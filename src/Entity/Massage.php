@@ -24,6 +24,7 @@ class Massage
 
     #[ORM\OneToOne(mappedBy: 'massage', targetEntity: Reservation::class, cascade: ['persist', 'remove'])]
     private $reservation;
+    
 
     public function getId(): ?int
     {
