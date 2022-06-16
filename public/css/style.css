@@ -1,0 +1,40 @@
+:root {
+    --noir: #000000;
+    --blanc: rgba(255, 255, 255, 1);
+    --grey-btn: rgb(231, 232, 236,0.4);
+    --grey-border:rgb(215, 213, 213);
+    --summary:rgba(24, 134, 197, 0.6);
+}
+
+.summary{
+    width: 400px;
+    /* background-color: var(--summary); */
+    padding: 15px;
+    border: 1px solid var(--grey-border);
+    border-radius: 10px;
+    line-height: 3px;
+}
+
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.massagist-photo-profile{
+    width: 200px;
+    height: auto;
+}
+.btn-card{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+    text-align: left;
+    transition: 0.5s;
+}
+.btn-card:hover{
+    background: var(--grey-btn);
+    transition: 0.5s;
+}
