@@ -1,0 +1,98 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    
+    --sonic-silver: #72727eff;
+    --gris-sombre: #625f63ff;
+    --title-font: 'Raleway', sans-serif;
+
+    --cyan-process: #00b6eaff;
+    --white: #ffffffff;
+    --red-ryb: #fe251eff;
+
+    --orange: #F46036;
+    --orange-brown: #D25F2C;
+    --blue-dark: #011627;
+    --white-animation: #fdfffc;
+  
+ 
+    --noir: #000000;
+    --blanc: rgba(255, 255, 255, 1);
+    --grey-btn: rgb(231, 232, 236,0.4);
+    --grey-border:rgb(215, 213, 213);
+    --summary:rgba(24, 134, 197, 0.6);
+
+}
+
+body {
+    font-family: var(--title-font);
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    height: 100px;
+    background-color: var(--white);
+}
+
+.navigation a {
+    font-family: var(--title-font);
+    color: var(--sonic-silver);
+    text-transform: uppercase;
+}
+
+.navigation a:hover {
+    color: var(--gris-sombre);
+}
+
+.intro {
+   
+    background-image: url(../images/water2.jpg);
+    height: 70vh;
+    width: 100%;
+    margin: 100px auto 0;
+    text-transform: uppercase;
+    color: var(--white);
+}
+
+/* Equipe */
+
+.equipe-img {
+  object-fit: fill;
+  height: 30vh;
+
+
+.summary{
+    width: 400px;
+    /* background-color: var(--summary); */
+    padding: 15px;
+    border: 1px solid var(--grey-border);
+    border-radius: 10px;
+    line-height: 3px;
+}
+
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.massagist-photo-profile{
+    width: 200px;
+    height: auto;
+}
+.btn-card{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+    text-align: left;
+    transition: 0.5s;
+}
+.btn-card:hover{
+    background: var(--grey-btn);
+    transition: 0.5s;
+
+}

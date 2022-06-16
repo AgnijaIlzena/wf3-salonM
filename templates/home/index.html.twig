@@ -1,10 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}component{% endblock %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="/css/style.css">
+{% endblock %}
 
 {% block body %}
-{{ include('home/aboutUs.html.twig')}}
-{{ include('home/services.html.twig')}}
-{{ include('home/contact.html.twig')}}
+{{ include('component/_navbar.html.twig') }}
+{{ include('component/_intro.html.twig') }}
+{{ include('component/aboutUs.html.twig')}}
+{{ include('component/services.html.twig')}}
+{{ include('component/_equipe.html.twig') }}
+{{ include('component/contact.html.twig')}}
+
+
+
+
+
+<div class="text-center mt-5">
+
+</div>
+
+{{ include('component/_footer.html.twig') }}
 
 {% endblock %}
