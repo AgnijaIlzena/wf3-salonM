@@ -2,10 +2,21 @@
 
 {% block title %}Home{% endblock %}
 
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="/css/style.css">
+{% endblock %}
+
 {% block body %}
 
+{{ include('component/_navbar.html.twig') }}
+{{ include('component/_intro.html.twig') }}
+{{ include('component/_equipe.html.twig') }}
+
 <div class="text-center mt-5">
-    <h1>{{bienvenue}} Home</h1>
+    {# <h1>{{bienvenue}} Home</h1> #}
 </div>
+
+{{ include('component/_footer.html.twig') }}
 
 {% endblock %}
