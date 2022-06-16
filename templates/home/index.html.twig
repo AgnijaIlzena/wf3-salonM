@@ -3,9 +3,8 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-
-<div class="text-center mt-5">
-    <h1>{{bienvenue}} Home</h1>
-</div>
+{{ include('home/aboutUs.html.twig')}}
+{{ include('home/services.html.twig')}}
+{{ include('home/contact.html.twig')}}
 
 {% endblock %}
