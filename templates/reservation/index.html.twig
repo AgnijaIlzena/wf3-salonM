@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{# Nom du massage à ajouter #}
+{% block title %}Réservation{% endblock %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+{% endblock %}
+
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-8 offset-2">
+                <header>
+                    {#  nav-bar #}
+                    <h1>Rendez-vous de Massage à WF3-Massage</h1>
+                    {# nom du massage #}
+                    <h2>Massage Y</h2>
+                </header>
+
+                {# Choix du masseur #}
+                <section class="mb-5">
+                    <h3>Choisir un masseur</h3>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                   <button class="btn-card">
+                                        <div class="card-horizontal">
+                                            <div class="img-square-wrapper">
+                                                <img class="massagist-photo-profile" src="{{absolute_url(asset('img/masseur.jpg'))}}">
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title">Paul Smith</h4>
+                                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            </div>
+                                        </div>
+                                   </button>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <button class="btn-card">
+                                        <div class="card-horizontal">
+                                            <div class="img-square-wrapper">
+                                                <img class="massagist-photo-profile" src="{{absolute_url(asset('img/masseur.jpg'))}}">
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title">Paul Smith</h4>
+                                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            </div>
+                                        </div>
+                                   </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {# Calendrier #}
+                <section>
+                    <h3>Choisir une date</h3>
+                    {{calendar|raw}}
+                </section>
+                
+                {# Créneaux horaires #}
+                <section>
+                    <h3>Choisir un créneau horaire</h3>
+
+                    {# <h1 class="text-center">Book for Date: <?= date('Y/m/d', strtotime($date)) ?></h1> #}
+                    {# <?= isset($msg) ? $msg : "" ?> #}
+
+                    <!-- affichage des times slots -->
+                    {% for timeSlot in timeSlots|raw %}
+                        {# à ajouter = data-timeslot #}
+                        {# à ajouter = si tous le créneau est réservé on ne peut plus le réserver #}
+                        <button class="btn btn-primary mb-4 book"data-timeslot="{{timeSlot}}">{{timeSlot}}</button>
+                    {% endfor %}
+                </section>
+                {# Formulaire #}
+                
+
+                {# Récapitulatif #}
+                <section class='summary'>
+                    <h3 class="mb-3">Résumé</h3>
+                    <p>Massage: </p>
+                    <p>Masseur: </p>
+                    <p>Date et horaire: </p>
+                    <p>Prix: </p>
+                </section>
+                <button class="btn btn-primary">Réserver</button>
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+{% endblock %}
