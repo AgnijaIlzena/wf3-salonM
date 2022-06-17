@@ -21,39 +21,30 @@
                 </header>
 
                 {# Choix du masseur #}
+                <pre>
+                    {{ dump(massagists) }}
+                </pre>
                 <section class="mb-5">
                     <h3>Choisir un masseur</h3>
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 mt-3">
-                                <div class="card">
-                                   <button class="btn-card">
-                                        <div class="card-horizontal">
-                                            <div class="img-square-wrapper">
-                                                <img class="massagist-photo-profile" src="{{absolute_url(asset('img/masseur.jpg'))}}">
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">Paul Smith</h4>
-                                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                            </div>
-                                        </div>
-                                   </button>
-                                </div>
-                            </div>
-                            <div class="col-12 mt-3">
+                            {% for massagist in massagists %}
                                 <div class="card">
                                     <button class="btn-card">
                                         <div class="card-horizontal">
                                             <div class="img-square-wrapper">
-                                                <img class="massagist-photo-profile" src="{{absolute_url(asset('img/masseur.jpg'))}}">
+                                                <img class="massagist-photo-profile" src="{{absolute_url(asset('img/{{massagist.cover}}'))}}">
                                             </div>
                                             <div class="card-body">
-                                                <h4 class="card-title">Paul Smith</h4>
-                                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                                <h4 class="card-title">{{massagist.name}}</h4>
+                                                <p class="card-text">{{massagist.description}}</p>
                                             </div>
                                         </div>
-                                   </button>
+                                    </button>
                                 </div>
+                            {% endfor %}
+
                             </div>
                         </div>
                     </div>
@@ -80,17 +71,37 @@
                     {% endfor %}
                 </section>
                 {# Formulaire #}
+                <section>
+                    <h3>Veuillez renseigner les informations suivantes</h3>
+                    {{ form_start(form) }}
+                        <p>{{form_label(form.lastname)}}</p>
+                        <p>{{form_widget(form.lastname)}}</p>
+                        <p>{{form_errors(form.lastname)}}</p>
+
+                        <p>{{form_label(form.firstname)}}</p>
+                        <p>{{form_widget(form.firstname)}}</p>
+                        <p>{{form_errors(form.firstname)}}</p>
+                        
+                        <p>{{form_label(form.email)}}</p>
+                        <p>{{form_widget(form.email)}}</p>
+                        <p>{{form_errors(form.email)}}</p>
+
+                        <p>{{form_label(form.telephone)}}</p>
+                        <p>{{form_widget(form.telephone)}}</p>
+                        <p>{{form_errors(form.telephone)}}</p>
+
+                        {# Récapitulatif #}
+                        <section class='summary'>
+                            <h3 class="mb-3">Résumé</h3>
+                            <p>Massage: </p>
+                            <p>Masseur: </p>
+                            <p>Date et horaire: </p>
+                            <p>Prix: </p>
+                        </section>
+                    {{ form_end(form)}}
+                </section>
                 
 
-                {# Récapitulatif #}
-                <section class='summary'>
-                    <h3 class="mb-3">Résumé</h3>
-                    <p>Massage: </p>
-                    <p>Masseur: </p>
-                    <p>Date et horaire: </p>
-                    <p>Prix: </p>
-                </section>
-                <button class="btn btn-primary">Réserver</button>
             </div>
 
         </div>
