@@ -38,4 +38,5 @@ class ReservationController extends AbstractController
             'timeSlots'=>$timeSlots
         ]);
     }
+
 }
