@@ -32,7 +32,7 @@ class Reservation
     #[ORM\JoinColumn(nullable: false)]
     private $massagist;
 
-    #[ORM\OneToOne(inversedBy: 'reservation', targetEntity: Massage::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'reservation', targetEntity: Massage::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private $massage;
 
