@@ -3,25 +3,31 @@
 
 :root {
     
-    --sonic-silver: #72727eff;
-    --gris-sombre: #625f63ff;
+    /* --sonic-silver: #72727eff;
+    --gris-sombre: #625f63ff; */
     --title-font: 'Raleway', sans-serif;
 
-    --cyan-process: #00b6eaff;
-    --white: #ffffffff;
+    /* --cyan-process: #00b6eaff;
+  
     --red-ryb: #fe251eff;
 
     --orange: #F46036;
     --orange-brown: #D25F2C;
     --blue-dark: #011627;
-    --white-animation: #fdfffc;
+    --white-animation: #fdfffc; */
   
- 
     --noir: #000000;
     --blanc: rgba(255, 255, 255, 1);
     --grey-btn: rgb(231, 232, 236,0.4);
     --grey-border:rgb(215, 213, 213);
     --summary:rgba(24, 134, 197, 0.6);
+
+    --sky-blue-crayola: #6fd2e5ff;
+    --white: #fcf7f8ff;
+    --text-color: #0e273cff;
+    --ruby-red: #a31621ff;
+    --grey: #7f7b82ff;
+    --raisin-black: #191923ff;
 
 }
 
@@ -39,22 +45,57 @@ body {
 
 .navigation a {
     font-family: var(--title-font);
-    color: var(--sonic-silver);
+    color: var(--text-color);
     text-transform: uppercase;
 }
 
 .navigation a:hover {
-    color: var(--gris-sombre);
+    color: var(--grey);
 }
 
+/* Intro */
 .intro {
    
-    background-image: url(../images/water2.jpg);
+    background-image: url(../images/69.jpg);
     height: 70vh;
     width: 100%;
     margin: 100px auto 0;
+    text-transform: uppercase;  
+    background-size: cover; 
+    /* background-size: contain;
+    background-repeat: no-repeat; */
+    position: relative;
+}
+
+.intro-text h1 {
+   
+    color: var(--text-color);
+    position: absolute;
+    top: 30%;
+    left: 100px;
+    width: 10%;
+    font-size: 5rem;
+}
+
+.intro-text button {
+    color: var(--text-color);
+    position: absolute;
+    top: 80%;
+    left: 100px;
+    width: 15%;
+    border: solid 0.1rem  var(--text-color);
+    padding: 16px ;
+    background-color: var(--white);
+    font-family: var(--title-font);
     text-transform: uppercase;
+    transition: 0.5s;
+}
+
+.intro-text button:hover {
     color: var(--white);
+    background-color: var(--text-color);
+    transition: 0.5s;
+    
 }
 
 /* Equipe */
@@ -64,7 +105,7 @@ body {
   height: 30vh;
 }
 
-}
+
 .summary{
     width: 400px;
     /* background-color: var(--summary); */
@@ -101,7 +142,7 @@ body {
 /* footer */
  footer .contact-us, .hours {
     text-transform: uppercase;
-    color: var(--gris-sombre);
+    color: var(--text-color);
   }
 
   .adress, .social {
