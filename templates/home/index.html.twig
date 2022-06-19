@@ -11,6 +11,7 @@
 {{ include('component/_navbar.html.twig') }}
 {{ include('component/_intro.html.twig') }}
 {{ include('component/aboutUs.html.twig')}}
+
 {# {{ include('component/services.html.twig')}} #}
 
 
@@ -22,9 +23,10 @@
 {{ include('component/_equipe.html.twig') }}
 {# {{ include('component/contact.html.twig')}} #}
 
-{# <div class="text-center mt-5">
 
-</div> #}
+{{ render(controller(
+    'App\\Controller\\MassagistController::index'
+)) }}
 
 {{ include('component/_footer.html.twig') }}
 
