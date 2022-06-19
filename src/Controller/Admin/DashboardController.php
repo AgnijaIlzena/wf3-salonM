@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
+
 class DashboardController extends AbstractDashboardController
 {
 
@@ -54,7 +55,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Wf3 SalonM');
+            ->setTitle('Webforce3 Salon');
     }
 
     public function configureMenuItems(): iterable
@@ -63,29 +64,26 @@ class DashboardController extends AbstractDashboardController
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
 
 
-        yield MenuItem::section('Massage');
-
-        yield MenuItem::subMenu('Massage', 'fas fa-bars')->setSubItems([
+        yield MenuItem::subMenu('Massage', 'fas fa-tags')->setSubItems([
             MenuItem::linkToCrud('Liste Magazine', 'fas fa-plus', Massage::class),
             MenuItem::linkToCrud('Create Product', 'fas fa-plus', Massage::class)->setAction(Crud::PAGE_NEW),
             
         ]);
 
-        yield MenuItem::section('Masseurs');
 
-        yield MenuItem::subMenu('Masseurs', 'fas fa-bars')->setSubItems([
+        yield MenuItem::subMenu('Masseurs', 'fas fa-bookmark')->setSubItems([
             MenuItem::linkToCrud('Liste Masseurs', 'fas fa-plus', Massagist::class),
             MenuItem::linkToCrud('Ajout masseurs', 'fas fa-plus', Massagist::class)->setAction(Crud::PAGE_NEW),
             
         ]);
 
-        yield MenuItem::section('Masseurs');
-
-        yield MenuItem::subMenu('Masseurs', 'fas fa-bars')->setSubItems([
-            MenuItem::linkToCrud('Liste Masseurs', 'fas fa-plus', Reservation::class),
-            MenuItem::linkToCrud('Ajout masseurs', 'fas fa-plus', Reservation::class)->setAction(Crud::PAGE_NEW),
+        yield MenuItem::subMenu('Reservation', 'fas fa-store')->setSubItems([
+            MenuItem::linkToCrud('Liste Reservation', 'fas fa-plus', Reservation::class),
+            MenuItem::linkToCrud('Ajout Reservation', 'fas fa-plus', Reservation::class)->setAction(Crud::PAGE_NEW),
             
         ]);
+
+        yield MenuItem::linkToCrud(label:'Categories', icon:'fa fa-tags', entityFqcn:Reservation::class);
     }
     
 }

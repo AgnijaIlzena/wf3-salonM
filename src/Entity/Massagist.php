@@ -6,9 +6,10 @@ use App\Repository\MassagistRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Stringable;
 
 #[ORM\Entity(repositoryClass: MassagistRepository::class)]
-class Massagist
+class Massagist implements Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -101,5 +102,10 @@ class Massagist
         $this->cover = $cover;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }

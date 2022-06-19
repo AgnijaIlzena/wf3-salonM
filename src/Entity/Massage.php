@@ -4,8 +4,13 @@ namespace App\Entity;
 
 use App\Repository\MassageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints\File;
+use vich\UploaderBundle\Mapping\Annotation\Uploadable;
+use App\Entity\UploadableField;
 
 #[ORM\Entity(repositoryClass: MassageRepository::class)]
+#[Uploadable]
 class Massage
 {
     #[ORM\Id]
@@ -26,8 +31,13 @@ class Massage
     #[ORM\Column(type: 'integer')]
     private $price;
 
-    #[ORM\Column(type: 'string', length: 50, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $cover;
+
+    #[UploadableField(mapping: 'product', fileNameProperty: 'cover')]
+    private ?File $file = null;
+
+    
     
 
     public function getId(): ?int
@@ -99,5 +109,13 @@ class Massage
         $this->cover = $cover;
 
         return $this;
+    }
+
+        /**
+     * @return Collection|Product[]
+     */
+    public function getMassage(): Collection
+    {
+        return $this->massage;
     }
 }

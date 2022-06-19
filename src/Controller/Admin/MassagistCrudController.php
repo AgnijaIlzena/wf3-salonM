@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Massagist;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class MassagistCrudController extends AbstractCrudController
@@ -22,4 +23,10 @@ class MassagistCrudController extends AbstractCrudController
         ];
     }
     */
+    
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+        ->setEntityLabelInPlural(label:'Masseurs');
+    }
 }
