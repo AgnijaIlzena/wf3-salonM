@@ -12,19 +12,24 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ReservationRepository;
 use App\Form\ReservationFormType;
 use App\Entity\Reservation;
+use App\Entity\Massage;
 use App\Repository\MassagistRepository;
+use App\Repository\MassageRepository;
 
 class ReservationController extends AbstractController
 {   
     // ajouter ID du massage en dans l'url
-    #[Route('/reservation', name: 'app_reservation')]
+    #[Route('/reservation/{id}', name: 'app_reservation', requirements:['id' => '\d+'])]
+    // #[Route('/reservation', name: 'app_reservation')]
 
     public function index(
         CalendarService $calendarService, 
         TimeSlotsService $timeSlotsService, 
         Request $request,
         ReservationRepository $reservationRepository,
-        MassagistRepository $massagistRepository
+        MassagistRepository $massagistRepository,
+        MassageRepository $massageRepository,
+        Massage $massage
         
         ): Response
     {   
@@ -73,6 +78,7 @@ class ReservationController extends AbstractController
             'calendar'=>$calendar,
             'timeSlots'=>$timeSlots,
             'massagists'=>$massagists,
+            'massage'=>$massage,
             'form'=>$form->createView()
         ]);
     }
