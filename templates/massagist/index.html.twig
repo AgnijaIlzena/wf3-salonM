@@ -8,27 +8,25 @@
 {% endblock %}
 
 {% block body %}
+    <section class="equipe mt-5">
+    <div class="container">
+        <h2>Nos massothérapeutes</h2>
+    </div>
 
-<div class="container">
-<section class="equipe mt-5">
-    <div class="container-fluid">
+        <div class="container hstack gap-5">
 
-    <div class="row ">
-    {% for massagist in massagists %}
+            <div class="row mx-auto py-5">
+                {% for massagist in massagists %}
 
-        <div class="col-12 col-lg-4 mx-auto text-center ">
+                    <div class="col-12 col-lg-4 mx-auto ">
+                        <img src="{{ asset('images/'~ massagist.cover) }}" alt="{{ massagist.name ~ ' - image' }}" class="equipe-img ">
+                        <h3 class="mt-4">{{massagist.name}}</h3>
+                        <p  class="mt-4">{{massagist.description}}</p>                   
+                    </div>
             
-            <img src="{{ asset('images/'~ massagist.cover) }}" alt="{{ massagist.name ~ ' - image' }}" class="equipe-img ">
-            <h3 class="mt-3">{{massagist.name}}</h3>
-            <p  class="mt-3">{{massagist.description}}</p>
-            
+                {% endfor %}
+            </div>
         </div>
-        
-    {% endfor %}
-    </div>
-    </div>
 
-</section>
-</div>
-
+    </section>
 {% endblock %}
