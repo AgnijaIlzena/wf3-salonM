@@ -2,24 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;400;700&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-:root {
-    
-    /* --sonic-silver: #72727eff;
-    --gris-sombre: #625f63ff; */
+:root { 
     --title-font: 'Libre Baskerville', serif;
-    --text-font: 'Source Sans Pro', sans-serif;
-   
-    /* --cyan-process: #00b6eaff;
+    --text-font: 'Source Sans Pro', sans-serif; 
   
-    --red-ryb: #fe251eff;
-
-    --orange: #F46036;
-    --orange-brown: #D25F2C;
-    --blue-dark: #011627;
-    --white-animation: #fdfffc; */
-  
-    --noir: #000000;
-    --blanc: rgba(255, 255, 255, 1);
+    /* --noir: #000000; */
+    /* --blanc: rgba(255, 255, 255, 1); */
     --grey-btn: rgb(231, 232, 236,0.4);
     --grey-border:rgb(215, 213, 213);
     --summary:rgba(24, 134, 197, 0.6);
@@ -38,8 +26,15 @@ body {
     margin: 0;
     padding: 0;
     font-size: 16px;
+    background-color: var(--white);
 }
 
+.section-title {
+    font-size: 3rem;
+    font-family: var(--title-font);
+}
+
+/* Navigation Bar */
 .navbar {
     height: 100px;
     background-color: var(--white);
@@ -56,8 +51,7 @@ body {
 }
 
 /* Intro */
-.intro {
-   
+.intro {   
     background-image: url(../images/69.jpg);
     height: 70vh;
     width: 100%;
@@ -68,8 +62,7 @@ body {
     position: relative;
 }
 
-.intro-text h1 {
-   
+.intro-text h1 {   
     color: var(--text-color);
     font-family: var(--title-font);
     position: absolute;
@@ -81,30 +74,33 @@ body {
     z-index: 1;
 }
 
-.intro-text button {
+.btn-design {
     color: var(--text-color);
-    position: absolute;
-    top: 75%;
-    left: 15rem;
+    background-color: var(--white);
     border: solid 0.2em  var(--text-color);
-    padding: 16px 80px ;
+    padding: 16px 80px;
     background-color: var(--white);
     font-family: var(--text-font);
     font-weight: 700;
     font-size: 1rem;
     text-transform: uppercase;
     transition-delay: 1.1s;   
-    z-index: 1;
-}
+   }
 
-.intro-text button:hover {
+.btn-design:hover {
     color: var(--white);
     background-color: var(--text-color);
     transition: 0.5s;    
 }
 
-.intro-window {
-    /* background-color: var(--sky-blue-crayola);  */
+.intro-text button {
+    position: absolute;
+    top: 75%;
+    left: 15rem;
+    z-index: 1;
+}
+
+.intro-window {   
     background-image: url(../images/water.jpg);
     background-size: cover; 
     width: 65%;
@@ -119,17 +115,16 @@ body {
     z-index: 0;
 }
 
-/* Equipe */
 
+
+/* Team */
 .equipe-img {
   object-fit: fill;
   height: 30vh;
 }
 
-
 .summary{
     width: 400px;
-    /* background-color: var(--summary); */
     padding: 15px;
     border: 1px solid var(--grey-border);
     border-radius: 10px;
@@ -145,6 +140,7 @@ body {
     width: 200px;
     height: auto;
 }
+
 .btn-card{
     background: none;
 	color: inherit;
@@ -155,22 +151,27 @@ body {
     text-align: left;
     transition: 0.5s;
 }
+
 .btn-card:hover{
     background: var(--grey-btn); 
     transition: 0.5s;
 }
 
 /* footer */
- footer .contact-us, .hours {
-    /* text-transform: uppercase; */
-    font-family: var(--title-font);
-    color: var(--text-color);
-  }
+footer {
+    background-color: var(--text-color) !important;
+}
 
-  .adress, .social {
-    font-size: 1.2rem;
-    font-family: var(--text-font);
-  }
+footer .contact-us, .hours {
+font-family: var(--title-font);
+color: var(--white);
+
+}
+
+.adress, .social {
+font-size: 1.2rem;
+font-family: var(--white) !important;
+}
 
 
 
