@@ -11,7 +11,18 @@
 {{ include('component/_navbar.html.twig') }}
 {{ include('component/_intro.html.twig') }}
 {{ include('component/aboutUs.html.twig')}}
-{{ include('component/services.html.twig')}}
+
+{# {{ include('component/services.html.twig')}} #}
+
+
+{{ render(controller(
+    'App\\Controller\\MassageController::index'   
+)) }}
+
+
+{{ include('component/_equipe.html.twig') }}
+{# {{ include('component/contact.html.twig')}} #}
+
 
 {{ render(controller(
     'App\\Controller\\MassagistController::index'
