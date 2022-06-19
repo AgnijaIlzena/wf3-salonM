@@ -57,6 +57,13 @@ body {
     color: var(--white);
 }
 
+/* Massages */
+
+.massages h2 {
+    font-size: 3rem;
+    font-family: var(--title-font);
+}
+
 /* Equipe */
 
 .equipe-img {
@@ -64,7 +71,6 @@ body {
   height: 30vh;
 }
 
-}
 .summary{
     width: 400px;
     /* background-color: var(--summary); */
