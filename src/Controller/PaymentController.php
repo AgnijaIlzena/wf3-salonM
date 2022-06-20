@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Massage;
+use App\Repository\MassageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,8 +21,8 @@ class PaymentController extends AbstractController
         ]);
     }
 
-    #[Route('/checkout', name: 'app_checkout')]
-    public function checkout($stripeSK): Response
+    #[Route('/checkout/{id}', name: 'app_checkout', requirements: ['id' => '\d+'])]
+    public function checkout($stripeSK, Massage $massage, MassageRepository $massageRepository ): Response
     {
        Stripe::setApiKey($stripeSK);
 
@@ -29,9 +31,10 @@ class PaymentController extends AbstractController
           'price_data' => [
             'currency' => 'eur',
             'product_data' => [
-              'name' => 'Massage',
+              'name' => $massage->getName(),
+              'description' => $massage->getDescription(),
             ],
-            'unit_amount' => 9000,
+            'unit_amount' => $massage->getPrice() * 100,
           ],
           'quantity' => 1,
         ]],
@@ -40,8 +43,9 @@ class PaymentController extends AbstractController
         'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
       ]);
 
-      //return $response->withHeader('Location', $session->url)->withStatus(303);
-      return $this->redirect($session->url, 303);
+      return $this->redirect($session->url, 303, [
+        'massage'=>$massage
+      ]);
     }
 
     #[Route('/success-url', name: 'success_url')]

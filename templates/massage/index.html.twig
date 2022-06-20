@@ -26,9 +26,22 @@
 						{{ massage.description|u.truncate(100, '...') }}
 					</p>
 					<p class="pb-4"><span class="details text-muted">30 min {{massage.price}} € , 60 min {{massage.price}} €</span></p>
-					<a class="btn-design mb-5" href="{{ path('app_reservation', { id: massage.id }) }}">
-						réserver
-					</a>
+					
+					{# Try buttons #}
+					<div class="row">
+				
+					<div class="col">
+						<a class="btn-design mb-5" href="{{ path('app_reservation', { id: massage.id }) }}">
+							réserver
+						</a>
+					</div>
+					<div class="col">
+						 <a class="btn-design mb-5" href="{{ path('app_checkout', { id: massage.id }) }}">
+							payer
+						</a> 
+					</div>
+
+					</div>
 				</div>
 			{% endfor %}
 			</div>
