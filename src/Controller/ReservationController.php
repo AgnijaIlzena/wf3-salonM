@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ReservationRepository;
 use App\Form\ReservationFormType;
 use App\Entity\Reservation;
-use App\Entity\Massage;
 use App\Repository\MassagistRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\MassageRepository;
@@ -32,9 +31,9 @@ class ReservationController extends AbstractController
         ReservationRepository $reservationRepository,
         MassagistRepository $massagistRepository,
 
-        Massage $massage
-        MassageRepository $massageRepository,
-        Massage $massage
+        Massage $massage,
+        MassageRepository $massageRepository
+       
         
         ): Response
     {   
