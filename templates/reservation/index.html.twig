@@ -10,6 +10,9 @@
 
 
 {% block body %}
+
+{{ include('component/_navbar.html.twig') }}
+
     <div class="container mt-5">
         <div class="row">
             <div class="col-8 offset-2">
@@ -111,4 +114,6 @@
 
 
     </div>
+
+    {{ include('component/_footer.html.twig') }}
 {% endblock %}

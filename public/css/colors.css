@@ -1,0 +1,39 @@
+:root {
+--sky-blue-crayola: #6fd2e5ff;
+--snow: #fcf7f8ff;
+--midnight-green-eagle-green: #074f57ff;
+--old-lavender: #80727bff;
+--teal-blue: #077187ff;
+
+--sky-blue-crayola: #6fd2e5ff;
+--snow: #fcf7f8ff;
+--prussian-blue: #0e273cff;
+--ruby-red: #a31621ff;
+--taupe-gray: #7f7b82ff;
+--raisin-black: #191923ff;
+
+
+
+/* old */
+--sonic-silver: #72727eff;
+--gris-sombre: #625f63ff;
+--title-font: 'Raleway', sans-serif;
+
+--cyan-process: #00b6eaff;
+--white: #ffffffff;
+--red-ryb: #fe251eff;
+
+--orange: #F46036;
+--orange-brown: #D25F2C;
+--blue-dark: #011627;
+--white-animation: #fdfffc;
+
+
+font-family: 'Raleway', sans-serif;
+font-family: 'Source Sans Pro', sans-serif;
+
+ font-family: 'Averia Serif Libre', cursive; 
+
+ font-family: 'Libre Baskerville', serif;
+font-family: 'Source Sans Pro', sans-serif;
+}
