@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="/css/style.css">
 {% endblock %}
 
+{% block javascripts %}
+    {{parent()}}
+{% endblock %}
+
 {% block body %}
 {{ include('component/_navbar.html.twig') }}
 {{ include('component/_intro.html.twig') }}

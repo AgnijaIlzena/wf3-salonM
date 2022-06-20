@@ -49,6 +49,19 @@ p {
     color: var(--grey)  ;
 }
 
+/* JS effects */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(-50px);
+}
+
+.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: 1.5s cubic-bezier(.5, 0, 0, 1);
+}
+
 /* Navigation Bar */
 .navbar {
     height: 100px;
