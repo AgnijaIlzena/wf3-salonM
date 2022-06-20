@@ -4,13 +4,25 @@
 {% endblock %}
 
 {% block body %}
-<div class =" bg-light">
-<div class="row  w-50 m-auto py-5">
-<div class="col">
-	<h3 class="fst-italic py-5">You want to offer a relaxing massage for a moment of well-being on the occasion of an anniversary or a special occasion like Valentine's day, Christmas 
-	 Offer a gift voucher for a Relaxing Massage. 🎁</h3>
-	{{ form(form) }}
-	</div>
-	</div>
-</div>
-{% endblock %}
+	<div class=" bg-light">
+		<div class="row  w-50 m-auto py-5">
+			<div class="col">
+				<div>
+					{% for massage in massages %}
+
+						{{ massage.name }}
+					</div>
+					<div>
+						{{ massage.duration }}
+					</div>
+					<div>
+						{{ massage.description }}
+					</div>
+				{% endfor %}
+
+				<h3 class="fst-italic py-5">You want to offer a relaxing massage for a moment of well-being on the occasion of an anniversary or a special occasion like Valentine's day, Christmas Offer a gift voucher for a Relaxing Massage. 🎁</h3>
+				{{ form(form) }}
+				</div>
+			</div>
+		</div>
+	{% endblock %}

@@ -28,6 +28,10 @@ class Gift
     #[ORM\Column(type: 'string', length: 200)]
     private $message;
 
+    #[ORM\ManyToOne(targetEntity: Massage::class, inversedBy: 'gifts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $massage;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +93,18 @@ class Gift
     public function setMessage(string $message): self
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getMassage(): ?massage
+    {
+        return $this->massage;
+    }
+
+    public function setMassage(?massage $massage): self
+    {
+        $this->massage = $massage;
 
         return $this;
     }

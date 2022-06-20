@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -52,7 +53,7 @@ class GiftFormType extends AbstractType
             ->add('message', TextareaType::class)
             
             ->add('save', SubmitType::class, [
-                'label' => 'Submit',
+                'label' => 'Next',
                 'attr' => [
                     'class' => 'btn btn-outline-primary'
                 ]
