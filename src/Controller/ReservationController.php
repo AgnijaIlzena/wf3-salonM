@@ -13,12 +13,16 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ReservationRepository;
 use App\Form\ReservationFormType;
 use App\Entity\Reservation;
+use App\Entity\Massage;
 use App\Repository\MassagistRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Repository\MassageRepository;
+
 
 class ReservationController extends AbstractController
 {   
     // ajouter ID du massage en dans l'url
+
     #[Route('/reservation/{id}', name: 'app_reservation', requirements:["id"=>"\d+"])]
 
     public function index(
@@ -27,7 +31,11 @@ class ReservationController extends AbstractController
         Request $request,
         ReservationRepository $reservationRepository,
         MassagistRepository $massagistRepository,
+
         Massage $massage
+        MassageRepository $massageRepository,
+        Massage $massage
+        
         ): Response
     {   
         // Affichage des masseurs

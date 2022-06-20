@@ -1,65 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;400;700&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-:root {
-    
-    --sonic-silver: #72727eff;
-    --gris-sombre: #625f63ff;
-    --title-font: 'Raleway', sans-serif;
-
-    --cyan-process: #00b6eaff;
-    --white: #ffffffff;
-    --red-ryb: #fe251eff;
-
-    --orange: #F46036;
-    --orange-brown: #D25F2C;
-    --blue-dark: #011627;
-    --white-animation: #fdfffc;
+:root { 
+    --title-font: 'Libre Baskerville', serif;
+    --text-font: 'Source Sans Pro', sans-serif; 
   
- 
     --grey-btn: rgb(231, 232, 236,0.4);
     --grey-border:rgb(215, 213, 213);
     --summary:rgba(24, 134, 197, 0.6);
 
+    --sky-blue-crayola: #6fd2e5ff;
+    --white: #fcf7f8ff;
+    --text-color: #0e273cff;
+    --ruby-red: #a31621ff;
+    --grey: #7f7b82ff;
+    --raisin-black: #191923ff;
 }
 
 body {
-    font-family: var(--title-font);
+    font-family: var(--text-font);
     margin: 0;
     padding: 0;
+    font-size: 16px;
+    background-color: var(--white);
+    color: var(--text-color);
 }
 
+p {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    font-weight: 300;
+}
+
+.section-title {
+    font-size: 3rem;
+    font-family: var(--title-font);
+    padding: 5rem 0 3rem;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-family: var(--title-font);
+}
+
+.details {
+    font-size: 1.4rem;  
+    color: var(--grey)  ;
+}
+
+/* Navigation Bar */
 .navbar {
     height: 100px;
     background-color: var(--white);
 }
 
 .navigation a {
-    font-family: var(--title-font);
-    color: var(--sonic-silver);
+    font-family: var(--text-font);
+    color: var(--text-color);
     text-transform: uppercase;
 }
 
 .navigation a:hover {
-    color: var(--gris-sombre);
+    color: var(--grey);
 }
 
-.intro {
-   
-    background-image: url(../images/water2.jpg);
+/* Intro */
+.intro {   
+    background-image: url(../images/69.jpg);
     height: 70vh;
     width: 100%;
-    margin: 100px auto 0;
-    text-transform: uppercase;
-    color: var(--white);
+    margin: 100px auto 0;    
+    background-size: cover; 
+    /* background-size: contain;
+    background-repeat: no-repeat; */
+    position: relative;
 }
 
-/* Equipe */
+.intro-text h1 {   
+    color: var(--text-color);
+    font-family: var(--title-font);
+    position: absolute;
+    top: 30%;
+    left: 15rem;
+    width: 10%;
+    font-size: 4rem;
+    line-height: 1.2;
+    z-index: 1;
+}
 
-.equipe-img {
+.btn-design {
+    color: var(--text-color);
+    background-color: var(--white);
+    border: solid 0.2em  var(--text-color);
+    padding: 16px 80px;
+    background-color: var(--white);
+    font-family: var(--text-font);
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition-delay: 1.1s;   
+    text-decoration: none;
+   }
+
+.btn-design:hover {
+    color: var(--white);
+    background-color: var(--text-color);
+    transition: 0.5s;    
+}
+
+.intro-text button {
+    position: absolute;
+    top: 75%;
+    left: 15rem;
+    z-index: 1;
+}
+
+.intro-window {   
+    background-image: url(../images/water.jpg);
+    background-size: cover; 
+    width: 65%;
+    height: 75%;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    top: 15%;
+    z-index: 0;
+}
+
+/* About */
+.about {
+    margin-top: 7rem;
+    height: 70vh;
+}
+
+/* Massages / Services */
+.massages, .team {
+    padding-bottom: 10rem;
+}
+
+/* Team */
+.team-img {
   object-fit: fill;
   height: 30vh;
 }
+
+.team {
+    background-image: url(../images/69.jpg);
+    background-size: cover; 
+
 
 
 /* Reservation */
@@ -68,10 +160,8 @@ elles s'afficheront au clic sur la section précédente
  */
  .calendar, .timeslots, .form, .summary{
     display: none;
-}
 .summary{
     width: 400px;
-    /* background-color: var(--summary); */
     padding: 15px;
     border: 1px solid var(--grey-border);
     border-radius: 10px;
@@ -87,6 +177,7 @@ elles s'afficheront au clic sur la section précédente
     width: 300px;
     height: auto;
 }
+
 .btn-card{
     background: none;
 	color: inherit;
@@ -97,9 +188,33 @@ elles s'afficheront au clic sur la section précédente
     text-align: left;
     transition: 0.5s;
 }
+
 .btn-card:hover{
-    background: var(--grey-btn);
+    background: var(--grey-btn); 
     transition: 0.5s;
 }
+
+
+/* footer */
+footer {
+    background-color: var(--text-color);
+}
+
+footer .contact-us, .hours{
+    font-family: var(--title-font);
+    color: var(--white);
+}
+
+.adress, .social {
+    font-size: 1.2rem;
+    color: var(--white) ;
+}
+
+.hours-time {
+    color: var(--white);
+    font-size: 1.1rem;
+}
+
+
 
 
