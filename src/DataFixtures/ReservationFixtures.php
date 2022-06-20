@@ -7,7 +7,6 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\Reservation;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker;
-use DateTimeImmutable;
 
 class ReservationFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -24,7 +23,8 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
 
         for ($i=0; $i < 21; $i++) { 
             $reservation= new Reservation();
-            $reservation->setDate($faker->dateTimeBetween('now','+6months'));
+            
+            $reservation->setDate($faker->dateTimeBetween('now','+6months')->format('Y-m-d'));
             $reservation->setTimeslot($timeslot[rand(0,count($timeslot)-1)]);
             $reservation->setLastname($faker->lastName);
             $reservation->setFirstname($faker->firstName);

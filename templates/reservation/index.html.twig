@@ -55,13 +55,13 @@
                 </section>
 
                 {# Calendrier #}
-                <section class="calendar">
+                <section class="calendar mb-5">
                     <h3>Choisir une date</h3>
                     {{calendar|raw}}
                 </section>
                 
                 {# Créneaux horaires #}
-                <section class="timeslots">
+                <section class="timeslots mb-5">
                     <h3>Choisir un créneau horaire</h3>
 
                     {# <h1 class="text-center">Book for Date: <?= date('Y/m/d', strtotime($date)) ?></h1> #}
@@ -76,7 +76,7 @@
                 </section>
 
                 {# Formulaire #}
-                <section class="form">
+                <section class="form mb-5">
                     <h3>Veuillez renseigner les informations suivantes</h3>
                     {{ form_start(form) }}
                         <p>{{form_label(form.lastname)}}</p>
