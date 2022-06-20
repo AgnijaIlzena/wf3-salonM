@@ -7,8 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Stringable;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File as FileFile;
 
 #[ORM\Entity(repositoryClass: MassagistRepository::class)]
+#[Vich\Uploadable]
 class Massagist implements Stringable
 {
     #[ORM\Id]
@@ -27,6 +30,9 @@ class Massagist implements Stringable
 
     #[ORM\Column(type: 'string', length: 50)]
     private $cover;
+
+    #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'cover')]
+    private ?FileFile $file = null;
 
     public function __construct()
     {
@@ -107,5 +113,25 @@ class Massagist implements Stringable
     public function __toString(): string
     {
         return $this->name;
+    }
+
+        /**
+     * Get the value of file
+     */ 
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Set the value of file
+     *
+     * @return  self
+     */ 
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
     }
 }

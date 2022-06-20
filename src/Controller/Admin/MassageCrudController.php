@@ -3,14 +3,20 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Massage;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use Doctrine\ORM\EntityManagerInterface;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use App\Controller\Admin\MassagistCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+#[IsGranted('ROLE_ADMIN')]
 class MassageCrudController extends AbstractCrudController
 {
 
@@ -37,15 +43,23 @@ class MassageCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
 
-        yield IdField::new(propertyName:'ID');
+        yield IdField::new(propertyName:'ID')->hideOnForm();;
         yield TextField::new(propertyName:'name', label:'Nom');
-        yield TextField::new(propertyName:'description', label:'Description');
+        yield TextareaField::new(propertyName:'description', label:'Description');
         yield MoneyField::new(propertyName:'price', label:'Prix')->setCurrency(currencyCode:'EUR');
+
         yield TextField::new(propertyName: 'file', label: 'Image')
             ->setFormType(formTypeFqcn:VichImageType::class)
             ->onlyOnForms();
+            
         yield ImageField::new(propertyName:'cover', label:'Image')
-        ->setBasePath(path:$this->uploadDir);
+        ->setBasePath(path:$this->uploadDir)
+        ->setUploadDir('public/uploads')
+        ->hideOnForm();
+
+
+
+        
         // yield AssociationField::new(propertyName:'Massagist', label:'Masseur')
         //     ->setCrudController(crudControllerFqcn: MassagistCrudController::class);
 
@@ -57,16 +71,16 @@ class MassageCrudController extends AbstractCrudController
         // ];
     }
 
-    public function deleteEntity(EntityManagerInterface $em, $entityInstance): void
-    {
-        if (!$entityInstance instanceof Massage) return;
+    // public function deleteEntity(EntityManagerInterface $em, $entityInstance): void
+    //     {
+    //         if (!$entityInstance instanceof Massage) return;
 
-        foreach ($entityInstance->getMassage() as $massage) {
-            $em->remove($massage);
-        }
+    //         foreach ($entityInstance->getMassage() as $massage) {
+    //             $em->remove($massage);
+    //     }
 
-        parent::deleteEntity($em, $entityInstance);
-    }
+    //     parent::deleteEntity($em, $entityInstance);
+    //  }
 }
 
 

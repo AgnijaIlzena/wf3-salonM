@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Massage;
 use App\Entity\Massagist;
 use App\Entity\Reservation;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -12,8 +13,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
+
+#[IsGranted('ROLE_ADMIN')]
 class DashboardController extends AbstractDashboardController
 {
 
@@ -79,11 +83,13 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::subMenu('Reservation', 'fas fa-store')->setSubItems([
             MenuItem::linkToCrud('Liste Reservation', 'fas fa-plus', Reservation::class),
-            MenuItem::linkToCrud('Ajout Reservation', 'fas fa-plus', Reservation::class)->setAction(Crud::PAGE_NEW),
-            
+            MenuItem::linkToCrud('Ajout Reservation', 'fas fa-plus', Reservation::class)->setAction(Crud::PAGE_NEW),            
         ]);
 
-        yield MenuItem::linkToCrud(label:'Categories', icon:'fa fa-tags', entityFqcn:Reservation::class);
+        yield MenuItem::subMenu('Admin', 'fas fa-store')->setSubItems([
+            MenuItem::linkToCrud('Liste Admin', 'fas fa-plus', User::class),
+            MenuItem::linkToCrud('Ajout Reservation', 'fas fa-plus', User::class)->setAction(Crud::PAGE_NEW),            
+        ]);
     }
     
 }

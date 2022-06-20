@@ -5,12 +5,14 @@ namespace App\Entity;
 use App\Repository\MassageRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints\File;
-use vich\UploaderBundle\Mapping\Annotation\Uploadable;
-use App\Entity\UploadableField;
+use Symfony\Component\HttpFoundation\File\File as FileFile;
+use vich\UploaderBundle\Mapping\Annotation\UploadableField;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+
 
 #[ORM\Entity(repositoryClass: MassageRepository::class)]
-#[Uploadable]
+#[Vich\Uploadable] 
 class Massage
 {
     #[ORM\Id]
@@ -32,14 +34,12 @@ class Massage
     private $price;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $cover;
+    private $cover = '';
 
-    #[UploadableField(mapping: 'product', fileNameProperty: 'cover')]
-    private ?File $file = null;
 
+    #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'cover')]
+    private ?FileFile $file = null;
     
-    
-
     public function getId(): ?int
     {
         return $this->id;
@@ -111,11 +111,32 @@ class Massage
         return $this;
     }
 
-        /**
-     * @return Collection|Product[]
-     */
-    public function getMassage(): Collection
+    //     /**
+    //  * @return Collection|Massage[]
+    //  */
+    // public function getMassage(): Collection
+    // {
+    //     return $this->massage;
+    // }
+
+    
+    /**
+     * Get the value of file
+     */ 
+    public function getFile()
     {
-        return $this->massage;
+        return $this->file;
+    }
+
+    /**
+     * Set the value of file
+     *
+     * @return  self
+     */ 
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
     }
 }
