@@ -6,8 +6,6 @@
     --title-font: 'Libre Baskerville', serif;
     --text-font: 'Source Sans Pro', sans-serif; 
   
-    /* --noir: #000000; */
-    /* --blanc: rgba(255, 255, 255, 1); */
     --grey-btn: rgb(231, 232, 236,0.4);
     --grey-border:rgb(215, 213, 213);
     --summary:rgba(24, 134, 197, 0.6);
@@ -153,10 +151,15 @@ p {
 .team {
     background-image: url(../images/69.jpg);
     background-size: cover; 
-}
 
-/* Reservations */
 
+
+/* Reservation */
+/* on n'affiche pas les différentes parties de la réservation,
+elles s'afficheront au clic sur la section précédente
+ */
+ .calendar, .timeslots, .form, .summary{
+    display: none;
 .summary{
     width: 400px;
     padding: 15px;
@@ -171,7 +174,7 @@ p {
 }
 
 .massagist-photo-profile{
-    width: 200px;
+    width: 300px;
     height: auto;
 }
 
@@ -190,6 +193,7 @@ p {
     background: var(--grey-btn); 
     transition: 0.5s;
 }
+
 
 /* footer */
 footer {
@@ -210,6 +214,7 @@ footer .contact-us, .hours{
     color: var(--white);
     font-size: 1.1rem;
 }
+
 
 
 
