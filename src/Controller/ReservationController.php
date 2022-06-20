@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Massage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,15 +12,13 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ReservationRepository;
 use App\Form\ReservationFormType;
 use App\Entity\Reservation;
+use App\Entity\Massage;
 use App\Repository\MassagistRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Repository\MassageRepository;
 
 
 class ReservationController extends AbstractController
 {   
-    // ajouter ID du massage en dans l'url
-
     #[Route('/reservation/{id}', name: 'app_reservation', requirements:["id"=>"\d+"])]
 
     public function index(
@@ -30,27 +27,26 @@ class ReservationController extends AbstractController
         Request $request,
         ReservationRepository $reservationRepository,
         MassagistRepository $massagistRepository,
-
         Massage $massage,
-        MassageRepository $massageRepository,
-       
-        
         ): Response
     {   
         // Affichage des masseurs
         $massagists = $massagistRepository->findAll();
 
         // Affichage calendrier
+        // $reservationRepository->findBy(['date' => DateTime::createFromFormat('Y-m-d','2022-06-08 08:23:41')]);
         $dateComponents = getdate();
         if(isset($_GET['month']) && isset($_GET['year'])){
            $month = +$_GET['month'];
            $year = $_GET['year'];
+           $totalBookings = 0;
         }
         else{
            $month = $dateComponents['mon'];
            $year = $dateComponents['year'];
+           $totalBookings = 0;
         }
-        $calendar =  $calendarService->build_calendar($month , $year);
+        $calendar =  $calendarService->build_calendar($month , $year, $totalBookings);
 
         // Affichage timeslots
         $duration = 60;

@@ -13,7 +13,7 @@ class Reservation
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: 'string')]
     private $date;
 
     #[ORM\Column(type: 'string', length: 50)]
@@ -32,7 +32,7 @@ class Reservation
     #[ORM\JoinColumn(nullable: false)]
     private $massagist;
 
-    #[ORM\OneToOne(inversedBy: 'reservation', targetEntity: Massage::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'reservation', targetEntity: Massage::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private $massage;
 
@@ -53,12 +53,12 @@ class Reservation
         return $this->id;
     }
 
-    public function getDate(): ?\DateTime
+    public function getDate(): ?string
     {
         return $this->date;
     }
 
-    public function setDate(\DateTime $date): self
+    public function setDate(string $date): self
     {
         $this->date = $date;
 
