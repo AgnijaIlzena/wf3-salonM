@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Massage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,13 +15,15 @@ use App\Form\ReservationFormType;
 use App\Entity\Reservation;
 use App\Entity\Massage;
 use App\Repository\MassagistRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\MassageRepository;
+
 
 class ReservationController extends AbstractController
 {   
     // ajouter ID du massage en dans l'url
-    #[Route('/reservation/{id}', name: 'app_reservation', requirements:['id' => '\d+'])]
-    // #[Route('/reservation', name: 'app_reservation')]
+
+    #[Route('/reservation/{id}', name: 'app_reservation', requirements:["id"=>"\d+"])]
 
     public function index(
         CalendarService $calendarService, 
@@ -28,11 +31,14 @@ class ReservationController extends AbstractController
         Request $request,
         ReservationRepository $reservationRepository,
         MassagistRepository $massagistRepository,
+
+        Massage $massage
         MassageRepository $massageRepository,
         Massage $massage
         
         ): Response
     {   
+        // Affichage des masseurs
         $massagists = $massagistRepository->findAll();
 
         // Affichage calendrier
@@ -81,5 +87,18 @@ class ReservationController extends AbstractController
             'massage'=>$massage,
             'form'=>$form->createView()
         ]);
+    }
+
+    #[Route('/massagist/{massagistId}', name: 'app_reservation_datas', methods: ['POST'])]
+    public function setData(
+        $massagistId ,
+        Reservation $reservation,
+        ReservationRepository $reservationRepository):JsonResponse
+    {
+        // ajax, set massagist_id
+        $reservation->setMassagist($massagistId);
+        $reservationRepository->add($reservation, true);
+
+        return $this->json(['role' => $reservation]);
     }
 }
