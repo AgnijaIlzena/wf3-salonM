@@ -18,9 +18,8 @@ massagistBtn.forEach(btn=>{
                 data.id = id;
             })
             .catch(error => alert(error))
+            calendar.style.display = 'block';
 })
 
-
-    calendar.style.display = 'block';
 
 })

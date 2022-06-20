@@ -3,7 +3,7 @@ namespace App\Service;
 
 
 class CalendarService{
-    function build_calendar($month, $year){
+    function build_calendar($month, $year, $totalBookings){
 
         // $mysqli = new mysqli('localhost','root','','bookingcalendar');
     
@@ -85,14 +85,16 @@ class CalendarService{
             /* réservation possible tous les jours à partir d'aujourd'hui, sauf les dimanches
             $totalBookings = nombre de réservation total possible par jour*/
             // $totalBookings = checkSlots($mysqli, $date);
-            // if($dayName !='sunday' && $date>=date('Y-m-d') && $totalBookings != 9){
-            //     $linkForBooking = "<a class='btn btn-success btn-xs' href='book.php?date=$date'>Book</a>";
-            // }
-            // else{
-                $linkForBooking = "";
-            // }
+            if($dayName !='sunday' && $date>=date('Y-m-d') && $totalBookings<9){
+                // $linkForBooking = "<a class='btn btn-success btn-xs' data-date=$date'>Book</a>";
+                $calendar .= "<td class='$classToday'><button class='btn-date' data-date=$date'>
+                <h4>$currentDay</h4></button></td>";
+            }
+            else{
+                $calendar .= "<td class='$classToday'><h4>$currentDay</h4></td>";
+            }
             
-            $calendar .= "<td class='$classToday'><h4>$currentDay</h4>$linkForBooking</td>";
+            
     
             // on incrémente les compteurs
             $currentDay++;
