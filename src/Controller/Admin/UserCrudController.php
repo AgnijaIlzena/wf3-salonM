@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -28,5 +29,11 @@ class UserCrudController extends AbstractCrudController
             yield ArrayField::new(propertyName: 'roles', label: 'Rôle')->onlyOnForms();
             yield ArrayField::new(propertyName: 'roles[0]', label: 'Rôle')->hideOnForm();
     }
-    
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+        ->setEntityLabelInPlural(label:'Utilisateurs');
+    }
+ 
 }

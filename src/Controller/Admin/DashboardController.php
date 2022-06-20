@@ -69,26 +69,26 @@ class DashboardController extends AbstractDashboardController
 
 
         yield MenuItem::subMenu('Massage', 'fas fa-tags')->setSubItems([
-            MenuItem::linkToCrud('Liste Magazine', 'fas fa-plus', Massage::class),
-            MenuItem::linkToCrud('Create Product', 'fas fa-plus', Massage::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Liste Magazine', 'fa-solid fa-list', Massage::class),
+            MenuItem::linkToCrud('Create Product', 'fa-solid fa-paintbrush', Massage::class)->setAction(Crud::PAGE_NEW),
             
         ]);
 
 
-        yield MenuItem::subMenu('Masseurs', 'fas fa-bookmark')->setSubItems([
-            MenuItem::linkToCrud('Liste Masseurs', 'fas fa-plus', Massagist::class),
-            MenuItem::linkToCrud('Ajout masseurs', 'fas fa-plus', Massagist::class)->setAction(Crud::PAGE_NEW),
+        yield MenuItem::subMenu('Masseurs', 'fa-solid fa-person')->setSubItems([
+            MenuItem::linkToCrud('Liste Masseurs', 'fa-solid fa-list', Massagist::class),
+            MenuItem::linkToCrud('Ajout masseurs', 'fa-solid fa-paintbrush', Massagist::class)->setAction(Crud::PAGE_NEW),
             
         ]);
 
         yield MenuItem::subMenu('Reservation', 'fas fa-store')->setSubItems([
-            MenuItem::linkToCrud('Liste Reservation', 'fas fa-plus', Reservation::class),
-            MenuItem::linkToCrud('Ajout Reservation', 'fas fa-plus', Reservation::class)->setAction(Crud::PAGE_NEW),            
+            MenuItem::linkToCrud('Liste Reservation', 'fa-solid fa-list', Reservation::class),
+            MenuItem::linkToCrud('Ajout Reservation', 'fa-solid fa-paintbrush', Reservation::class)->setAction(Crud::PAGE_NEW),            
         ]);
 
-        yield MenuItem::subMenu('Admin', 'fas fa-store')->setSubItems([
-            MenuItem::linkToCrud('Liste Admin', 'fas fa-plus', User::class),
-            MenuItem::linkToCrud('Ajout Reservation', 'fas fa-plus', User::class)->setAction(Crud::PAGE_NEW),            
+        yield MenuItem::subMenu('Admin', 'fa-solid fa-user-graduate')->setSubItems([
+            MenuItem::linkToCrud('Liste Admin', 'fa-solid fa-list', User::class),
+            MenuItem::linkToCrud('Ajout Reservation', 'fa-solid fa-paintbrush', User::class)->setAction(Crud::PAGE_NEW),            
         ]);
     }
     
