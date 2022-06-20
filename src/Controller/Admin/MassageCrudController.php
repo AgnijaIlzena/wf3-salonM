@@ -71,16 +71,7 @@ class MassageCrudController extends AbstractCrudController
         // ];
     }
 
-    // public function deleteEntity(EntityManagerInterface $em, $entityInstance): void
-    //     {
-    //         if (!$entityInstance instanceof Massage) return;
 
-    //         foreach ($entityInstance->getMassage() as $massage) {
-    //             $em->remove($massage);
-    //     }
-
-    //     parent::deleteEntity($em, $entityInstance);
-    //  }
 }
 
 

@@ -86,9 +86,9 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Ajout Reservation', 'fa-solid fa-paintbrush', Reservation::class)->setAction(Crud::PAGE_NEW),            
         ]);
 
-        yield MenuItem::subMenu('Admin', 'fa-solid fa-user-graduate')->setSubItems([
-            MenuItem::linkToCrud('Liste Admin', 'fa-solid fa-list', User::class),
-            MenuItem::linkToCrud('Ajout Reservation', 'fa-solid fa-paintbrush', User::class)->setAction(Crud::PAGE_NEW),            
+        yield MenuItem::subMenu('Utilisateur', 'fa-solid fa-user-graduate')->setSubItems([
+            MenuItem::linkToCrud('Liste Utilisateurs', 'fa-solid fa-list', User::class),
+            MenuItem::linkToCrud('Ajout Utilisateur', 'fa-solid fa-paintbrush', User::class)->setAction(Crud::PAGE_NEW),            
         ]);
     }
     
