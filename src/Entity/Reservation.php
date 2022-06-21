@@ -37,6 +37,7 @@ class Reservation
     private $massage;
 
     #[ORM\OneToOne(mappedBy: 'reservation', targetEntity: Payement::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true)]
     private $payement;
 
     #[ORM\Column(type: 'string', length: 50)]
