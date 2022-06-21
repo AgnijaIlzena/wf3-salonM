@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}gift
+{% endblock %}
+
+{% block body %}
+	<div class=" bg-light">
+		<div class="row  w-50 m-auto py-5">
+			<div class="col">
+				<div class="py-3">
+					{% for massage in massages %}
+
+						{{ massage.name }}
+					</div>
+					<div class="py-3">
+						{{ massage.description }}
+					</div>
+					<div class="py-3">
+						{{ massage.price}}
+					</div>
+					<div class="py-3">
+					<img src="{{asset('images/'~ massage.cover)|imagine_filter('vignette')}}" alt="picture">
+					</div>
+				{% endfor %}
+
+				<h3 class="fst-italic py-5">You want to offer a relaxing massage for a moment of well-being on the occasion of an anniversary or a special occasion like Valentine's day, Christmas Offer a gift voucher for a Relaxing Massage. 🎁</h3>
+				{{ form(form) }}
+
+				{# the attribute not to use now , just to copy the path after the payment button works #}
+				    <a href="{{ path('app_giftpdf') }}"></a>
+					{#  #}
+				</div>
+			</div>
+		</div>
+	{% endblock %}
