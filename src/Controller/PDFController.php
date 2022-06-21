@@ -112,5 +112,17 @@ public function __construct(ParameterBagInterface $parameterBag)
         // Write file to the desired path
         file_put_contents($giftFilepath, $output);
 
-}
+        $email = (new Email())
+        ->from('wf3-salonm@gmail.com')
+        ->to('seether.anas2911@gmail.com')
+        ->subject('gift')
+        ->text('Surprise Surprise , you got a gift')
+        ->attachFromPath($giftFilepath);
+
+        $mailer->send($email);
+
+        // Send some text response
+        return new Response("The PDF file has been succesfully generated !");
+    }
+
 }
