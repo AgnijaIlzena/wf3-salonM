@@ -8,8 +8,15 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 {% endblock %}
 
+{% block javascripts %}
+    {{parent()}}
+    <script src="{{asset('js/reservation.js')}}" defer></script> 
+{% endblock %} 
 
 {% block body %}
+
+{{ include('component/_navbar.html.twig') }}
+
     <div class="container mt-5">
         <div class="row">
             <div class="col-8 offset-2">
@@ -17,7 +24,7 @@
                     {#  nav-bar #}
                     <h1>Rendez-vous de Massage à WF3-Massage</h1>
                     {# nom du massage #}
-                    <h2>Massage Y</h2>
+                    <h2>Massage {{massage.name}}</h2>
                 </header>
 
                 {# Choix du masseur #}
@@ -26,47 +33,35 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 mt-3">
+                            {% for massagist in massagists %}
                                 <div class="card">
-                                   <button class="btn-card">
+                                    <button class="btn-card massagistBtn" data-id={{massagist.id}}>
                                         <div class="card-horizontal">
                                             <div class="img-square-wrapper">
-                                                <img class="massagist-photo-profile" src="{{absolute_url(asset('img/masseur.jpg'))}}">
+                                                <img class="massagist-photo-profile" src="{{asset('images/'~massagist.cover)}}">
                                             </div>
                                             <div class="card-body">
-                                                <h4 class="card-title">Paul Smith</h4>
-                                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                                <h4 class="card-title">{{massagist.name}}</h4>
+                                                <p class="card-text">{{massagist.description}}</p>
                                             </div>
                                         </div>
-                                   </button>
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="col-12 mt-3">
-                                <div class="card">
-                                    <button class="btn-card">
-                                        <div class="card-horizontal">
-                                            <div class="img-square-wrapper">
-                                                <img class="massagist-photo-profile" src="{{absolute_url(asset('img/masseur.jpg'))}}">
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">Paul Smith</h4>
-                                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                            </div>
-                                        </div>
-                                   </button>
-                                </div>
+                            {% endfor %}
+
                             </div>
                         </div>
                     </div>
                 </section>
 
                 {# Calendrier #}
-                <section>
+                <section class="calendar mb-5">
                     <h3>Choisir une date</h3>
                     {{calendar|raw}}
                 </section>
                 
                 {# Créneaux horaires #}
-                <section>
+                <section class="timeslots mb-5">
                     <h3>Choisir un créneau horaire</h3>
 
                     {# <h1 class="text-center">Book for Date: <?= date('Y/m/d', strtotime($date)) ?></h1> #}
@@ -79,18 +74,39 @@
                         <button class="btn btn-primary mb-4 book"data-timeslot="{{timeSlot}}">{{timeSlot}}</button>
                     {% endfor %}
                 </section>
+
                 {# Formulaire #}
+                <section class="form mb-5">
+                    <h3>Veuillez renseigner les informations suivantes</h3>
+                    {{ form_start(form) }}
+                        <p>{{form_label(form.lastname)}}</p>
+                        <p>{{form_widget(form.lastname)}}</p>
+                        <p>{{form_errors(form.lastname)}}</p>
+
+                        <p>{{form_label(form.firstname)}}</p>
+                        <p>{{form_widget(form.firstname)}}</p>
+                        <p>{{form_errors(form.firstname)}}</p>
+                        
+                        <p>{{form_label(form.email)}}</p>
+                        <p>{{form_widget(form.email)}}</p>
+                        <p>{{form_errors(form.email)}}</p>
+
+                        <p>{{form_label(form.telephone)}}</p>
+                        <p>{{form_widget(form.telephone)}}</p>
+                        <p>{{form_errors(form.telephone)}}</p>
+
+                        {# Récapitulatif #}
+                        <section class="summary">
+                            <h3 class="mb-3">Résumé</h3>
+                            <p>Massage: </p>
+                            <p>Masseur: </p>
+                            <p>Date et horaire: </p>
+                            <p>Prix: </p>
+                        </section>
+                    {{ form_end(form)}}
+                </section>
                 
 
-                {# Récapitulatif #}
-                <section class='summary'>
-                    <h3 class="mb-3">Résumé</h3>
-                    <p>Massage: </p>
-                    <p>Masseur: </p>
-                    <p>Date et horaire: </p>
-                    <p>Prix: </p>
-                </section>
-                <button class="btn btn-primary">Réserver</button>
             </div>
 
         </div>
@@ -100,4 +116,6 @@
 
 
     </div>
+
+    {{ include('component/_footer.html.twig') }}
 {% endblock %}

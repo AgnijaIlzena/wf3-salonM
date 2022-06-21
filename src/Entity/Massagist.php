@@ -24,6 +24,9 @@ class Massagist
     #[ORM\OneToMany(mappedBy: 'massagist', targetEntity: Reservation::class, orphanRemoval: true)]
     private $reservations;
 
+    #[ORM\Column(type: 'string', length: 50)]
+    private $cover;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -84,6 +87,18 @@ class Massagist
                 $reservation->setMassagist(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(string $cover): self
+    {
+        $this->cover = $cover;
 
         return $this;
     }

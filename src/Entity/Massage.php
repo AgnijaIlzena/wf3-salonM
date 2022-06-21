@@ -6,7 +6,6 @@ use App\Repository\MassageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
 #[ORM\Entity(repositoryClass: MassageRepository::class)]
 class Massage
 {
@@ -18,13 +17,11 @@ class Massage
     #[ORM\Column(type: 'string', length: 50)]
     private $name;
 
-    #[ORM\Column(type: 'string', length: 30)]
-    private $duration;
 
     #[ORM\Column(type: 'text')]
     private $description;
 
-    #[ORM\OneToOne(mappedBy: 'massage', targetEntity: Reservation::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(mappedBy: 'massage', targetEntity: Reservation::class, cascade: ['persist', 'remove'])]
     private $reservation;
 
     #[ORM\OneToMany(mappedBy: 'massage', targetEntity: Gift::class, orphanRemoval: true)]
@@ -33,6 +30,35 @@ class Massage
     public function __construct()
     {
         $this->gifts = new ArrayCollection();
+    }
+    #[ORM\Column(type: 'integer')]
+    private $price;
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    #[ORM\Column(type: 'string', length: 50, nullable: true)]
+    private $cover;
+
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(string $cover): self
+    {
+        $this->cover = $cover;
+
+        return $this;
     }
     
 
@@ -53,17 +79,6 @@ class Massage
         return $this;
     }
 
-    public function getDuration(): ?string
-    {
-        return $this->duration;
-    }
-
-    public function setDuration(string $duration): self
-    {
-        $this->duration = $duration;
-
-        return $this;
-    }
 
     public function getDescription(): ?string
     {

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Massagist{% endblock %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}"> 
+{% endblock %}
+
+{% block body %}
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title">Nos massothérapeutes</h2>
+        </div>
+
+            <div class="container hstack gap-5">
+
+                <div class="row mx-auto py-5">
+                    {% for massagist in massagists %}
+
+                        <div class="col-12 col-lg-4 mx-auto ">
+                            <img src="{{ asset('images/'~ massagist.cover) }}" alt="{{ massagist.name ~ ' - image' }}" class="team-img ">
+                            <h3 class="pt-5 pb-2 title ">{{massagist.name}}</h3>
+                            <p  class="mt-4">{{massagist.description}}</p>                   
+                        </div>
+                
+                    {% endfor %}
+                </div>
+            </div>
+
+    </section>
+{% endblock %}

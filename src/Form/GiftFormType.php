@@ -55,7 +55,8 @@ class GiftFormType extends AbstractType
             ->add('save', SubmitType::class, [
                 'label' => 'Next',
                 'attr' => [
-                    'class' => 'btn btn-outline-primary'
+                    'class' => 'btn btn-outline-primary',
+                    'submit' => 'app_pdf'
                 ]
             ]);
     }
