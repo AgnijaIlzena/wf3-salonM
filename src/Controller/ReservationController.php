@@ -16,8 +16,8 @@ use App\Entity\Massage;
 use App\Repository\MassagistRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Entity\Massagist;
 use App\Repository\MassageRepository;
+use App\Controller\PDO;
 
 class ReservationController extends AbstractController
 {   
@@ -27,7 +27,6 @@ class ReservationController extends AbstractController
         Massage $massage,
         CalendarService $calendarService, 
         TimeSlotsService $timeSlotsService, 
-        Request $request,
         ReservationRepository $reservationRepository,
         MassagistRepository $massagistRepository
         
@@ -64,17 +63,6 @@ class ReservationController extends AbstractController
         $reservation = new Reservation();
         $form = $this->createForm(ReservationFormType::class, $reservation);
 
-        // rempli $reservation avec les données du formulaire
-        $form->handleRequest($request);
-
-        // si le formulaire est envoyé et qu'il est correct on enregistre les données dans la bdd
-        if($form->isSubmitted()&& $form->isValid()){
-            $reservationRepository->add($reservation, true);
-        
-        // !!!!!!!!!! route
-        return $this->redirectToRoute('paiement');
-        }
-
         
         return $this->render('reservation/index.html.twig',[
             'calendar'=>$calendar,
@@ -91,17 +79,18 @@ class ReservationController extends AbstractController
         ReservationRepository $reservationRepository,
         MassageRepository $massageRepository,
         MassagistRepository $massagistRepository,
-        Request $request
-        ):int
+        Request $request,
+        ):JsonResponse
     {   
         $data = json_decode($request->getContent(), true);
         
         $reservation = new Reservation();
         
-        $massage = $massageRepository->find($data['massage']);
-        $reservation->setMassage($massage);
 
-        $massagist = $massagistRepository->find($data['massagist']);
+        $massageId = $massageRepository->find($data['massageId']);
+        $reservation->setMassage($massageId);
+
+        $massagist = $massagistRepository->find($data['massagistId']);
         $reservation->setMassagist($massagist);
 
         $reservation->setDate($data['date']);
@@ -110,7 +99,7 @@ class ReservationController extends AbstractController
 
         $reservation->setLastname($data['lastname']);
 
-        $reservation->getFirstname($data['firstname']);
+        $reservation->setFirstname($data['firstname']);
 
         $reservation->setEmail($data['email']);
 
@@ -118,7 +107,11 @@ class ReservationController extends AbstractController
 
         $reservationRepository->add($reservation, true);
 
-        // return $this->json($data['massage']);
-        return $reservation->getId();
+        return $this->json($reservation);
+    }
+    #[Route('/payement', name: 'payement')]
+    public function test(ReservationRepository $reservationRepository){   
+        $lastInsertId = 
+        return $this->render('reservation/test.html.twig');
     }
 }

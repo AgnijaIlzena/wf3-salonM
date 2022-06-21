@@ -6,6 +6,8 @@ use App\Repository\MassageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
+
 #[ORM\Entity(repositoryClass: MassageRepository::class)]
 class Massage
 {
@@ -22,6 +24,7 @@ class Massage
     private $description;
 
     #[ORM\OneToMany(mappedBy: 'massage', targetEntity: Reservation::class, cascade: ['persist', 'remove'])]
+    #[Ignore]
     private $reservation;
 
     #[ORM\OneToMany(mappedBy: 'massage', targetEntity: Gift::class, orphanRemoval: true)]
