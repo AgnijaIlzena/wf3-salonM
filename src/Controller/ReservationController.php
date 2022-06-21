@@ -90,28 +90,35 @@ class ReservationController extends AbstractController
     public function setData(
         ReservationRepository $reservationRepository,
         MassageRepository $massageRepository,
+        MassagistRepository $massagistRepository,
         Request $request
-        ):JsonResponse
+        ):int
     {   
         $data = json_decode($request->getContent(), true);
         
-        $massage = $massageRepository->find($data['massage']);
-
         $reservation = new Reservation();
+        
+        $massage = $massageRepository->find($data['massage']);
         $reservation->setMassage($massage);
 
-        // ajax, set massagist_id
-        // $reservation->setMassage($massage);
-        // $reservation->setMassagist($massagist);
-        // $reservation->setDate();
-        // $reservation->setTimeslot();
-        // $reservation->setLastname();
-        // $reservation->getFirstname();
-        // $reservation->setEmail();
-        // $reservation->setTelephone();
+        $massagist = $massagistRepository->find($data['massagist']);
+        $reservation->setMassagist($massagist);
 
-        // $reservationRepository->add($reservation, true);
+        $reservation->setDate($data['date']);
 
-        return $this->json($data['massage']);
+        $reservation->setTimeslot($data['timeslot']);
+
+        $reservation->setLastname($data['lastname']);
+
+        $reservation->getFirstname($data['firstname']);
+
+        $reservation->setEmail($data['email']);
+
+        $reservation->setTelephone($data['telephone']);
+
+        $reservationRepository->add($reservation, true);
+
+        // return $this->json($data['massage']);
+        return $reservation->getId();
     }
 }

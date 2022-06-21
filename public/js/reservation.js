@@ -67,8 +67,8 @@ elementsForAjax.forEach(el=>{
             body: reservation
         })
         .then(response => response.json())
-        .then(response => alert(response))
-        .catch(error => alert("Erreur : " + error));
+        .then(response => window.location.href = '/payement')
+        .catch(error => console.log("Erreur : " + error));
             
     })
 
