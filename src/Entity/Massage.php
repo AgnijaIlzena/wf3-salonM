@@ -4,16 +4,15 @@ namespace App\Entity;
 
 use App\Repository\MassageRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File as FileFile;
-use vich\UploaderBundle\Mapping\Annotation\UploadableField;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Stringable;
 
 
 
 #[ORM\Entity(repositoryClass: MassageRepository::class)]
 #[Vich\Uploadable] 
-class Massage
+class Massage implements Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -111,15 +110,6 @@ class Massage
         return $this;
     }
 
-    //     /**
-    //  * @return Collection|Massage[]
-    //  */
-    // public function getMassage(): Collection
-    // {
-    //     return $this->massage;
-    // }
-
-    
     /**
      * Get the value of file
      */ 
@@ -138,5 +128,10 @@ class Massage
         $this->file = $file;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;       
     }
 }

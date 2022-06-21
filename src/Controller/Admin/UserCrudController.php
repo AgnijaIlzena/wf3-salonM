@@ -9,6 +9,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use Symfony\Component\Form\AbstractType;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -28,6 +30,7 @@ class UserCrudController extends AbstractCrudController
             yield TextField::new(propertyName: 'firstName', label: 'Prénom');
             yield ArrayField::new(propertyName: 'roles', label: 'Rôle')->onlyOnForms();
             yield ArrayField::new(propertyName: 'roles[0]', label: 'Rôle')->hideOnForm();
+
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -37,3 +40,4 @@ class UserCrudController extends AbstractCrudController
     }
  
 }
+

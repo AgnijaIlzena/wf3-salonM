@@ -35,9 +35,11 @@ class DashboardController extends AbstractDashboardController
             ->setController(MassageCrudController::class)
             ->setController(MassagistCrudController::class)
             ->setController(ReservationCrudController::class)
+            ->setController(UserCrudController::class)
             ->generateUrl();
 
         return $this->redirect($url);
+        // return $this->redirectToRoute('app_home');
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
@@ -52,7 +54,7 @@ class DashboardController extends AbstractDashboardController
 
         // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
         // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //
+        
         // return $this->render('some/path/my-dashboard.html.twig');
     }
 
@@ -64,7 +66,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
 
 
@@ -82,14 +84,16 @@ class DashboardController extends AbstractDashboardController
         ]);
 
         yield MenuItem::subMenu('Reservation', 'fas fa-store')->setSubItems([
-            MenuItem::linkToCrud('Liste Reservation', 'fa-solid fa-list', Reservation::class),
-            MenuItem::linkToCrud('Ajout Reservation', 'fa-solid fa-paintbrush', Reservation::class)->setAction(Crud::PAGE_NEW),            
+            MenuItem::linkToCrud('Liste Reservation', 'fa-solid fa-list', Reservation::class),          
         ]);
 
         yield MenuItem::subMenu('Utilisateur', 'fa-solid fa-user-graduate')->setSubItems([
             MenuItem::linkToCrud('Liste Utilisateurs', 'fa-solid fa-list', User::class),
             MenuItem::linkToCrud('Ajout Utilisateur', 'fa-solid fa-paintbrush', User::class)->setAction(Crud::PAGE_NEW),            
         ]);
+
+        yield MenuItem::linkToLogout('Logout', 'fa fa-sign-out');
+        
     }
     
 }
