@@ -1,36 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Massages{% endblock %}
+{% block title %}Massage{% endblock %}
 {% block stylesheets %}
-    {{parent()}}
-    <link rel="stylesheet" href="/css/style.css">
+    {{parent()}}   
 {% endblock %}
 {% block body %}
 
-<section class="massages">
+<section class="massages reveal">
 	<div class="container">
 		<h2 class="section-title">Nos Massages</h2>
 	</div>
 
-	<div class="container hstack gap-5 reveal">
+	<div class="container hstack">
 	
+			{# Massage cards #}
 			<div class="row mx-auto">
-			{% for massage in massages %}
+				{% for massage in massages %}
 
-				<div class="col-4 mt-3">
-					<img class="w-100 h-50" src="{{ asset('images/'~ massage.cover) }}" class="rounded mx-auto" alt="Thai massage">
-					<h3 class="pt-5 pb-2 title">
-						{{ massage.name }}
-					</h3>
-					<p class="py-4">
-						{{ massage.description|u.truncate(100, '...') }}
-					</p>
-					<p class="pb-4"><span class="details text-muted">30 min {{massage.price}} € , 60 min {{massage.price}} €</span></p>
-					<a class="btn-design mb-5" href="{{ path('app_reservation', { id: massage.id }) }}">
-						réserver
-					</a>
-				</div>
-			{% endfor %}
+					<div class="col-12 col-lg-6 col-xl-4 my-4">
+						<div class="card p-3 ">
+							<img class="w-100 h-50" src="{{ asset('images/'~ massage.cover) }}" class="rounded mx-auto" alt="Thai massage">
+							<h3 class="pt-5 pb-2 title">
+								{{ massage.name }}
+							</h3>
+							<p class="py-4">
+								{{ massage.description|u.truncate(100, '...') }}
+							</p>
+							<p class="pb-4"><span class="text-muted">60 min</span> <span class="details">{{massage.price}} €</span></p>
+							<a class="btn-design btn-massage text-center mb-5" href="{{ path('app_reservation', { id: massage.id }) }}">
+								réserver
+							</a>
+						</div>					
+					</div>
+				{% endfor %}
 			</div>
 		
 	</div>
