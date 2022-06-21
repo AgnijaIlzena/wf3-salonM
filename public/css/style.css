@@ -7,6 +7,7 @@
     --grey-btn: rgb(231, 232, 236,0.4);
     --grey-border:rgb(215, 213, 213);
     --summary:rgba(24, 134, 197, 0.6);
+    --today: yellow;
 
     --sky-blue-crayola: #6fd2e5ff;
     --white: #fcf7f8ff;
@@ -226,6 +227,9 @@ elles s'afficheront au clic sur la section précédente
 .btn-card:hover{
     background: var(--grey-btn); 
     transition: 0.5s;
+}
+.today{
+    background-color: var(--today);
 }
 
 /* footer */
