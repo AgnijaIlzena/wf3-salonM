@@ -7,21 +7,24 @@
     <link rel="stylesheet" href="/css/style.css">
 {% endblock %}
 
-{% block body %}
-{{ include('component/_navbar.html.twig') }}
-{{ include('component/_intro.html.twig') }}
-{{ include('component/aboutUs.html.twig')}}
+{% block javascripts %}
+    {{parent()}}
+{% endblock %}
 
-{{ render(controller(
-    'App\\Controller\\MassageController::index'   
-)) }}
+{% block body %}
+    {{ include('component/_navbar.html.twig') }}
+    {{ include('component/_intro.html.twig') }}
+    {{ include('component/aboutUs.html.twig')}}
 
 {# {{ include('component/contact.html.twig')}} #}
 
-{{ render(controller(
-    'App\\Controller\\MassagistController::index'
-)) }}
+    {{ render(controller(
+        'App\\Controller\\MassageController::index'
+    )) }}
 
-{{ include('component/_footer.html.twig') }}
+    {{ render(controller(
+        'App\\Controller\\MassagistController::index'
+    )) }}
 
+    {{ include('component/_footer.html.twig') }}
 {% endblock %}
