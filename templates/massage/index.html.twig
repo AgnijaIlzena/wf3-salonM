@@ -18,23 +18,61 @@
 				{% for massage in massages %}
 
 					<div class="col-12 col-lg-6 col-xl-4 my-4">
-						<div class="card p-3 ">
-							<img class="w-100 h-50" src="{{ asset('images/'~ massage.cover) }}" class="rounded mx-auto" alt="Thai massage">
-							<h3 class="pt-5 pb-2 title">
-								{{ massage.name }}
-							</h3>
-							<p class="py-4">
-								{{ massage.description|u.truncate(100, '...') }}
-							</p>
-							<p class="pb-4"><span class="text-muted">60 min</span> <span class="details">{{massage.price}} €</span></p>
-							<a class="btn-design btn-massage text-center mb-5" href="{{ path('app_reservation', { id: massage.id }) }}">
-								réserver
-							</a>
-						</div>					
+						
+							<div class="card p-3" >
+								<img class="w-100 h-50" src="{{ asset('images/'~ massage.cover) }}" class="rounded mx-auto" alt="Thai massage">																					
+								<h3 class="pt-5 pb-2 title" data-massage-name="{{massage.name}}">
+									{{ massage.name }}
+								</h3>
+																
+								<p class="py-4">
+									{{ massage.description|u.truncate(100, '...') }}
+								</p>																	
+
+								<p class="pb-4"><span class="text-muted">60 min</span> <span class="details">{{massage.price}} €</span></p>
+								<a class="btn-design btn-massage text-center mb-5" href="{{ path('app_reservation', { id: massage.id }) }}">
+									réserver
+								</a>	
+
+								{# modal test #}
+								<button class="btnDetails">Open Modal</button>
+
+							</div>
+											
 					</div>
 				{% endfor %}
 			</div>
-		
+	
 	</div>
+
+{# MODAL #}
+<div class="container"> 
+
+    <div id="myModal" class="modal">
+
+            <div class="modal-content">
+                <span class="close">&times;</span>
+
+            {# Modal content #}
+                <div class="row">
+
+                    <div class="col-4 ">
+                        <img class="modal-img" src="https://beautyinsider.sg/wp-content/uploads/2021/03/shutterstock_291214463.jpg" alt="Japanese massage">
+                    </div>
+
+                    <div class="col-8 ps-5">
+                        <h3 class="modal-title pb-3" id="showName">massage name</h3>
+                        <p class="modal-descr pb-4">
+                            Using a combination of kneading, tapping, pulling and pressure, practitioners target the legs, back, arms and neck. Japanese Massage aims to bring about relaxation and healing not just with the physical body, but also on an emotional and spiritual level.
+                        </p>
+                        <p><span class="modal-price">60 min 160€</span></p>
+                    </div>
+
+                </div>
+
+            </div>   
+    </div>   
+</div>
+
 </section>
 {% endblock %}
