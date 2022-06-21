@@ -1,0 +1,379 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Thank you for using our services
+{% endblock %}
+
+{% block body %}
+	<style>
+	:root
+	{
+		--title-font: 'Libre Baskerville', serif;
+		--text-font: 'Source Sans Pro', sans-serif;
+
+		--grey-btn: rgb(231, 232, 236, 0.4);
+		--grey-border: rgb(215, 213, 213);
+		--summary: rgba(24, 134, 197, 0.6);
+
+		--sky-blue-crayola: #6fd2e5ff;
+		--white: #fcf7f8ff;
+		--text-color: #0e273cff;
+		--ruby-red: #a31621ff;
+		--grey: #7f7b82ff;
+		--raisin-black: #191923ff;
+	}
+
+
+	h1 {
+		font: 'Libre Baskerville', serif;
+		text-align: center;
+	}
+
+
+	table {
+		font-size: 75%;
+		table-layout: fixed;
+		width: 100%;
+	}
+	table {
+		border-collapse: separate;
+		border-spacing: 2px;
+	}
+	th,
+	td {
+		border-width: 1px;
+		padding: 0.5em;
+		position: relative;
+		text-align: left;
+	}
+	th,
+	td {
+		border-radius: 0.25em;
+		border-style: solid;
+	}
+	th {
+		background: #EEE;
+		border-color: #BBB;
+	}
+	td {
+		border-color: #DDD;
+	}
+
+	body {
+		box-sizing: border-box;
+		height: 11in;
+		margin: 0 auto;
+		overflow: hidden;
+		padding: 0.5in;
+		width: 7.5in;
+	}
+	body {
+		background: #FFF;
+		border-radius: 1px;
+		box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+	}
+
+
+	header {
+		margin: 0 0 3em;
+	}
+	header:after {
+		clear: both;
+		content: "";
+		display: table;
+	}
+
+	header h1 {
+		background: #a31621ff;
+		border-radius: 0.25em;
+		color: #FFF;
+		margin: 0 0 1em;
+		padding: 0.5em 0;
+	}
+	header address {
+		float: left;
+		font-size: 95%;
+		font-style: normal;
+		line-height: 1.25;
+		margin: 0 1em 1em 0;
+	}
+	article address.norm h4 {
+		font-size: 125%;
+		font-weight: bold;
+	}
+	article address.norm {
+		float: left;
+		font-size: 95%;
+		font-style: normal;
+		font-weight: normal;
+		line-height: 1.25;
+		margin: 0 1em 1em 0;
+	}
+	header address p {
+		margin: 0 0 0.25em;
+	}
+	header span,
+	header img {
+		display: block;
+		float: right;
+	}
+	header span {
+		margin: 0 0 1em 1em;
+		max-height: 25%;
+		max-width: 60%;
+		position: relative;
+	}
+	header img {
+		max-height: 100%;
+		max-width: 100%;
+	}
+	header input {
+		cursor: pointer; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+		height: 100%;
+		left: 0;
+		opacity: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+
+
+	article,
+	article address,
+	table.meta,
+	table.inventory {
+		margin: 0 0 3em;
+	}
+	article:after {
+		clear: both;
+		content: "";
+		display: table;
+	}
+	article h1 {
+		clip: rect(0 0 0 0);
+		position: absolute;
+	}
+	article h2 {
+		font-style: bold;
+		font-size: 2.2rem
+	}
+
+	article address {
+		float: left;
+		font-size: 125%;
+		font-weight: bold;
+	}
+
+	article h5 {
+		font-size: 1.2rem;
+	}
+
+
+	table.meta,
+	table.balance {
+		float: right;
+		width: 36%;
+	}
+	table.meta:after,
+	table.balance:after {
+		clear: both;
+		content: "";
+		display: table;
+	}
+
+
+	table.meta th {
+		width: 40%;
+	}
+	table.meta td {
+		width: 60%;
+	}
+
+
+	table.inventory {
+		clear: both;
+		width: 100%;
+	}
+	table.inventory th:first-child {
+		width: 50px;
+	}
+	table.inventory th:nth-child(2) {
+		width: 300px;
+	}
+	table.inventory th {
+		font-weight: bold;
+		text-align: center;
+	}
+
+	table.inventory td:nth-child(1) {
+		width: 26%;
+	}
+	table.inventory td:nth-child(2) {
+		width: 38%;
+	}
+	table.inventory td:nth-child(3) {
+		text-align: right;
+		width: 12%;
+	}
+	table.inventory td:nth-child(4) {
+		text-align: right;
+		width: 12%;
+	}
+	table.inventory td:nth-child(5) {
+		text-align: right;
+		width: 12%;
+	}
+
+
+	table.balance th,
+	table.balance td {
+		width: 50%;
+	}
+	table.balance td {
+		text-align: right;
+	}
+
+
+	aside h1 {
+		border: none;
+		border-width: 0 0 1px;
+		margin: 0 0 1em;
+	}
+	aside h1 {
+		border-color: #999;
+		border-bottom-style: solid;
+	}
+
+	table.sign {
+		float: left;
+		width: 220px;
+	}
+	table.sign img {
+		width: 100%;
+	}
+	table.sign tr td {
+		border-color: transparent;
+	}
+	@media print {
+		* {
+			-webkit-print-color-adjust: exact;
+		}
+		html {
+			background: none;
+			padding: 0;
+		}
+		body {
+			box-shadow: none;
+			margin: 0;
+		}
+		span:empty {
+			display: none;
+		}
+		.add,
+		.cut {
+			display: none;
+		}
+	}
+
+	@page {
+		margin: 0;
+	}
+</style>
+
+
+<body>
+	<header>
+		<h1>WF3 SalonM</h1>
+		<address>
+			<p>
+				WF3-macon@gmail.com
+			</p>
+			<p>
+				71000, 82 Rue Victor Hugo, Macon</p>
+			<p>
+				0033 06 01 02 03 04
+			</p>
+
+		</address>
+
+	</header>
+	<article>
+		{# {% for user in users %} #}
+			<h2>Receiver</h2>
+			<address class="norm">
+				<h4>
+					{{ user.lastName }}
+					{{ user.firstName }}
+					</h4>
+				<p>
+					{{ user.email}}<br>
+				</p>
+			</address>
+		{# {% endfor %} #}
+		<table class="meta">
+		{% for massage in massages %}
+			<tr>
+				<th>
+					<span>Facteur ID</span>
+				</th>
+				<td>
+					<span>{{ random() }} </span>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<span>Date</span>
+				</th>
+				<td>
+					<span>{{ 'now'|date('d.m.Y') }}</span>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<span>Total</span>
+				</th>
+				<td>
+					<span id="prefix">€</span>
+					<span>{{massage.price}}</span>
+				</td>
+			</tr>
+		</table>
+		<table class="inventory">
+		
+			<thead>
+				<tr>
+					<th>
+						<span>Customer id</span>
+					</th>
+					<th>
+						<span>Massage Type</span>
+					</th>
+					
+					<th>
+						<span>Paid</span>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<span>{{massage.id}}</span>
+					</td>
+					<td>
+						<span>{{massage.name}}</span>
+					</td>
+					
+					<td>
+						<span data-prefix>€</span>
+						<span>{{massage.price}}</span>
+					</td>
+				</tr>
+			</tbody>
+			{% endfor %}
+		</table>
+		<hr>
+		<h5>
+			Thank you for using our service and we are waiting you to visit us again</h5>
+	</article>
+	</body>
+{% endblock %}
+

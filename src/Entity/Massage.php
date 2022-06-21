@@ -3,8 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\MassageRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
 #[ORM\Entity(repositoryClass: MassageRepository::class)]
 class Massage
 {
@@ -23,11 +24,42 @@ class Massage
     #[ORM\OneToMany(mappedBy: 'massage', targetEntity: Reservation::class, cascade: ['persist', 'remove'])]
     private $reservation;
 
+    #[ORM\OneToMany(mappedBy: 'massage', targetEntity: Gift::class, orphanRemoval: true)]
+    private $gifts;
+
+    public function __construct()
+    {
+        $this->gifts = new ArrayCollection();
+    }
     #[ORM\Column(type: 'integer')]
     private $price;
 
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
     #[ORM\Column(type: 'string', length: 50, nullable: true)]
     private $cover;
+
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(string $cover): self
+    {
+        $this->cover = $cover;
+
+        return $this;
+    }
     
 
     public function getId(): ?int
@@ -77,26 +109,32 @@ class Massage
         return $this;
     }
 
-    public function getPrice(): ?int
+    /**
+     * @return Collection<int, Gift>
+     */
+    public function getGifts(): Collection
     {
-        return $this->price;
+        return $this->gifts;
     }
 
-    public function setPrice(int $price): self
+    public function addGift(Gift $gift): self
     {
-        $this->price = $price;
+        if (!$this->gifts->contains($gift)) {
+            $this->gifts[] = $gift;
+            $gift->setMassage($this);
+        }
 
         return $this;
     }
 
-    public function getCover(): ?string
+    public function removeGift(Gift $gift): self
     {
-        return $this->cover;
-    }
-
-    public function setCover(?string $cover): self
-    {
-        $this->cover = $cover;
+        if ($this->gifts->removeElement($gift)) {
+            // set the owning side to null (unless already changed)
+            if ($gift->getMassage() === $this) {
+                $gift->setMassage(null);
+            }
+        }
 
         return $this;
     }
