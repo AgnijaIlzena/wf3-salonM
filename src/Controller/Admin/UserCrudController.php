@@ -30,7 +30,6 @@ class UserCrudController extends AbstractCrudController
             yield TextField::new(propertyName: 'firstName', label: 'Prénom');
             yield ArrayField::new(propertyName: 'roles', label: 'Rôle')->onlyOnForms();
             yield ArrayField::new(propertyName: 'roles[0]', label: 'Rôle')->hideOnForm();
-
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -38,6 +37,6 @@ class UserCrudController extends AbstractCrudController
         return $crud
         ->setEntityLabelInPlural(label:'Utilisateurs');
     }
- 
+
 }
 

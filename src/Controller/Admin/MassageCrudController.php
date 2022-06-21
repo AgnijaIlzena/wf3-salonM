@@ -44,9 +44,9 @@ class MassageCrudController extends AbstractCrudController
             ->onlyOnForms();
             
         yield ImageField::new(propertyName:'cover', label:'Image')
-        ->setBasePath(path:$this->uploadDir)
-        ->setUploadDir('public/uploads')
-        ->hideOnForm();
+            ->setBasePath(path:$this->uploadDir)
+            ->setUploadDir('public/uploads')
+            ->hideOnForm();
 
 
 
