@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\MassageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 #[ORM\Entity(repositoryClass: MassageRepository::class)]
 class Massage
@@ -21,6 +23,7 @@ class Massage
     private $description;
 
     #[ORM\OneToMany(mappedBy: 'massage', targetEntity: Reservation::class, cascade: ['persist', 'remove'])]
+    #[Ignore]
     private $reservation;
 
     #[ORM\Column(type: 'integer')]

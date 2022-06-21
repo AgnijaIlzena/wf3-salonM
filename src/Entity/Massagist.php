@@ -6,6 +6,8 @@ use App\Repository\MassagistRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 #[ORM\Entity(repositoryClass: MassagistRepository::class)]
 class Massagist
@@ -22,6 +24,7 @@ class Massagist
     private $description;
 
     #[ORM\OneToMany(mappedBy: 'massagist', targetEntity: Reservation::class, orphanRemoval: true)]
+    #[Ignore]
     private $reservations;
 
     #[ORM\Column(type: 'string', length: 50)]
