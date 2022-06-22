@@ -61,9 +61,9 @@ class CalendarService{
         $calendar = "<table class = 'table table-bordered'>";
         $calendar.="<div class ='text-center'><h2>$monthName $year</h2></div>";
         $calendar.= "<div class='buttons d-flex justify-content-between w-50 mx-auto my-3'>
-                    <a class='btn btn-primary btn-xs' href='?month=$prev_month&year=$prev_year' >Mois précédent</a>";
-        $calendar.= "<a class='btn btn-primary btn-xs' href='?month=".date('m')."&year=".date('Y')."' >Mois en cours</a></center>";
-        $calendar.= "<a class='btn btn-primary btn-xs' href='?month=$next_month&year=$next_year' >Mois suivant</a>
+                    <a class='btn btn-primary btn-xs calendarBtn' href='?month=$prev_month&year=$prev_year' >Mois précédent</a>";
+        $calendar.= "<a class='btn btn-primary btn-xs calendarBtn' href='?month=".date('m')."&year=".date('Y')."' >Mois en cours</a></center>";
+        $calendar.= "<a class='btn btn-primary btn-xs calendarBtn' href='?month=$next_month&year=$next_year' >Mois suivant</a>
                     </div>";
         $calendar.= "<thead><tr>";
     

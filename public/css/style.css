@@ -189,7 +189,7 @@ p {
 
 /* Reservation */
 
-.calendar, .timeslots, .form, .summary{
+.calendar, .timeslots, .form, .summary, .alert-danger{
     display: none;
  }
 

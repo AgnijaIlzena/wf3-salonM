@@ -14,6 +14,18 @@ const massageText = document.querySelector('.massage');
 const book = document.querySelector('.book');
 const next = document.querySelector('.next');
 
+const calendarBtn = document.querySelector('.calendarBtn');
+
+calendarBtn.forEach(el=>{
+    el.addEventListener('click',()=>{
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+          });
+          // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+          let value = params.some_key; // "some_value"
+          
+    })
+})
 
 elementsForAjax.forEach(el=>{
     el.addEventListener('click', (e) => {
@@ -76,6 +88,7 @@ elementsForAjax.forEach(el=>{
 
 })
 
+// inputs
 elementsForAjax.forEach(el=>{
     el.addEventListener('change', (e) => {
 
@@ -93,8 +106,11 @@ elementsForAjax.forEach(el=>{
 })
 })
 
-book.addEventListener('click',()=>{
 
+book.addEventListener('click',()=>{
+    // if(lastname.length == 0){
+    //     lasnameError.style.display = 'block';
+    // }
     fetch("/reservation", {
         method: "POST",
         headers: {
