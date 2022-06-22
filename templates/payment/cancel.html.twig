@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Payment Fail!{% endblock %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="/css/style.css">
+{% endblock %}
+
+{% block body %}
+    {{parent()}}
+
+<h1>Thanks for your attempted order!</h1>
+    <p>
+      We would appreciate your business!
+     Your payment failed !
+      <a href="mailto:orders@example.com">failures@example.com</a>.
+    </p>
+
+    <a class="btn-design" href="{{ path('app_home') }}">retour à accueil</a>
+
+{% endblock %}

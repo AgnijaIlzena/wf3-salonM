@@ -124,7 +124,7 @@ p {
     transition: 0.5s;    
 }
 
-.intro-text button {
+.intro-text a {
     position: absolute;
     top: 75%;
     left: 15rem;
@@ -189,9 +189,9 @@ p {
 
 /* Reservation */
 
-/* .calendar, .timeslots, .form, .summary{
+.calendar, .timeslots, .form, .summary, .alert-danger{
     display: none;
- } */
+ }
 
 .date{
     background: none;

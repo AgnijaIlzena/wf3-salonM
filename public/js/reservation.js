@@ -14,6 +14,18 @@ const massageText = document.querySelector('.massage');
 const book = document.querySelector('.book');
 const next = document.querySelector('.next');
 
+const calendarBtn = document.querySelector('.calendarBtn');
+
+calendarBtn.forEach(el=>{
+    el.addEventListener('click',()=>{
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+          });
+          // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+          let value = params.some_key; // "some_value"
+          
+    })
+})
 
 elementsForAjax.forEach(el=>{
     el.addEventListener('click', (e) => {
@@ -59,23 +71,24 @@ elementsForAjax.forEach(el=>{
 
 
         // clic sur  btn 'suivant' -> summary 
-        // if(e.target.classList[3]=='next'){
-        //     summary.style.display = 'block';
-        //     next.innerHTML = 'Valider les mo';
+        if(e.target.classList[3]=='next'){
+            summary.style.display = 'block';
+            next.style.display = 'none';
 
-        //     // résumé
-        //     summaryMassage.innerHTML = 'Massage: '+reservation.massageName;
-        //     summaryMassagist.innerHTML = 'Masseur: '+reservation.massagistName;
-        //     summaryDate.innerHTML = `Date et horaire: le ${reservation.date.slice(8,10)}-${reservation.date.slice(5,7)}-${reservation.date.slice(0,4)} 
-        //     de ${reservation.timeslot.slice(0,2)}h à ${reservation.timeslot.slice(8,10)}h`;
-        //     summaryPrice.innerHTML = `Prix: ${price} €`;
-        // }
+            // résumé
+            summaryMassage.innerHTML = 'Massage: '+reservation.massageName;
+            summaryMassagist.innerHTML = 'Masseur: '+reservation.massagistName;
+            summaryDate.innerHTML = `Date et horaire: le ${reservation.date.slice(8,10)}-${reservation.date.slice(5,7)}-${reservation.date.slice(0,4)} 
+            de ${reservation.timeslot.slice(0,2)}h à ${reservation.timeslot.slice(8,10)}h`;
+            summaryPrice.innerHTML = `Prix: ${price} €`;
+        }
 
         localStorage.setItem('reservation', JSON.stringify(reservation));
 })
 
 })
 
+// inputs
 elementsForAjax.forEach(el=>{
     el.addEventListener('change', (e) => {
 
@@ -93,8 +106,11 @@ elementsForAjax.forEach(el=>{
 })
 })
 
-book.addEventListener('click',()=>{
 
+book.addEventListener('click',()=>{
+    // if(lastname.length == 0){
+    //     lasnameError.style.display = 'block';
+    // }
     fetch("/reservation", {
         method: "POST",
         headers: {
@@ -105,7 +121,7 @@ book.addEventListener('click',()=>{
     })
     .then(response => response.json())
     .then(id => {
-        window.location.href = `/payement/${id}`;
+        window.location.href = `/checkout/${id}`;
     })
     .catch(error => console.log("Erreur : " + error));
     
