@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\CalendarService;
 use App\Service\TimeSlotsService;
-
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ReservationRepository;
 use App\Form\ReservationFormType;
@@ -74,44 +73,6 @@ class ReservationController extends AbstractController
     }
 
 
-}
-
-
-    #[Route('/reservation', name: 'app_reservation_datas', methods: ['POST'])]
-    public function setData(
-        ReservationRepository $reservationRepository,
-        MassageRepository $massageRepository,
-        MassagistRepository $massagistRepository,
-        Request $request,
-        ):JsonResponse
-    {   
-        $data = json_decode($request->getContent(), true);
-        
-        $reservation = new Reservation();
-        
-
-        $massageId = $massageRepository->find($data['massageId']);
-        $reservation->setMassage($massageId);
-
-        $massagist = $massagistRepository->find($data['massagistId']);
-        $reservation->setMassagist($massagist);
-
-        $reservation->setDate($data['date']);
-
-        $reservation->setTimeslot($data['timeslot']);
-
-        $reservation->setLastname($data['lastname']);
-
-        $reservation->setFirstname($data['firstname']);
-
-        $reservation->setEmail($data['email']);
-
-        $reservation->setTelephone($data['telephone']);
-
-        $reservationRepository->add($reservation, true);
-
-        return $this->json($reservation->getId());
-    }
     #[Route('/payement/{id}', name: 'payement', requirements:['id'=>'\d+'])]
     public function test(Reservation $reservation){   
         return $this->render('reservation/test.html.twig',[

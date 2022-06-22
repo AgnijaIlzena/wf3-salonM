@@ -9,8 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File as FileFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Stringable;
-
-
 use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: MassageRepository::class)]
@@ -59,8 +57,6 @@ class Massage implements Stringable
         return $this;
     }
 
-    #[ORM\Column(type: 'string', length: 50, nullable: true)]
-    private $cover;
 
     public function getCover(): ?string
     {
