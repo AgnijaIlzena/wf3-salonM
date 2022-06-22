@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700 &family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');:root {
+			--title-font: 'Libre Baskerville', serif;
+			--text-font: 'Source Sans Pro', sans-serif;
+
+			--grey-btn: rgb(231, 232, 236, 0.4);
+			--grey-border: rgb(215, 213, 213);
+			--summary: rgba(24, 134, 197, 0.6);
+			--today: yellow;
+
+			--sky-blue-crayola: #6fd2e5ff;
+			--sky-blue-crayola2: #6fd2e5ff;
+			--white: #fcf7f8ff;
+			--text-color: #0e273cff;
+			--ruby-red: #a31621ff;
+			--grey: #7f7b82ff;
+			--raisin-black: #191923ff;
+		}
+        body{
+           position: relative;
+           background-image:url(https://assets.weforum.org/project/image/isszgFNBdM_zNV00TYXwCUDgEEN17nYD0_j1DDpv-sQ.jpeg);
+        
+        }
+
+		img {
+			positions:absolute;
+			width: 80%;
+            margin: 10% 10%;
+    
+            
+		}
+		a {
+			position: absolute;
+			bottom: 19%;
+			left: 60%;
+		}
+		h1 {
+			position: absolute;
+			top: 13%;
+			left: 28%;
+			font-size: 7em;
+			font-style: bold;
+            font-family: var(--text-font);
+		}
+		p {
+			position: absolute;
+			top: 24%;
+			left: 25%;
+			font-size: 3em;
+			font-style: bold;
+            font-family: var(--text-font);
+		}
+		.btn-design {
+			color: var(--text-color);
+			background-color: var(--white);
+			border: solid 0.2em var(--text-color);
+			background-color: var(--white);
+			font-family: var(--text-font);
+			font-weight: 700;
+			font-size: 1rem;
+			text-transform: uppercase;
+			transition-delay: 1.1s;
+			text-decoration: none;
+		}
+		.btn-design:hover {
+			color: var(--white);
+			background-color: var(--text-color);
+			transition: 0.5s;
+		}
+	</style>
+
+	<div class="container">
+		<img src="https://cdn.discordapp.com/attachments/981819168707989506/989083967649091584/chien_massage.PNG" alt="error">
+		<a href="{{ path('app_home')}}" class="btn-design px-5 py-1 rounded">Return to the home page</a>
+
+		<h1>404</h1>
+		<p>page not found</p>
+
+	</div>
+{% endblock %}
