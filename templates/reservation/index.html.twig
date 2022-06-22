@@ -76,19 +76,19 @@
                     {{ form_start(form) }}
                         <p>{{form_label(form.lastname)}}</p>
                         <p class="ajax">{{form_widget(form.lastname)}}</p>
-                        <p>{{form_errors(form.lastname)}}</p>
+                        <div class="alert alert-danger" role="alert">Nom de famille obligatoire</div>
 
                         <p>{{form_label(form.firstname)}}</p>
                         <p class="ajax" >{{form_widget(form.firstname)}}</p>
-                        <p>{{form_errors(form.firstname)}}</p>
+                        <div class="alert alert-danger" role="alert">Prénom obligatoire</div>
                         
                         <p>{{form_label(form.email)}}</p>
                         <p class="ajax" >{{form_widget(form.email)}}</p>
-                        <p>{{form_errors(form.email)}}</p>
+                        <div class="alert alert-danger" role="alert">Email obligatoire</div>
 
                         <p>{{form_label(form.telephone)}}</p>
                         <p class="ajax">{{form_widget(form.telephone)}}</p>
-                        <p>{{form_errors(form.telephone)}}</p>
+                        <div class="alert alert-danger" role="alert">Numéro de téléphone obligatoire</div>
                         
                         <button class="btn btn-primary mt-3 next ajax " type="button">Suivant</button>
 
