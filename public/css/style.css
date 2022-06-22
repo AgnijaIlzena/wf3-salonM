@@ -7,7 +7,8 @@
     --grey-btn: rgb(231, 232, 236,0.4);
     --grey-border:rgb(215, 213, 213);
     --summary:rgba(24, 134, 197, 0.6);
-    --today: yellow;
+    --today: rgb(243, 178, 11);
+    --black: black;
 
     --sky-blue-crayola: #6fd2e5ff;
     --white: #fcf7f8ff;
@@ -192,8 +193,8 @@ p {
     display: none;
  } */
 
-/* .date{
-    background: blue;
+.date{
+    background: none;
     width: 100%;
     height: 100%;
 	color: inherit;
@@ -201,11 +202,25 @@ p {
 	padding: 0;
 	cursor: pointer;
 	outline: inherit;
- } */
- 
- .dateTd{
-    background-color: blue;
  }
+ .today{
+    background-color: var(--today)!important;
+}
+ #dateTd{
+    background-color: var(--sky-blue-crayola);
+ }
+ #dateTd:hover, .today:hover{
+    color:var(--white);
+    background-color: var(--text-color)!important;
+ }
+.btn-primary{
+    background-color: var(--sky-blue-crayola)!important;
+    color: var(--black);
+    border:none;
+}
+.btn-primary:hover{
+    background-color: var(--text-color)!important;
+}
 .summary{
     width: 400px;
     padding: 15px;
@@ -239,9 +254,7 @@ p {
     background: var(--grey-btn); 
     transition: 0.5s;
 }
-.today{
-    background-color: var(--today);
-}
+
 
 
 /* footer */

@@ -59,33 +59,38 @@ elementsForAjax.forEach(el=>{
 
 
         // clic sur  btn 'suivant' -> summary 
-        if(e.target.classList[3]=='next'){
-            summary.style.display = 'block';
-            next.style.display = 'none';
+        // if(e.target.classList[3]=='next'){
+        //     summary.style.display = 'block';
+        //     next.innerHTML = 'Valider les mo';
 
-            // remplissage du localstorage - infos client
-            const lastname = document.querySelector('#reservation_form_lastname').value;
-            const firstname = document.querySelector('#reservation_form_firstname').value;
-            const email = document.querySelector('#reservation_form_email').value;
-            const telephone = document.querySelector('#reservation_form_telephone').value;
-            reservation.lastname = lastname;
-            reservation.firstname = firstname;
-            reservation.email = email;
-            reservation.telephone = telephone;
-
-            // résumé
-            summaryMassage.innerHTML = 'Massage: '+reservation.massageName;
-            summaryMassagist.innerHTML = 'Masseur: '+reservation.massagistName;
-            // 2022-06-30 16:00PM-17:00PM
-            summaryDate.innerHTML = `Date et horaire: le ${reservation.date.slice(8,10)}-${reservation.date.slice(5,7)}-${reservation.date.slice(0,4)} 
-            de ${reservation.timeslot.slice(0,2)}h à ${reservation.timeslot.slice(8,10)}h`;
-            summaryPrice.innerHTML = `Prix: ${price} €`;
-        }
+        //     // résumé
+        //     summaryMassage.innerHTML = 'Massage: '+reservation.massageName;
+        //     summaryMassagist.innerHTML = 'Masseur: '+reservation.massagistName;
+        //     summaryDate.innerHTML = `Date et horaire: le ${reservation.date.slice(8,10)}-${reservation.date.slice(5,7)}-${reservation.date.slice(0,4)} 
+        //     de ${reservation.timeslot.slice(0,2)}h à ${reservation.timeslot.slice(8,10)}h`;
+        //     summaryPrice.innerHTML = `Prix: ${price} €`;
+        // }
 
         localStorage.setItem('reservation', JSON.stringify(reservation));
+})
 
 })
 
+elementsForAjax.forEach(el=>{
+    el.addEventListener('change', (e) => {
+
+    // remplissage du localstorage - infos client
+    let reservation = JSON.parse(localStorage.getItem('reservation'))||{};
+    const lastname = document.querySelector('#reservation_form_lastname').value;
+    const firstname = document.querySelector('#reservation_form_firstname').value;
+    const email = document.querySelector('#reservation_form_email').value;
+    const telephone = document.querySelector('#reservation_form_telephone').value;
+    reservation.lastname = lastname;
+    reservation.firstname = firstname;
+    reservation.email = email;
+    reservation.telephone = telephone;
+    localStorage.setItem('reservation', JSON.stringify(reservation));
+})
 })
 
 book.addEventListener('click',()=>{

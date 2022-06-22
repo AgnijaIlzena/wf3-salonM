@@ -104,7 +104,7 @@ class CalendarService{
             $totalBookings = nombre de réservation total possible par jour*/
 
             if($dayName !='sunday' && $date>=date('Y-m-d') && $totalBookings<9){
-                $calendar .= "<td class='$classToday dateTd'><button class='ajax date' data-date=$date>
+                $calendar .= "<td class='$classToday' id='dateTd'><button class='ajax date' data-date=$date>
                 <h4 class='date'>$currentDay</h4></button></td>";
             }
             else{
