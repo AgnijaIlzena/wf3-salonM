@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body %}
+	{{ include('component/_navbar.html.twig') }}
 	<div class=" bg-light">
 		<div class="row  w-50 m-auto py-5">
 			<div class="col">
@@ -32,4 +33,5 @@
 				</div>
 			</div>
 		</div>
-	{% endblock %}
+	{{ include('component/_footer.html.twig') }}
+{% endblock %}
