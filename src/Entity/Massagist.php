@@ -28,7 +28,7 @@ class Massagist implements Stringable
     private $description;
 
     #[ORM\OneToMany(mappedBy: 'massagist', targetEntity: Reservation::class, orphanRemoval: true)]
-    #[Ignore]
+    // #[Ignore]
     private $reservations;
 
     #[ORM\Column(type: 'string', length: 50)]

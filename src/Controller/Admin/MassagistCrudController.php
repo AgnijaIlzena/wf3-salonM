@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 
 #[IsGranted('ROLE_ADMIN')]
 class MassagistCrudController extends AbstractCrudController
@@ -29,6 +30,7 @@ class MassagistCrudController extends AbstractCrudController
     {
         yield IdField::new(propertyName:'ID')->hideOnForm();
         yield TextField::new(propertyName:'name', label:'Nom');
+        yield TextareaField::new(propertyName:'description', label:'Description');
 
 
         yield TextField::new(propertyName: 'file', label: 'Image')

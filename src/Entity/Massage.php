@@ -28,7 +28,7 @@ class Massage implements Stringable
     private $description;
 
     #[ORM\OneToMany(mappedBy: 'massage', targetEntity: Reservation::class, cascade: ['persist', 'remove'])]
-    #[Ignore]
+    // #[Ignore]
     private $reservation;
 
     #[ORM\OneToMany(mappedBy: 'massage', targetEntity: Gift::class, orphanRemoval: true)]
