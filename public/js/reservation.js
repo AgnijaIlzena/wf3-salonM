@@ -121,7 +121,7 @@ book.addEventListener('click',()=>{
     })
     .then(response => response.json())
     .then(id => {
-        window.location.href = `/payement/${id}`;
+        window.location.href = `/checkout/${id}`;
     })
     .catch(error => console.log("Erreur : " + error));
     

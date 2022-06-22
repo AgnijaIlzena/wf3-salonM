@@ -124,7 +124,7 @@ p {
     transition: 0.5s;    
 }
 
-.intro-text button {
+.intro-text a {
     position: absolute;
     top: 75%;
     left: 15rem;

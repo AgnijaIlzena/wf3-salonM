@@ -44,8 +44,8 @@ class Massage implements Stringable
     private $price;
 
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $cover = '';
+    // #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    // private $cover = '';
 
     public function getPrice(): ?int
     {
