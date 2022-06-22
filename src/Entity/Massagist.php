@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Stringable;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File as FileFile;
+use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 #[ORM\Entity(repositoryClass: MassagistRepository::class)]
 #[Vich\Uploadable]
@@ -26,6 +28,7 @@ class Massagist implements Stringable
     private $description;
 
     #[ORM\OneToMany(mappedBy: 'massagist', targetEntity: Reservation::class, orphanRemoval: true)]
+    #[Ignore]
     private $reservations;
 
     #[ORM\Column(type: 'string', length: 50)]

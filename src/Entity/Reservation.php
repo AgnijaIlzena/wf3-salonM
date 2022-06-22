@@ -13,7 +13,7 @@ class Reservation
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'datetime_immutable')]
+    #[ORM\Column(type: 'string')]
     private $date;
 
     #[ORM\Column(type: 'string', length: 50)]
@@ -40,17 +40,26 @@ class Reservation
     #[ORM\JoinColumn(nullable: true)]
     private $payement;
 
+    #[ORM\Column(type: 'string', length: 50)]
+    private $timeslot;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $archive;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $cancel;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeImmutable
+    public function getDate(): ?string
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeImmutable $date): self
+    public function setDate(string $date): self
     {
         $this->date = $date;
 
@@ -150,5 +159,40 @@ class Reservation
 
         return $this;
     }
+  
+    public function getTimeslot(): ?string
+    {
+        return $this->timeslot;
+    }
 
+    public function setTimeslot(string $timeslot): self
+    {
+        $this->timeslot = $timeslot;
+
+        return $this;
+    }
+
+    public function getArchive(): ?int
+    {
+        return $this->archive;
+    }
+
+    public function setArchive(?int $archive): self
+    {
+        $this->archive = $archive;
+
+        return $this;
+    }
+
+    public function getCancel(): ?int
+    {
+        return $this->cancel;
+    }
+
+    public function setCancel(?int $cancel): self
+    {
+        $this->cancel = $cancel;
+
+        return $this;
+    }
 }

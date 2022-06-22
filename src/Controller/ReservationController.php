@@ -8,12 +8,35 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Service\CalendarService;
 use App\Service\TimeSlotsService;
 
+use Symfony\Component\HttpFoundation\Request;
+use App\Repository\ReservationRepository;
+use App\Form\ReservationFormType;
+use App\Entity\Reservation;
+use App\Entity\Massage;
+use App\Repository\MassagistRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Repository\MassageRepository;
+use App\Controller\PDO;
+
 class ReservationController extends AbstractController
 {   
-    // ajouter ID du massage en dans l'url
-    #[Route('/reservation', name: 'app_reservation')]
-    public function index(CalendarService $calendarService, TimeSlotsService $timeSlotsService): Response
+    #[Route('/reservation/{id}', name: 'app_reservation', requirements:["id"=>"\d+"])]
+    #[Entity('reservation', expr: 'repository.find(massage_id)')]
+    public function index(
+        Massage $massage,
+        CalendarService $calendarService, 
+        TimeSlotsService $timeSlotsService, 
+        ReservationRepository $reservationRepository,
+        MassagistRepository $massagistRepository
+        
+        ): Response
     {   
+        // Affichage des masseurs
+        $massagists = $massagistRepository->findAll();
+
+        // Affichage calendrier
+        // $reservationRepository->findBy(['date' => DateTime::createFromFormat('Y-m-d','2022-06-08 08:23:41')]);
         $dateComponents = getdate();
         if(isset($_GET['month']) && isset($_GET['year'])){
            $month = +$_GET['month'];
@@ -23,8 +46,10 @@ class ReservationController extends AbstractController
            $month = $dateComponents['mon'];
            $year = $dateComponents['year'];
         }
-        $calendar =  $calendarService->build_calendar($month , $year);
+        // $totalBookings = count($reservationRepository->findBy(['date'=>$year.'-'.$month.'-24']));
+        $calendar =  $calendarService->build_calendar($month , $year, $reservationRepository);
 
+        // Affichage timeslots
         $duration = 60;
         // cleanUp = temps entre 2 rendez-vous
         $cleanUp = 0;
@@ -32,11 +57,65 @@ class ReservationController extends AbstractController
         $end = "18:00";
 
         $timeSlots = $timeSlotsService->timeslots($duration, $cleanUp, $start, $end);
+
+
+        //  on déclare un objet vide, que l'on remplira par la suite
+        $reservation = new Reservation();
+        $form = $this->createForm(ReservationFormType::class, $reservation);
+
         
         return $this->render('reservation/index.html.twig',[
             'calendar'=>$calendar,
-            'timeSlots'=>$timeSlots
+            'timeSlots'=>$timeSlots,
+            'massagists'=>$massagists,
+            'massage'=>$massage,
+            'form'=>$form->createView()
         ]);
     }
 
+
+}
+
+
+    #[Route('/reservation', name: 'app_reservation_datas', methods: ['POST'])]
+    public function setData(
+        ReservationRepository $reservationRepository,
+        MassageRepository $massageRepository,
+        MassagistRepository $massagistRepository,
+        Request $request,
+        ):JsonResponse
+    {   
+        $data = json_decode($request->getContent(), true);
+        
+        $reservation = new Reservation();
+        
+
+        $massageId = $massageRepository->find($data['massageId']);
+        $reservation->setMassage($massageId);
+
+        $massagist = $massagistRepository->find($data['massagistId']);
+        $reservation->setMassagist($massagist);
+
+        $reservation->setDate($data['date']);
+
+        $reservation->setTimeslot($data['timeslot']);
+
+        $reservation->setLastname($data['lastname']);
+
+        $reservation->setFirstname($data['firstname']);
+
+        $reservation->setEmail($data['email']);
+
+        $reservation->setTelephone($data['telephone']);
+
+        $reservationRepository->add($reservation, true);
+
+        return $this->json($reservation->getId());
+    }
+    #[Route('/payement/{id}', name: 'payement', requirements:['id'=>'\d+'])]
+    public function test(Reservation $reservation){   
+        return $this->render('reservation/test.html.twig',[
+            'reservation'=>$reservation]
+    );
+    }
 }

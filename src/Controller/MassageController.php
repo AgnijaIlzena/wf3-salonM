@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Massage;
+
 use App\Repository\MassageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,9 +12,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+
 class MassageController extends AbstractController
 {
     #[Route('/massage', name: 'app_massage')]
+
     public function index(): Response
     {
         return $this->render('massage/index.html.twig', [
@@ -34,4 +38,14 @@ class MassageController extends AbstractController
 
         return $this->redirectToRoute('admin');
     }
+
+    public function index(MassageRepository $massageRepository): Response
+    {
+        $massages = $massageRepository->findAll();
+
+        return $this->render('massage/index.html.twig', [
+            'massages' => $massages,
+        ]);
+    }
+
 }
