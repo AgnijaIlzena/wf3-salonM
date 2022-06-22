@@ -24,7 +24,8 @@
                     {#  nav-bar #}
                     <h1>Rendez-vous de Massage à WF3-Massage</h1>
                     {# nom du massage #}
-                    <h2 class="massage" data-massage={{massage.id}}>Massage {{massage.name}}</h2>
+                    <h2 class="massage" data-massage-id="{{massage.id}}" data-massage-name="{{massage.name}}"
+                    data-massage-price="{{massage.price}}">Massage {{massage.name}}</h2>
                 </header>
 
                 {# Choix du masseur #}
@@ -35,7 +36,8 @@
                             <div class="col-12 mt-3">
                             {% for massagist in massagists %}
                                 <div class="card">
-                                    <button class="btn-card ajax" data-massagist={{massagist.id}}>
+                                    <button class="btn-card ajax" data-massagist-id="{{massagist.id}} "
+                                    data-massagist-name="{{massagist.name}}">
                                         <div class="card-horizontal">
                                             <div class="img-square-wrapper">
                                                 <img class="massagist-photo-profile" src="{{asset('images/'~massagist.cover)}}">
@@ -92,23 +94,20 @@
                         <p class="ajax">{{form_widget(form.telephone)}}</p>
                         <p>{{form_errors(form.telephone)}}</p>
                         
-                        <button class="btn btn-primary mt-3 next">Suivant</button>
+                        <button class="btn btn-primary mt-3 next ajax " type="button">Suivant</button>
 
                         {# Récapitulatif #}
                         <section class="summary">
                             <h3 class="mb-3">Résumé</h3>
-                            <p>Massage: </p>
-                            <p>Masseur: </p>
-                            <p>Date et horaire: </p>
-                            <p>Prix: </p>
-                            <button class="btn btn-primary mt-3">Réserver</button>
+                            <p class="summary-massage">Massage: </p>
+                            <p class="summary-massagist">Masseur: </p>
+                            <p class="summary-date">Date et horaire: </p>
+                            <p class="summary-price">Prix: </p>
+                            <button type="button" class="btn btn-primary mt-3 book">Réserver</button>
                         </section>
                     {{ form_end(form)}}
                 </section>
-                
-
             </div>
-
         </div>
 
 
