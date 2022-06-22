@@ -59,17 +59,17 @@ elementsForAjax.forEach(el=>{
 
 
         // clic sur  btn 'suivant' -> summary 
-        // if(e.target.classList[3]=='next'){
-        //     summary.style.display = 'block';
-        //     next.innerHTML = 'Valider les mo';
+        if(e.target.classList[3]=='next'){
+            summary.style.display = 'block';
+            next.innerHTML = 'Valider les mo';
 
-        //     // résumé
-        //     summaryMassage.innerHTML = 'Massage: '+reservation.massageName;
-        //     summaryMassagist.innerHTML = 'Masseur: '+reservation.massagistName;
-        //     summaryDate.innerHTML = `Date et horaire: le ${reservation.date.slice(8,10)}-${reservation.date.slice(5,7)}-${reservation.date.slice(0,4)} 
-        //     de ${reservation.timeslot.slice(0,2)}h à ${reservation.timeslot.slice(8,10)}h`;
-        //     summaryPrice.innerHTML = `Prix: ${price} €`;
-        // }
+            // résumé
+            summaryMassage.innerHTML = 'Massage: '+reservation.massageName;
+            summaryMassagist.innerHTML = 'Masseur: '+reservation.massagistName;
+            summaryDate.innerHTML = `Date et horaire: le ${reservation.date.slice(8,10)}-${reservation.date.slice(5,7)}-${reservation.date.slice(0,4)} 
+            de ${reservation.timeslot.slice(0,2)}h à ${reservation.timeslot.slice(8,10)}h`;
+            summaryPrice.innerHTML = `Prix: ${price} €`;
+        }
 
         localStorage.setItem('reservation', JSON.stringify(reservation));
 })
