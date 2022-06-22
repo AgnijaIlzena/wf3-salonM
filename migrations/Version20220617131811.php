@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220617071921 extends AbstractMigration
+final class Version20220617131811 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,6 +20,7 @@ final class Version20220617071921 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('CREATE TABLE gift (id INT AUTO_INCREMENT NOT NULL, sender VARCHAR(50) NOT NULL, receiver VARCHAR(50) NOT NULL, sender_email VARCHAR(200) NOT NULL, receiver_email VARCHAR(200) NOT NULL, message VARCHAR(200) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE massage (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(50) NOT NULL, duration VARCHAR(30) NOT NULL, description LONGTEXT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE massagist (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(50) NOT NULL, description LONGTEXT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE payement (id INT AUTO_INCREMENT NOT NULL, reservation_id INT DEFAULT NULL, type VARCHAR(50) NOT NULL, date DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', UNIQUE INDEX UNIQ_B20A7885B83297E7 (reservation_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -36,6 +37,7 @@ final class Version20220617071921 extends AbstractMigration
         $this->addSql('ALTER TABLE reservation DROP FOREIGN KEY FK_42C84955E964225');
         $this->addSql('ALTER TABLE reservation DROP FOREIGN KEY FK_42C8495536A61ED0');
         $this->addSql('ALTER TABLE payement DROP FOREIGN KEY FK_B20A7885B83297E7');
+        $this->addSql('DROP TABLE gift');
         $this->addSql('DROP TABLE massage');
         $this->addSql('DROP TABLE massagist');
         $this->addSql('DROP TABLE payement');

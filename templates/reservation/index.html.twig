@@ -3,10 +3,6 @@
 {# Nom du massage à ajouter #}
 {% block title %}Réservation{% endblock %}
 
-{% block stylesheets %}
-    {{parent()}}
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
-{% endblock %}
 
 {% block javascripts %}
     {{parent()}}
@@ -24,7 +20,8 @@
                     {#  nav-bar #}
                     <h1>Rendez-vous de Massage à WF3-Massage</h1>
                     {# nom du massage #}
-                    <h2>Massage {{massage.name}}</h2>
+                    <h2 class="massage" data-massage-id="{{massage.id}}" data-massage-name="{{massage.name}}"
+                    data-massage-price="{{massage.price}}">Massage {{massage.name}}</h2>
                 </header>
 
                 {# Choix du masseur #}
@@ -35,7 +32,8 @@
                             <div class="col-12 mt-3">
                             {% for massagist in massagists %}
                                 <div class="card">
-                                    <button class="btn-card massagistBtn" data-id={{massagist.id}}>
+                                    <button class="btn-card ajax" data-massagist-id="{{massagist.id}} "
+                                    data-massagist-name="{{massagist.name}}">
                                         <div class="card-horizontal">
                                             <div class="img-square-wrapper">
                                                 <img class="massagist-photo-profile" src="{{asset('images/'~massagist.cover)}}">
@@ -48,20 +46,19 @@
                                     </button>
                                 </div>
                             {% endfor %}
-
                             </div>
                         </div>
                     </div>
                 </section>
 
                 {# Calendrier #}
-                <section class="calendar">
+                <section class="calendar mb-5">
                     <h3>Choisir une date</h3>
                     {{calendar|raw}}
                 </section>
                 
                 {# Créneaux horaires #}
-                <section class="timeslots">
+                <section class="timeslots mb-5">
                     <h3>Choisir un créneau horaire</h3>
 
                     {# <h1 class="text-center">Book for Date: <?= date('Y/m/d', strtotime($date)) ?></h1> #}
@@ -69,39 +66,41 @@
 
                     <!-- affichage des times slots -->
                     {% for timeSlot in timeSlots|raw %}
-                        {# à ajouter = data-timeslot #}
-                        {# à ajouter = si tous le créneau est réservé on ne peut plus le réserver #}
-                        <button class="btn btn-primary mb-4 book"data-timeslot="{{timeSlot}}">{{timeSlot}}</button>
+                        <button class="btn btn-primary mb-4 ajax timeSlot" data-timeslot="{{timeSlot}}">{{timeSlot}}</button>
                     {% endfor %}
                 </section>
 
                 {# Formulaire #}
-                <section class="form">
+                <section class="form mb-5">
                     <h3>Veuillez renseigner les informations suivantes</h3>
                     {{ form_start(form) }}
                         <p>{{form_label(form.lastname)}}</p>
-                        <p>{{form_widget(form.lastname)}}</p>
+                        <p class="ajax">{{form_widget(form.lastname)}}</p>
                         <p>{{form_errors(form.lastname)}}</p>
 
                         <p>{{form_label(form.firstname)}}</p>
-                        <p>{{form_widget(form.firstname)}}</p>
+                        <p class="ajax" >{{form_widget(form.firstname)}}</p>
                         <p>{{form_errors(form.firstname)}}</p>
                         
                         <p>{{form_label(form.email)}}</p>
-                        <p>{{form_widget(form.email)}}</p>
+                        <p class="ajax" >{{form_widget(form.email)}}</p>
                         <p>{{form_errors(form.email)}}</p>
 
                         <p>{{form_label(form.telephone)}}</p>
-                        <p>{{form_widget(form.telephone)}}</p>
+                        <p class="ajax">{{form_widget(form.telephone)}}</p>
                         <p>{{form_errors(form.telephone)}}</p>
+                        
+                        <button class="btn btn-primary mt-3 next ajax " type="button">Suivant</button>
 
                         {# Récapitulatif #}
                         <section class="summary">
                             <h3 class="mb-3">Résumé</h3>
-                            <p>Massage: </p>
-                            <p>Masseur: </p>
-                            <p>Date et horaire: </p>
-                            <p>Prix: </p>
+                            <p class="summary-massage">Massage: </p>
+                            <p class="summary-massagist">Masseur: </p>
+                            <p class="summary-date">Date et horaire: </p>
+                            <p class="summary-price">Prix: </p>
+                            <button type="button" class="btn btn-primary mt-3 book">Réserver</a></button>
+
                         </section>
                        
                     {{ form_end(form)}} 

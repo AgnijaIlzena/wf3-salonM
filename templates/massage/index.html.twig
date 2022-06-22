@@ -1,51 +1,88 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Massages{% endblock %}
-{% block stylesheets %}
-    {{parent()}}
-    <link rel="stylesheet" href="/css/style.css">
-{% endblock %}
 {% block body %}
 
-<section class="massages">
+<section class="massages reveal">
 	<div class="container">
 		<h2 class="section-title">Nos Massages</h2>
 	</div>
 
-	<div class="container hstack gap-5">
+	<div class="container hstack">
 	
+			{# Massage cards #}
 			<div class="row mx-auto">
-			{% for massage in massages %}
+				{% for massage in massages %}
 
-				<div class="col-4 mt-3">
-					<img class="w-100 h-50" src="{{ asset('images/'~ massage.cover) }}" class="rounded mx-auto" alt="Thai massage">
-					<h3 class="pt-5 pb-2 title">
-						{{ massage.name }}
-					</h3>
-					<p class="py-4">
-						{{ massage.description|u.truncate(100, '...') }}
-					</p>
-					<p class="pb-4"><span class="details text-muted">30 min {{massage.price}} € , 60 min {{massage.price}} €</span></p>
-					
-					{# Try buttons #}
-					<div class="row">
-				
-					<div class="col">
-						<a class="btn-design mb-5" href="{{ path('app_reservation', { id: massage.id }) }}">
-							réserver
-						</a>
-					</div>
-					<div class="col">
-						 <a class="btn-design mb-5" href="{{ path('app_checkout', { id: massage.id }) }}">
-							payer
-						</a> 
-					</div>
+					<div class="col-12 col-lg-6 col-xl-4 my-4">
+						
+							<div class="card p-3" >
+								<img class="w-100 h-50" src="{{ asset('images/'~ massage.cover) }}" class="rounded mx-auto" alt="Thai massage">																					
+								<h3 class="pt-5 pb-2 title getName">
+									{{ massage.name }}
+								</h3>
+																
+								<p class="py-4">
+									{{ massage.description|u.truncate(60, '') }}
+								{# modal test button #}
+								<button type="button" 
+									class="btnDetails" 
+									data-massage-cover="{{massage.cover}}" 
+									data-massage-name="{{massage.name}}" 
+									data-massage-description="{{massage.description}}" 
+									data-massage-price="{{massage.price}}"
+									data-massage-id="{{massage.id}}">
+								...
+								</button>	
+								</p>																	
 
+								<p class="pb-4"><span class="text-muted">60 min</span> <span class="details">{{massage.price}} €</span></p>
+								<a class="btn-design btn-massage text-center mb-5" href="{{ path('app_reservation', { id: massage.id }) }}">
+									réserver
+								</a>					 
+							</div>
+											
 					</div>
-				</div>
-			{% endfor %}
+				{% endfor %}
 			</div>
-		
 	</div>
+
+{# MODAL #}
+<div class="container"> 
+
+    <div id="myModal" class="modal">
+
+            <div class="modal-content">
+                <span class="close">&times;</span>
+
+            {# Modal content #}
+                <div class="row">
+
+                    <div class="col-4 ">
+                        <img class="modal-img" id="showCover" src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg" alt="Japanese massage">
+                    </div>
+
+                    <div class="col-8 ps-5">
+                        <h3 class="modal-title pb-3" id="showName">name</h3>
+                        <p class="modal-descr pb-4" id="showDescription">
+                          description
+                        </p>
+
+						<div class="row">
+							<div class="col-6">
+								<p><span class="modal-price" id="showPrice">€</span></p>
+							</div>
+							<div class="col-6">
+								<a class="btn-design text-center btn-modal" id="showReserve" href="#">
+									réserver
+								</a>
+							</div>
+							
+						</div>
+                        	
+                    </div>
+
+                </div>
+
+            </div>   
+    </div>   
+</div>
 </section>
 {% endblock %}

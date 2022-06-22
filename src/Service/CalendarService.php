@@ -1,11 +1,28 @@
 <?php
 namespace App\Service;
+// use mysqli;
 
 
 class CalendarService{
-    function build_calendar($month, $year){
+    // function checkSlots($mysqli, $date){
+    //     $stmt = $mysqli->prepare('SELECT * FROM bookings WHERE date=?');
+    //     $stmt->bind_param('s',$date);
+    //     $totalBookings = 0;
+    //     if($stmt->execute()){
+    //         $result = $stmt->get_result();
+    //         if($result->num_rows>0){
+    //             while($row = $result->fetch_assoc()){
+    //                 $totalBookings++;
+    //             }
+    //             $stmt->close();
+    //         }
+    //     }
+    //     return $totalBookings;
+    // }
+    function build_calendar($month, $year, $reservationRepository){
 
-        // $mysqli = new mysqli('localhost','root','','bookingcalendar');
+        // $mysqli = new mysqli('localhost','root','','salon');
+        
     
         $daysOfWeek = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
         $daysOfMonth = [1=>'Janvier','Février','Mars','Avril','Mai','Juin',
@@ -75,6 +92,7 @@ class CalendarService{
     
             $currentDayRel = str_pad($currentDay, 2, '0', STR_PAD_LEFT);
             $date = "$year-$month-$currentDayRel";
+            $totalBookings = count($reservationRepository->findByDate($date));
     
             // attribuer la classe 'today' au jour actuel pour lui mettre un background en css
             $dateToday = date('Y-m-d');
@@ -84,15 +102,16 @@ class CalendarService{
     
             /* réservation possible tous les jours à partir d'aujourd'hui, sauf les dimanches
             $totalBookings = nombre de réservation total possible par jour*/
-            // $totalBookings = checkSlots($mysqli, $date);
-            // if($dayName !='sunday' && $date>=date('Y-m-d') && $totalBookings != 9){
-            //     $linkForBooking = "<a class='btn btn-success btn-xs' href='book.php?date=$date'>Book</a>";
-            // }
-            // else{
-                $linkForBooking = "";
-            // }
+
+            if($dayName !='sunday' && $date>=date('Y-m-d') && $totalBookings<9){
+                $calendar .= "<td class='$classToday' id='dateTd'><button class='ajax date' data-date=$date>
+                <h4 class='date'>$currentDay</h4></button></td>";
+            }
+            else{
+                $calendar .= "<td class='$classToday'><h4>$currentDay</h4></td>";
+            }
             
-            $calendar .= "<td class='$classToday'><h4>$currentDay</h4>$linkForBooking</td>";
+            
     
             // on incrémente les compteurs
             $currentDay++;
@@ -110,20 +129,6 @@ class CalendarService{
     return $calendar;
     }
     
-    // function checkSlots($mysqli, $date){
-    //     $stmt = $mysqli->prepare('SELECT * FROM bookings WHERE date=?');
-    //     $stmt->bind_param('s',$date);
-    //     $totalBookings = 0;
-    //     if($stmt->execute()){
-    //         $result = $stmt->get_result();
-    //         if($result->num_rows>0){
-    //             while($row = $result->fetch_assoc()){
-    //                 $totalBookings++;
-    //             }
-    //             $stmt->close();
-    //         }
-    //     }
-    //     return $totalBookings;
-    // }
+    
 
 }

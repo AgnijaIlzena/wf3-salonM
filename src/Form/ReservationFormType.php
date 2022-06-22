@@ -54,9 +54,9 @@ class ReservationFormType extends AbstractType
                 ]
             ]
             )
-            ->add('save', SubmitType::class,[
-                'label'=>'Réserver'
-            ])
+            // ->add('save', SubmitType::class,[
+            //     'label'=>'Réserver'
+            // ])
         ;
     }
 
