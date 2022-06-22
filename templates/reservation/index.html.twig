@@ -3,10 +3,6 @@
 {# Nom du massage à ajouter #}
 {% block title %}Réservation{% endblock %}
 
-{% block stylesheets %}
-    {{parent()}}
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
-{% endblock %}
 
 {% block javascripts %}
     {{parent()}}
@@ -103,7 +99,8 @@
                             <p class="summary-massagist">Masseur: </p>
                             <p class="summary-date">Date et horaire: </p>
                             <p class="summary-price">Prix: </p>
-                            <button type="button" class="btn btn-primary mt-3 book">Réserver</button>
+                            <button type="button" class="btn btn-primary mt-3 book">Réserver</a></button>
+
                         </section>
                     {{ form_end(form)}}
                 </section>

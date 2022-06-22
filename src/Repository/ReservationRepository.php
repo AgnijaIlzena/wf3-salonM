@@ -38,7 +38,15 @@ class ReservationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+    // public function findLastId(): array
+    // {
+    //     return $this->createQueryBuilder('r')
+    //         ->orderBy('r.id', 'DESC')
+    //         ->setMaxResults(1)
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+    // }
 //    /**
 //     * @return Reservation[] Returns an array of Reservation objects
 //     */

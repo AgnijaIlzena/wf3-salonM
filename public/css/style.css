@@ -187,14 +187,24 @@ p {
 }
 
 /* Reservation */
-/* on n'affiche pas les différentes parties de la réservation,
-elles s'afficheront au clic sur la section précédente
- */
 
- .calendar, .timeslots, .form, .summary{
+/* .calendar, .timeslots, .form, .summary{
     display: none;
- }
+ } */
 
+/* .date{
+    background: blue;
+    width: 100%;
+    height: 100%;
+	color: inherit;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+ } */
+ .dateTd{
+    background-color: blue;
+ }
 .summary{
     width: 400px;
     padding: 15px;
@@ -231,6 +241,7 @@ elles s'afficheront au clic sur la section précédente
 .today{
     background-color: var(--today);
 }
+
 
 /* footer */
 
