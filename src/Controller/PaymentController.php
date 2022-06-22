@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Massage;
+use App\Entity\Reservation;
 use App\Repository\MassageRepository;
+use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,29 +24,38 @@ class PaymentController extends AbstractController
     }
 
     #[Route('/checkout/{id}', name: 'app_checkout', requirements: ['id' => '\d+'])]
-    public function checkout($stripeSK, Massage $massage, MassageRepository $massageRepository ): Response
+    public function checkout(Reservation $reservation, $stripeSK ): Response
     {
+
+      // dd($reservation->getMassagist()->getName());
        Stripe::setApiKey($stripeSK);
+       
+       $serviceDetails = $reservation->getMassage()->getName() .' le : '. $reservation->getDate() .'. à : '. $reservation->getTimeSlot();
+       $description = $reservation->getMassage()->getDescription() .'. Votre masseur est : '. $reservation->getMassagist()->getName(); 
 
        $session = Session::create([
         'line_items' => [[
           'price_data' => [
             'currency' => 'eur',
             'product_data' => [
-              'name' => $massage->getName(),
-              'description' => $massage->getDescription(),
-            ],
-            'unit_amount' => $massage->getPrice() * 100,
+              'name' => $serviceDetails,
+              'description' => $description,
+                ],
+            'unit_amount' => $reservation->getMassage()->getPrice() * 100,
           ],
           'quantity' => 1,
         ]],
         'mode' => 'payment',
         'success_url' => $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
         'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
+        'metadata'                    => [
+          'reservation_id' => $reservation->getId(),
+      ]
       ]);
 
       return $this->redirect($session->url, 303, [
-        'massage'=>$massage
+        
+        'reservation'=>$reservation,
       ]);
     }
 
