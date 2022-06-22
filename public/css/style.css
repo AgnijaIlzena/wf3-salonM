@@ -189,9 +189,9 @@ p {
 
 /* Reservation */
 
-/* .calendar, .timeslots, .form, .summary{
+.calendar, .timeslots, .form, .summary{
     display: none;
- } */
+ }
 
 .date{
     background: none;
