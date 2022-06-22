@@ -13,6 +13,7 @@
     --sky-blue-crayola: #6fd2e5ff;
     --white: #fcf7f8ff;
     --text-color: #0e273cff;
+    --blue-secondary: #112E47;
     --ruby-red: #a31621ff;
     --grey: #7f7b82ff;
     --raisin-black: #191923ff;
@@ -99,7 +100,7 @@ p {
     position: absolute;
     top: 30%;
     left: 15rem;
-    width: 10%;
+    width: 20%;
     font-size: 4rem;
     line-height: 1.2;
     z-index: 1;
@@ -166,7 +167,7 @@ p {
 }
 
 .btn-massage {
-    padding: 0.5rem 0; 
+    padding: 0.5rem 2rem; 
     width: 40%;    
 }
 
@@ -255,6 +256,57 @@ p {
     transition: 0.5s;
 }
 
+/* Gift Card */
+
+.gift-title {
+    font-family: var(--title-font);
+    font-size: 3rem;
+}
+
+.gift-subtitle {
+    font-family: var(--title-font);
+    line-height: 1.4;
+    font-size: 1.3rem;
+    
+}
+
+/* contact us */
+
+.contact-triger {
+    font-size: 2rem;
+    font-family: var(--title-font);
+    text-decoration: none;
+    color: var(--white);
+    padding: 20px 0;
+    margin: 0;
+    transition: 0.5s;      
+}
+
+.contact-triger:hover {
+    color: var(--grey);
+    transition: 0.5s;
+}
+
+.contact-collapse {
+    color: var(--blue-secondary);
+}
+
+#contact {
+    background-color: var(--blue-secondary);
+}
+
+.contact-top {
+    height: 5vh;
+    text-align: center;
+}
+
+.contact.card {
+    background-color: var(--blue-secondary);
+    border-color: var(--blue-secondary);
+    height: 400px;
+}
+
+
 /* footer */
 
 footer {
@@ -269,6 +321,12 @@ footer .contact-us, .hours{
 .adress, .social {
     font-size: 1.2rem;
     color: var(--white) ;
+    transition: 0.5s;
+}
+
+.social:hover {
+    color: var(--ruby-red);
+    transition: 0.5s;
 }
 
 .hours-time {
@@ -341,6 +399,7 @@ footer .contact-us, .hours{
 
   .btnDetails:hover {
     color: var(--ruby-red);
+    transition: 0.5s;
   }
  
   /* The Close Button */
