@@ -2,29 +2,15 @@
 
 {% block title %}component{% endblock %}
 
-{% block stylesheets %}
-    {{parent()}}
-    <link rel="stylesheet" href="/css/style.css">
-{% endblock %}
-
-{% block javascripts %}
-    {{parent()}}
-{% endblock %}
-
 {% block body %}
     {{ include('component/_navbar.html.twig') }}
     {{ include('component/_intro.html.twig') }}
     {{ include('component/aboutUs.html.twig')}}
 
-{# {{ include('component/contact.html.twig')}} #}
-
     {{ render(controller(
         'App\\Controller\\MassageController::index'
     )) }}
-
     
-    {# {{ include('component/_modal.html.twig')}} #}
-
     {{ render(controller(
         'App\\Controller\\MassagistController::index'
     )) }}

@@ -228,6 +228,7 @@ elles s'afficheront au clic sur la section précédente
     background: var(--grey-btn); 
     transition: 0.5s;
 }
+
 .today{
     background-color: var(--today);
 }
@@ -275,7 +276,6 @@ footer .contact-us, .hours{
     opacity: 0.95;
     margin: 10% auto; /* 15% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
     width: 60%; /* Could be more or less, depending on screen size */
   }
 
@@ -300,12 +300,32 @@ footer .contact-us, .hours{
     font-family: var(--title-font);
     font-size: 2.5rem;
   }
-  
+
+  .btn-modal {
+    padding: 0.5rem 4rem; 
+  }
+
+  .btn-modal:hover {
+    border: 0.1rem solid var(--white);
+  }
+
+  .btnDetails {
+    background-color: transparent;
+    border: none;
+    color: var(--text-color);
+    font-weight: 700;
+    letter-spacing: 5px;
+  }
+
+  .btnDetails:hover {
+    color: var(--ruby-red);
+  }
+ 
   /* The Close Button */
   .close {
     color: #aaa;
     float: right;
-    font-size: 28px;
+    font-size: 3rem;
     font-weight: bold;
   }
   

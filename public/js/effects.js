@@ -1,4 +1,5 @@
 // Delay effects in HOME page
+
 const ratio = .1;
 
 let options = {
@@ -22,40 +23,38 @@ document.querySelectorAll('.reveal').forEach(function(r) {
 })
 
 // Modal
-const btnDetails = document.querySelectorAll('.btnDetails');
+
+let btnDetails = document.querySelectorAll(".btnDetails");
 btnDetails.forEach(btn => {
 
-        // Get the modal
-        let modal = document.getElementById("myModal");
-        // Get the <span> element that closes the modal
-        let span = document.getElementsByClassName("close")[0];
-
-        let el = document.getElementById("showName");
-
-        btn.addEventListener('click', (event)=> {
-          event.preventDefault();
+          btn.addEventListener('click', ()=> {
+          let modal = document.querySelector(".modal");      
           modal.style.display = "block";
-          // Insert Data here
-          console.log(el.dataset.massage.name);
-        })
+          document.querySelector("#showName").innerText = btn.dataset.massageName;     
+          document.querySelector("#showDescription").innerText = btn.dataset.massageDescription; 
+          document.querySelector("#showPrice").innerText = `60 min ${btn.dataset.massagePrice} €` ;
+          let cover =  document.querySelector("#showCover"); 
+          cover.src =  `images/${btn.dataset.massageCover} `;  
+          let buttonR = document.querySelector("#showReserve");
+          buttonR.href = `/reservation/${btn.dataset.massageId}`;                 
+          })  
 
-        span.addEventListener('click', (event)=> {
+          let close = document.querySelector(".close");
+          close.addEventListener('click', (event)=> {
           event.preventDefault();
+          let modal = document.querySelector(".modal");
           modal.style.display = "none";
-        })
-        
-        window.addEventListener('click', (event)=> {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        })
+          })
+       })   
+      
+       window.addEventListener('click', (event)=> {
+        let modal = document.querySelector(".modal");
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      })
+      
+      
 
-        console.log('hello');
-        // console.log(el.dataset.name);
-
-        
-})
-
-
-
+      
 
