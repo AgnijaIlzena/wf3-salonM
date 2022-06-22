@@ -17,6 +17,8 @@
 
 ## symfony console d:s:u --force
 
+## composer require vich/uploader-bundle
+
 #  Payment
 ## composer require stripe/stripe-php
 ## add to .env.local   STRIPE_SK='secret_key' // you can find secret_key here: 

@@ -159,7 +159,7 @@ class Reservation
 
         return $this;
     }
-
+  
     public function getTimeslot(): ?string
     {
         return $this->timeslot;

@@ -61,7 +61,7 @@ elementsForAjax.forEach(el=>{
         // clic sur  btn 'suivant' -> summary 
         if(e.target.classList[3]=='next'){
             summary.style.display = 'block';
-            next.innerHTML = 'Valider les mo';
+            next.style.display = 'none';
 
             // résumé
             summaryMassage.innerHTML = 'Massage: '+reservation.massageName;

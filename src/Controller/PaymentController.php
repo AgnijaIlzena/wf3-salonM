@@ -30,7 +30,7 @@ class PaymentController extends AbstractController
       // dd($reservation->getMassagist()->getName());
        Stripe::setApiKey($stripeSK);
        
-       $serviceDetails = $reservation->getMassage()->getName() .' le : '. $reservation->getDate() .'. à : '. $reservation->getTimeSlot();
+       $serviceDetails = $reservation->getMassage()->getName() .' le '. $reservation->getDate() .'. à '. $reservation->getTimeSlot();
        $description = $reservation->getMassage()->getDescription() .'. Votre masseur est : '. $reservation->getMassagist()->getName(); 
 
        $session = Session::create([
