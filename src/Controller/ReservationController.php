@@ -107,11 +107,12 @@ class ReservationController extends AbstractController
 
         $reservationRepository->add($reservation, true);
 
-        return $this->json($reservation);
+        return $this->json($reservation->getId());
     }
-    #[Route('/payement', name: 'payement')]
-    public function test(ReservationRepository $reservationRepository){   
-        $lastInsertId = 
-        return $this->render('reservation/test.html.twig');
+    #[Route('/payement/{id}', name: 'payement', requirements:['id'=>'\d+'])]
+    public function test(Reservation $reservation){   
+        return $this->render('reservation/test.html.twig',[
+            'reservation'=>$reservation]
+    );
     }
 }

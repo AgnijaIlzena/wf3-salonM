@@ -7,7 +7,8 @@
     --grey-btn: rgb(231, 232, 236,0.4);
     --grey-border:rgb(215, 213, 213);
     --summary:rgba(24, 134, 197, 0.6);
-    --today: yellow;
+    --today: rgb(243, 178, 11);
+    --black: black;
 
     --sky-blue-crayola: #6fd2e5ff;
     --white: #fcf7f8ff;
@@ -187,14 +188,39 @@ p {
 }
 
 /* Reservation */
-/* on n'affiche pas les différentes parties de la réservation,
-elles s'afficheront au clic sur la section précédente
- */
 
- .calendar, .timeslots, .form, .summary{
+/* .calendar, .timeslots, .form, .summary{
     display: none;
- }
+ } */
 
+.date{
+    background: none;
+    width: 100%;
+    height: 100%;
+	color: inherit;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+ }
+ .today{
+    background-color: var(--today)!important;
+}
+ #dateTd{
+    background-color: var(--sky-blue-crayola);
+ }
+ #dateTd:hover, .today:hover{
+    color:var(--white);
+    background-color: var(--text-color)!important;
+ }
+.btn-primary{
+    background-color: var(--sky-blue-crayola)!important;
+    color: var(--black);
+    border:none;
+}
+.btn-primary:hover{
+    background-color: var(--text-color)!important;
+}
 .summary{
     width: 400px;
     padding: 15px;
@@ -227,10 +253,6 @@ elles s'afficheront au clic sur la section précédente
 .btn-card:hover{
     background: var(--grey-btn); 
     transition: 0.5s;
-}
-
-.today{
-    background-color: var(--today);
 }
 
 /* footer */
