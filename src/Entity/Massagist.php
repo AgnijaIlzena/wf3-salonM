@@ -10,7 +10,7 @@ use Stringable;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File as FileFile;
 use Symfony\Component\Serializer\Annotation\Ignore;
-use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MassagistRepository::class)]
 #[Vich\Uploadable]
@@ -28,13 +28,15 @@ class Massagist implements Stringable
     private $description;
 
     #[ORM\OneToMany(mappedBy: 'massagist', targetEntity: Reservation::class, orphanRemoval: true)]
-    // #[Ignore]
+    #[Ignore]
     private $reservations;
 
     #[ORM\Column(type: 'string', length: 50)]
     private $cover;
 
     #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'cover')]
+    #[Assert\Image(mimeTypesMessage: 'Ce fichier n\'est pas une image')]
+    #[Assert\File(maxSize: '1M', maxSizeMessage: 'Le fichier ne doit pas dépasser les {{ limit }} {{ suffix }}')]
     private ?FileFile $file = null;
 
     public function __construct()

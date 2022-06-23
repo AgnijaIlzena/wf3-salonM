@@ -2,7 +2,6 @@
 
 
 :root {
-     /* Quand un hexadécimal comporte 6 fois le même caractères, ont peut en mettre que 3 */
      --black: #000;
      --white: #FFF;
      --white-opacity-85: rgba(255, 255, 255, 0.85);

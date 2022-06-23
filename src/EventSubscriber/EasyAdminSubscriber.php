@@ -3,6 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -11,10 +12,12 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class EasyAdminSubscriber implements EventSubscriberInterface
 {
 	private UserPasswordHasherInterface $security;
+	private UserRepository $userRepository;
 
-	public function  __construct(UserPasswordHasherInterface $passwordHasher)
+	public function  __construct(UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository)
 	{
 		$this->security = $passwordHasher;
+		$this->userRepository = $userRepository;
 	}
 
 	public static function getSubscribedEvents()
@@ -44,7 +47,13 @@ class EasyAdminSubscriber implements EventSubscriberInterface
 			return;
 		}
 
-		$this->setHashPassword($entity);
+		$user = $this->userRepository->find($entity->getId());
+		
+		dd($user,$entity,$user->getPassword(), $entity->getPassword());
+
+		if($user->getPassword() != $entity->getPassword()){
+			$this->setHashPassword($entity);
+		}	
 	}
 
 	public function setHashPassword(User $user)

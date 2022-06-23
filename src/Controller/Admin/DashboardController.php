@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Gift;
 use App\Entity\Massage;
 use App\Entity\Massagist;
 use App\Entity\Reservation;
@@ -71,8 +72,8 @@ class DashboardController extends AbstractDashboardController
 
 
         yield MenuItem::subMenu('Massage', 'fas fa-tags')->setSubItems([
-            MenuItem::linkToCrud('Liste Magazine', 'fa-solid fa-list', Massage::class),
-            MenuItem::linkToCrud('Create Product', 'fa-solid fa-paintbrush', Massage::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Liste Massage', 'fa-solid fa-list', Massage::class),
+            MenuItem::linkToCrud('Ajout Massage', 'fa-solid fa-paintbrush', Massage::class)->setAction(Crud::PAGE_NEW),
             
         ]);
 
@@ -90,6 +91,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::subMenu('Utilisateur', 'fa-solid fa-user-graduate')->setSubItems([
             MenuItem::linkToCrud('Liste Utilisateurs', 'fa-solid fa-list', User::class),
             MenuItem::linkToCrud('Ajout Utilisateur', 'fa-solid fa-paintbrush', User::class)->setAction(Crud::PAGE_NEW),            
+        ]);
+
+        yield MenuItem::subMenu('Carte Cadeau', 'fa-solid fa-gift')->setSubItems([
+            MenuItem::linkToCrud('Liste Carte Cadeau', 'fa-solid fa-list', Gift::class),            
         ]);
 
         yield MenuItem::linkToLogout('Logout', 'fa fa-sign-out');

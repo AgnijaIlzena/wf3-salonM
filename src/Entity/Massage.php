@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\File as FileFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Stringable;
 use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MassageRepository::class)]
 #[Vich\Uploadable] 
@@ -28,7 +29,7 @@ class Massage implements Stringable
     private $description;
 
     #[ORM\OneToMany(mappedBy: 'massage', targetEntity: Reservation::class, cascade: ['persist', 'remove'])]
-    // #[Ignore]
+    #[Ignore]
     private $reservation;
 
     #[ORM\OneToMany(mappedBy: 'massage', targetEntity: Gift::class, orphanRemoval: true)]
@@ -72,6 +73,8 @@ class Massage implements Stringable
     
 
     #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'cover')]
+    #[Assert\Image(mimeTypesMessage: 'Ce fichier n\'est pas une image')]
+    #[Assert\File(maxSize: '1M', maxSizeMessage: 'Le fichier ne doit pas dépasser les {{ limit }} {{ suffix }}')]
     private ?FileFile $file = null;
     
     public function getId(): ?int

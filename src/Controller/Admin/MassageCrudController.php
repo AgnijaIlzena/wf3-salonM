@@ -33,10 +33,9 @@ class MassageCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
 
-        yield IdField::new(propertyName:'ID')->hideOnForm();;
+        yield IdField::new(propertyName:'id')->hideOnForm();;
         yield TextField::new(propertyName:'name', label:'Nom');
-        yield TextareaField::new(propertyName:'description', label:'Description')->hideOnForm();
-        yield TextEditorField::new(propertyName:'description', label:'Description')->onlyOnForms();
+        yield TextareaField::new(propertyName:'description', label:'Description');
         yield MoneyField::new(propertyName:'price', label:'Prix')->setCurrency(currencyCode:'EUR');
 
         yield TextField::new(propertyName: 'file', label: 'Image')

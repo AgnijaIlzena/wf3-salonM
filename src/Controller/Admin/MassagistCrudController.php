@@ -28,7 +28,7 @@ class MassagistCrudController extends AbstractCrudController
     
     public function configureFields(string $pageName): iterable
     {
-        yield IdField::new(propertyName:'ID')->hideOnForm();
+        yield IdField::new(propertyName:'id')->hideOnForm();
         yield TextField::new(propertyName:'name', label:'Nom');
         yield TextareaField::new(propertyName:'description', label:'Description');
 
