@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Gift;
 use App\Entity\Massage;
 use App\Entity\Reservation;
 use App\Repository\MassageRepository;
 use App\Repository\ReservationRepository;
+use App\Repository\GiftRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -72,4 +74,43 @@ class PaymentController extends AbstractController
         return $this->render('payment/cancel.html.twig', [     
         ]);
     }
+
+
+// add gift variable in route and further
+// connect with gift controller as it was with reservations (redirect to route)
+    #[Route('/checkout/{id}/{gift}', name: 'app_checkout_gift', requirements: ['id' => '\d+'])]
+    public function checkoutGift(Gift $gift, $stripeSK ): Response
+    {
+
+      // dd($reservation->getMassagist()->getName());
+       Stripe::setApiKey($stripeSK);      
+         
+       $session = Session::create([
+        'line_items' => [[
+          'price_data' => [
+            'currency' => 'eur',
+            'product_data' => [
+              'name' => $gift->getMassage()->getName(),
+              'description' => $gift->getMassage()->getDescription(),
+                ],
+            'unit_amount' => $gift->getMassage()->getPrice() * 100,
+          ],
+          'quantity' => 1,
+        ]],
+        'mode' => 'payment',
+        'success_url' => $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
+        'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
+        'metadata'                    => [
+          'reservation_id' => $gift->getId(),
+      ]
+      ]);
+
+      return $this->redirect($session->url, 303, [
+        
+        'reservation' => $reservation,
+        'gift' => $gift,
+      ]);
+    }
+
+
 }
