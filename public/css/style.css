@@ -417,6 +417,32 @@ footer .contact-us, .hours{
     cursor: pointer;
   }
 
+  .success, .cancel {
+    margin-top: 5rem;
+
+  }
+  .success h1, .cancel h1 {
+    font-size: 2rem;
+    font-family: var(--title-font);
+  }
+
+  .cancel h3 {
+    font-size: 1.2rem;
+    font-family: var(--title-font);
+    color:var(--ruby-red);
+  }
+
+  .success p,  .cancel p {
+    font-size: 1rem;
+    font-family: var(--text-font);
+    margin-bottom: 4rem;
+  }
+
+  .success a, .cancel a {
+    padding: 0.5rem 2rem;
+   
+  }
+
 
 
 
