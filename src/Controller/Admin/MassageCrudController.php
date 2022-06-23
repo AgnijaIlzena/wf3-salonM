@@ -35,7 +35,7 @@ class MassageCrudController extends AbstractCrudController
             ->setFormType(formTypeFqcn:VichImageType::class)
             ->onlyOnForms();
             
-        yield ImageField::new(propertyName:'cover', label:'Image')
+        yield ImageField::new(propertyName: 'cover', label:'Image')
             ->setBasePath('images/')
             ->setUploadDir('public/images')
             ->hideOnForm();

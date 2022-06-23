@@ -11,7 +11,7 @@ use Stringable;
 use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
-use App\Entity\DateTimeImmutable;
+use DateTimeImmutable;
 
 
 #[ORM\Entity(repositoryClass: MassageRepository::class)]
@@ -45,9 +45,11 @@ class Massage implements Stringable
     private $price;
 
 
-
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $cover;
+
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    private $updated_at;
 
     public function getPrice(): ?int
     {
@@ -67,7 +69,7 @@ class Massage implements Stringable
         return $this->cover;
     }
 
-    public function setCover(string $cover): self
+    public function setCover(?string $cover): self
     {
         $this->cover = $cover;
 
@@ -172,6 +174,21 @@ class Massage implements Stringable
     public function setProfileFile(?File $profileFile = null): self
     {
         $this->profileFile = $profileFile;
+
+        if ($profileFile !== null) {
+            $this->updated_at = new DateTimeImmutable();
+        }
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
+    {
+        $this->updated_at = $updated_at;
 
         return $this;
     }
