@@ -40,28 +40,31 @@ class ReservationController extends AbstractController
         // $reservationRepository->findBy(['date' => DateTime::createFromFormat('Y-m-d','2022-06-08 08:23:41')]);
         $dateComponents = getdate();
         if(isset($_GET['month']) && isset($_GET['year'])){
-           $month = +$_GET['month'];
-           $year = $_GET['year'];
-           dump($year);
+           $month = +$request->query->get('month');
+           $year = $request->query->get('year');
         }
         else{
            $month = $dateComponents['mon'];
            $year = $dateComponents['year'];
         }
-        // $totalBookings = count($reservationRepository->findBy(['date'=>$year.'-'.$month.'-24']));
-        $calendar =  $calendarService->build_calendar($month , $year, $reservationRepository);
+        
+        $massagist = $request->query->get('massagist');
+        dump($massagist);
+        $calendar =  $calendarService->build_calendar($month , $year, $reservationRepository, $massagist);
 
-        // Affichage timeslots
+        // Affichage des créneaux horaires
         $duration = 60;
         // cleanUp = temps entre 2 rendez-vous
         $cleanUp = 0;
         $start = "09:00";
         $end = "18:00";
 
-        // date récupérée dans l'url au clic
+        // date récupérée dans l'url au clic sur un jour du calendrier
         $date = $request->query->get('date');
+
         // créneaux réservés en bdd
         $timeSlotsBooked = $reservationRepository->findTimeSlotByDate($date);
+        $timeSlotsBookedClean=[];
         foreach ($timeSlotsBooked as $ts) {
             $timeSlotsBookedClean[]=$ts['timeslot'];
         }
@@ -70,10 +73,15 @@ class ReservationController extends AbstractController
         $timeSlotsArray = $timeSlotsService->timeslots($duration, $cleanUp, $start, $end);
         
         // Filtrer les résultats pour garder seulement les créneaux horaires disponibles
-        $timeSlotsFiltered = array_diff($timeSlotsArray, $timeSlotsBookedClean);
+        if(!empty($timeSlotsBookedClean)){
+            $timeSlotsFiltered = array_diff($timeSlotsArray, $timeSlotsBookedClean);
+        }
+        else{
+            $timeSlotsFiltered = $timeSlotsArray;
+        }
 
 
-        //  on déclare un objet vide, que l'on remplira par la suite
+        //  formulaire
         $reservation = new Reservation();
         $form = $this->createForm(ReservationFormType::class, $reservation);
 
@@ -88,9 +96,6 @@ class ReservationController extends AbstractController
     }
 
 
-
-
-
     #[Route('/reservation', name: 'app_reservation_datas', methods: ['POST'])]
     public function setData(
         ReservationRepository $reservationRepository,
@@ -102,7 +107,6 @@ class ReservationController extends AbstractController
         $data = json_decode($request->getContent(), true);
         
         $reservation = new Reservation();
-        
 
         $massageId = $massageRepository->find($data['massageId']);
         $reservation->setMassage($massageId);
@@ -127,11 +131,4 @@ class ReservationController extends AbstractController
         return $this->json($reservation->getId());
     }
 
-    #[Route('/payement/{id}', name: 'payement', requirements:['id'=>'\d+'])]
-    public function test(Reservation $reservation)
-    {   
-        return $this->render('reservation/test.html.twig',[
-            'reservation'=>$reservation]
-    );
-    }
 }

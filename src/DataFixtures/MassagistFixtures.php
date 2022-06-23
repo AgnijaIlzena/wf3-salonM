@@ -15,7 +15,7 @@ class MassagistFixtures extends Fixture
 
         $faker = Faker\Factory::create();
         
-        for ($i=0; $i < 5; $i++) { 
+        for ($i=0; $i < 3; $i++) { 
 
             $massagist = new Massagist();
             $massagist->setName($faker->name);

@@ -117,6 +117,7 @@ p {
     text-transform: uppercase;
     transition-delay: 1.1s;   
     text-decoration: none;
+    cursor: pointer;
     }
 
 .btn-design:hover {
@@ -190,7 +191,7 @@ p {
 
 /* Reservation */
 
-.calendar, .timeslots, .form, .summary, .alert-danger{
+.calendar, .timeslots, .form, .errorLastName, .errorFirstName,.errorEmail, .errorPhone, .errorGlobal{
     display: none;
  }
 
@@ -204,14 +205,19 @@ p {
 	cursor: pointer;
 	outline: inherit;
  }
- .today{
+.today{
     background-color: var(--today)!important;
 }
  #dateTd{
     background-color: var(--sky-blue-crayola);
  }
- #dateTd:hover, .today:hover{
-    color:var(--white);
+ .dateLink{
+    text-decoration: none;
+    color:var(--black);
+}
+
+#dateTd:hover, #dateTd:hover .dateLink, .today:hover{
+    color:var(--white)!important;
     background-color: var(--text-color)!important;
  }
 .btn-primary{
