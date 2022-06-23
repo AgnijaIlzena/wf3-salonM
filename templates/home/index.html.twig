@@ -5,7 +5,7 @@
 {% block body %}
     {{ include('component/_navbar.html.twig') }}
     {{ include('component/_intro.html.twig') }}
-    {{ include('component/aboutUs.html.twig')}}
+    {{ include('component/_aboutUs.html.twig')}}
 
     {{ render(controller(
         'App\\Controller\\MassageController::index'
@@ -15,6 +15,5 @@
         'App\\Controller\\MassagistController::index'
     )) }}
 
-    {{ include('component/_contact.html.twig')}}
     {{ include('component/_footer.html.twig') }}
 {% endblock %}
