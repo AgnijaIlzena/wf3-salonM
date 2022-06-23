@@ -1,22 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap');   /* font-family: 'Nunito', sans-serif; */
-
-
-:root {
-     /* Quand un hexadécimal comporte 6 fois le même caractères, ont peut en mettre que 3 */
-     --black: #000;
-     --white: #FFF;
-     --white-opacity-85: rgba(255, 255, 255, 0.85);
-     --gray: rgb(128, 128, 128);
-     --gray-light: #cbcbcb;
-}
-
-
 body {
-    font-family: 'Nunito', sans-serif ;
     font-size: 16px;
     margin: 0;
-    height: 100vh;
-    
+    height: 100vh;   
 }
 
 main {
@@ -30,15 +15,17 @@ main section {
     width: 50%;
 }
 
-.presentation {
+/**
+* Image
+*/
+
+.image {
     background: url(../uploads/masseur.jpg) center no-repeat;
     background-size: cover;
     width: 50%;
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: self-end;
-
 }
 
 
@@ -54,34 +41,24 @@ main section {
 
 .connexion form h1{
     font-size: 2.3rem;
-    margin: 0;
-}
-
-.connexion form p{
-    color: var(--gray);
-    margin: 0 0 32px 0; 
 }
 
 .connexion form label {
     display: block;
     font-size: 0.85rem;
-    font-size: 600;
     margin-bottom: 2px;
 }
 
 .connexion form input {
     display: block;
-    border: 1px solid var(--gray-light);
+    border: 1px solid lightgray;
     border-radius: 4px;
-    padding: 12px; 
-    margin-bottom: 16px;  
-    width: 100%;
-    box-sizing: border-box;
+    margin-bottom: 16px; 
 }
 
 .connexion form button{
     background-color: blue;
-    color: var(--white);
+    color: white;
     border-radius: 4px;
     padding: 12px 0;
     border: 0;
@@ -90,12 +67,9 @@ main section {
 }
 
 .connexion form a {
-    border: 1px solid var(--gray-light);
+    border: 1px solid lightgrey;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: var(--black);
+    color: black;
     font-size: 0.9rem;
     gap: 10px;
     padding: 10px 0;
@@ -104,14 +78,15 @@ main section {
 }
 
 @media (max-width: 1200px) {
-    .presentation {
+    .image {
         display: none;
     }
 
     .connexion form {
         width: 100%;
-        margin: auto;
     }
+
+    
 
     
 }

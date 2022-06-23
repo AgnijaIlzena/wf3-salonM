@@ -6,12 +6,13 @@ use App\Repository\MassageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File as FileFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Stringable;
-
-
 use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use App\Entity\DateTimeImmutable;
+
 
 #[ORM\Entity(repositoryClass: MassageRepository::class)]
 #[Vich\Uploadable] 
@@ -44,8 +45,9 @@ class Massage implements Stringable
     private $price;
 
 
-    // #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    // private $cover = '';
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $cover;
 
     public function getPrice(): ?int
     {
@@ -59,8 +61,6 @@ class Massage implements Stringable
         return $this;
     }
 
-    #[ORM\Column(type: 'string', length: 50, nullable: true)]
-    private $cover;
 
     public function getCover(): ?string
     {
@@ -74,9 +74,10 @@ class Massage implements Stringable
         return $this;
     }
     
-
     #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'cover')]
-    private ?FileFile $file = null;
+    #[Assert\Image(mimeTypesMessage: 'Ce fichier n\'est pas une image')]
+    #[Assert\File(maxSize: '1M', maxSizeMessage: 'Le fichier ne doit pas dépasser les {{ limit }} {{ suffix }}')]
+    private  $profileFile;
     
     public function getId(): ?int
     {
@@ -155,28 +156,23 @@ class Massage implements Stringable
         return $this;
     }
 
-    /**
-     * Get the value of file
-     */ 
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
-     * Set the value of file
-     *
-     * @return  self
-     */ 
-    public function setFile($file)
-    {
-        $this->file = $file;
-
-        return $this;
-    }
-
     public function __toString(): string
     {
         return $this->name;       
+    }
+
+    /**
+     * Get the value of profilefile
+     */ 
+    public function getProfileFile(): ?File
+    {
+        return $this->profileFile;
+    }
+
+    public function setProfileFile(?File $profileFile = null): self
+    {
+        $this->profileFile = $profileFile;
+
+        return $this;
     }
 }
