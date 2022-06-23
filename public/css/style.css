@@ -75,7 +75,7 @@ p {
     font-family: var(--text-font);
     color: var(--text-color);
     text-transform: uppercase;
-}
+ }
 
 .navigation a:hover {
     color: var(--grey);
@@ -431,6 +431,8 @@ footer .contact-us, .hours{
     margin-top: 5rem;
 
   }
+
+  
   .success h1, .cancel h1 {
     font-size: 2rem;
     font-family: var(--title-font);
