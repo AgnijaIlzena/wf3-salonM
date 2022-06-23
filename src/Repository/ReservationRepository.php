@@ -38,7 +38,28 @@ class ReservationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findTimeSlotByDate($value): ?array
+    {
+        return $this->createQueryBuilder('r')
+             ->select('r.timeslot')
+            ->andWhere('r.date = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getArrayResult()
+        ;
+    }
 
+    public function findReservationByMassagist($valDate, $valMassagist): ?array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.massagist = :valMassagist')
+            ->andWhere('r.date = :valDate')
+            ->setParameter('valMassagist', $valMassagist)
+            ->setParameter('valDate', $valDate)
+            ->getQuery()
+            ->getArrayResult()
+        ;
+    }
 //    /**
 //     * @return Reservation[] Returns an array of Reservation objects
 //     */
@@ -63,4 +84,6 @@ class ReservationRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
 }

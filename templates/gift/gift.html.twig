@@ -4,32 +4,40 @@
 {% endblock %}
 
 {% block body %}
-	<div class=" bg-light">
+  {{ include('component/_navbar.html.twig') }}
+	<div>
 		<div class="row  w-50 m-auto py-5">
+			
 			<div class="col">
-				<div class="py-3">
-					{% for massage in massages %}
+
+	           
+
+				<div class="py-3">			
 
 						{{ massage.name }}
-					</div>
-					<div class="py-3">
-						{{ massage.description }}
-					</div>
-					<div class="py-3">
-						{{ massage.price}}
-					</div>
-					<div class="py-3">
-					<img src="{{asset('images/'~ massage.cover)|imagine_filter('vignette')}}" alt="picture">
-					</div>
-				{% endfor %}
+						</div>
+						<div class="py-3">
+							{{ massage.description }}
+						</div>
+						<div class="py-3">
+							{{ massage.price}} &euro;
+						</div>
+						<div class="py-3">
+						<img src="{{asset('images/'~ massage.cover)|imagine_filter('vignette')}}" alt="picture">
+						</div>
+					
+				</div>
 
-				<h3 class="fst-italic py-5">You want to offer a relaxing massage for a moment of well-being on the occasion of an anniversary or a special occasion like Valentine's day, Christmas Offer a gift voucher for a Relaxing Massage. 🎁</h3>
-				{{ form(form) }}
-
+				<div>
+				<h3 class="gift-title py-5 text-center">Créez votre bon cadeau</h3>
+				<h5 class="gift-subtitle pb-5">You want to offer a relaxing massage for a moment of well-being on the occasion of an anniversary or a special occasion like Valentine's day, Christmas Offer a gift voucher for a Relaxing Massage. 🎁</h5>
+				{{ form(form)}}
 				{# the attribute not to use now , just to copy the path after the payment button works #}
-				    <a href="{{ path('app_giftpdf') }}"></a>
+				    <a href="{{ path('app_pdf') }}">pdf</a>
 					{#  #}
 				</div>
+
 			</div>
 		</div>
-	{% endblock %}
+	{{ include('component/_footer.html.twig') }}
+{% endblock %}

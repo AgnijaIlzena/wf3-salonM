@@ -4,7 +4,7 @@
     --title-font: 'Libre Baskerville', serif;
     --text-font: 'Source Sans Pro', sans-serif; 
   
-    --grey-btn: rgb(231, 232, 236,0.4);
+    --grey-btn: rgb(231, 232, 236,0.6);
     --grey-border:rgb(215, 213, 213);
     --summary:rgba(24, 134, 197, 0.6);
     --today: rgb(243, 178, 11);
@@ -13,6 +13,7 @@
     --sky-blue-crayola: #6fd2e5ff;
     --white: #fcf7f8ff;
     --text-color: #0e273cff;
+    --blue-secondary: #112E47;
     --ruby-red: #a31621ff;
     --grey: #7f7b82ff;
     --raisin-black: #191923ff;
@@ -80,6 +81,10 @@ p {
     color: var(--grey);
 }
 
+.logo {
+    width: 30%;
+}
+
 /* Intro */
 
 .intro {   
@@ -99,7 +104,7 @@ p {
     position: absolute;
     top: 30%;
     left: 15rem;
-    width: 10%;
+    width: 20%;
     font-size: 4rem;
     line-height: 1.2;
     z-index: 1;
@@ -116,6 +121,7 @@ p {
     text-transform: uppercase;
     transition-delay: 1.1s;   
     text-decoration: none;
+    cursor: pointer;
     }
 
 .btn-design:hover {
@@ -124,7 +130,7 @@ p {
     transition: 0.5s;    
 }
 
-.intro-text button {
+.intro-text a {
     position: absolute;
     top: 75%;
     left: 15rem;
@@ -166,7 +172,7 @@ p {
 }
 
 .btn-massage {
-    padding: 0.5rem 0; 
+    padding: 0.5rem 2rem; 
     width: 40%;    
 }
 
@@ -189,7 +195,7 @@ p {
 
 /* Reservation */
 
-.calendar, .timeslots, .form, .summary{
+.calendar, .timeslots, .form, .errorLastName, .errorFirstName,.errorEmail, .errorPhone, .errorGlobal{
     display: none;
  }
 
@@ -203,14 +209,20 @@ p {
 	cursor: pointer;
 	outline: inherit;
  }
- .today{
+.today{
     background-color: var(--today)!important;
 }
  #dateTd{
     background-color: var(--sky-blue-crayola);
  }
- #dateTd:hover, .today:hover{
-    color:var(--white);
+ .dateLink, .massagistLink{
+    text-decoration: none;
+    color:var(--black);
+}
+
+
+#dateTd:hover, #dateTd:hover .dateLink, .today:hover{
+    color:var(--white)!important;
     background-color: var(--text-color)!important;
  }
 .btn-primary{
@@ -250,10 +262,63 @@ p {
     transition: 0.5s;
 }
 
-.btn-card:hover{
+
+.btn-card:hover, .btn-card:hover .massagistLink{
     background: var(--grey-btn); 
+    color: var(--black);
     transition: 0.5s;
 }
+
+/* Gift Card */
+
+.gift-title {
+    font-family: var(--title-font);
+    font-size: 3rem;
+}
+
+.gift-subtitle {
+    font-family: var(--title-font);
+    line-height: 1.4;
+    font-size: 1.3rem;
+    
+}
+
+/* contact us */
+
+.contact-triger {
+    font-size: 2rem;
+    font-family: var(--title-font);
+    text-decoration: none;
+    color: var(--white);
+    padding: 20px 0;
+    margin: 0;
+    transition: 0.5s;      
+}
+
+.contact-triger:hover {
+    color: var(--grey);
+    transition: 0.5s;
+}
+
+.contact-collapse {
+    color: var(--blue-secondary);
+}
+
+#contact {
+    background-color: var(--blue-secondary);
+}
+
+.contact-top {
+    height: 5vh;
+    text-align: center;
+}
+
+.contact.card {
+    background-color: var(--blue-secondary);
+    border-color: var(--blue-secondary);
+    height: 400px;
+}
+
 
 /* footer */
 
@@ -269,6 +334,12 @@ footer .contact-us, .hours{
 .adress, .social {
     font-size: 1.2rem;
     color: var(--white) ;
+    transition: 0.5s;
+}
+
+.social:hover {
+    color: var(--ruby-red);
+    transition: 0.5s;
 }
 
 .hours-time {
@@ -341,6 +412,7 @@ footer .contact-us, .hours{
 
   .btnDetails:hover {
     color: var(--ruby-red);
+    transition: 0.5s;
   }
  
   /* The Close Button */
@@ -356,6 +428,32 @@ footer .contact-us, .hours{
     color: black;
     text-decoration: none;
     cursor: pointer;
+  }
+
+  .success, .cancel {
+    margin-top: 5rem;
+
+  }
+  .success h1, .cancel h1 {
+    font-size: 2rem;
+    font-family: var(--title-font);
+  }
+
+  .cancel h3 {
+    font-size: 1.2rem;
+    font-family: var(--title-font);
+    color:var(--ruby-red);
+  }
+
+  .success p,  .cancel p {
+    font-size: 1rem;
+    font-family: var(--text-font);
+    margin-bottom: 4rem;
+  }
+
+  .success a, .cancel a {
+    padding: 0.5rem 2rem;
+   
   }
 
 

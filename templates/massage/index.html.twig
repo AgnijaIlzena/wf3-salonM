@@ -1,10 +1,8 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello MassageController!{% endblock %}
-
 {% block body %}
 
-<section class="massages reveal">
+
+<section class="massages reveal" id="massage">
+
 	<div class="container">
 		<h2 class="section-title">Nos Massages</h2>
 	</div>
@@ -38,9 +36,21 @@
 								</p>																	
 
 								<p class="pb-4"><span class="text-muted">60 min</span> <span class="details">{{massage.price}} €</span></p>
-								<a class="btn-design btn-massage text-center mb-5" href="{{ path('app_reservation', { id: massage.id }) }}">
+								
+								<div class="row">
+								<div class="col-6 text-center">
+								<a class="btn-design btn-massage text-center mb-5 " href="{{ path('app_reservation', { id: massage.id }) }}">
 									réserver
-								</a>					 
+								</a>
+								</div>	
+
+								<div class="col-6 text-center">
+								<a class="btn-design btn-massage text-center mb-5 " href="{{ path('app_gift' ,{ id: massage.id } )}}">
+									bon cadeau
+								</a>
+								</div>		
+
+								</div>			 
 							</div>
 											
 					</div>

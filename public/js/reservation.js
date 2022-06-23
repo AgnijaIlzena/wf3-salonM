@@ -1,4 +1,4 @@
-const elementsForAjax = document.querySelectorAll('.ajax');
+const buttons = document.querySelectorAll('.ajax');
 const calendarSection = document.querySelector('.calendar');
 const timeslotsSection = document.querySelector('.timeslots');
 const formSection = document.querySelector('.form');
@@ -14,8 +14,45 @@ const massageText = document.querySelector('.massage');
 const book = document.querySelector('.book');
 const next = document.querySelector('.next');
 
+// messages d'erreur
+const errorLastName = document.querySelector('.errorLastName');
+const errorFirstName = document.querySelector('.errorFirstName');
+const errorEmail = document.querySelector('.errorEmail');
+const errorPhone = document.querySelector('.errorPhone');
+const errorGlobal = document.querySelector('.errorGlobal');
 
-elementsForAjax.forEach(el=>{
+
+
+
+// scroll jusqu'au calendrier si clic sur un des btn mois suivant, 
+// mois ou mois précédent ou mois en cours
+const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  });
+
+  let calendarView = params.calendar;
+  if(calendarView == 1){
+    calendarSection.style.display = 'block';
+    window.scrollTo(0,calendarSection.getBoundingClientRect().top + document.documentElement.scrollTop -30);
+  }
+
+  let massagistParam = params.massagist;
+  if(massagistParam !=null){
+    calendarSection.style.display = 'block';
+    window.scrollTo(0,calendarSection.getBoundingClientRect().top + document.documentElement.scrollTop -200);
+  }
+
+  let date = params.date;
+  if(date !=null){
+    calendarSection.style.display = 'block';
+    timeslotsSection.style.display = 'block';
+    window.scrollTo(0,timeslotsSection.getBoundingClientRect().top + document.documentElement.scrollTop -200);
+    
+  }
+  
+          
+
+buttons.forEach(el=>{
     el.addEventListener('click', (e) => {
         let reservation = JSON.parse(localStorage.getItem('reservation'))||{};
 
@@ -23,7 +60,6 @@ elementsForAjax.forEach(el=>{
         // clic sur une carte massagist -> calendrier
         if(e.target.classList == 'card-text' || e.target.classList == 'massagist-photo-profile' 
         || e.target.classList == 'card-title' || e.target.classList == 'card-body'){
-            calendarSection.style.display = 'block';
 
             // remplissage du localstorage - massagist 
             let massagistId = el.dataset.massagistId;
@@ -35,7 +71,7 @@ elementsForAjax.forEach(el=>{
         // clic sur  calendrier -> timeSlot
         if(e.target.classList == 'date' || e.target.classList[1] == 'date'){
             timeslotsSection.style.display = 'block';
-
+            window.scrollTo(0,timeslotsSection.getBoundingClientRect().top + document.documentElement.scrollTop -200);
             // remplissage du localstorage - date
             let date = el.dataset.date;
             reservation.date = date;
@@ -44,6 +80,7 @@ elementsForAjax.forEach(el=>{
         // clic sur  timeSlot -> form infos client
         if(e.target.classList[4]=='timeSlot'){
             formSection.style.display = 'block';
+            window.scrollTo(0,formSection.getBoundingClientRect().top + document.documentElement.scrollTop-100);
 
             // remplissage du localstorage - timeSlot
             let timeslot = el.dataset.timeslot;
@@ -53,61 +90,96 @@ elementsForAjax.forEach(el=>{
         // remplissage du localstorage - infos massage
         let massageId = massageText.dataset.massageId;
         let massageName = massageText.dataset.massageName;
-        let price = massageText.dataset.massagePrice;
         reservation.massageId = massageId;
         reservation.massageName = massageName;
 
-
-        // clic sur  btn 'suivant' -> summary 
-        if(e.target.classList[3]=='next'){
-            summary.style.display = 'block';
-            next.style.display = 'none';
-
-            // résumé
-            summaryMassage.innerHTML = 'Massage: '+reservation.massageName;
-            summaryMassagist.innerHTML = 'Masseur: '+reservation.massagistName;
-            summaryDate.innerHTML = `Date et horaire: le ${reservation.date.slice(8,10)}-${reservation.date.slice(5,7)}-${reservation.date.slice(0,4)} 
-            de ${reservation.timeslot.slice(0,2)}h à ${reservation.timeslot.slice(8,10)}h`;
-            summaryPrice.innerHTML = `Prix: ${price} €`;
-        }
 
         localStorage.setItem('reservation', JSON.stringify(reservation));
 })
 
 })
 
-elementsForAjax.forEach(el=>{
-    el.addEventListener('change', (e) => {
+// inputs
+buttons.forEach(el=>{
+    el.addEventListener('input', () => {
 
     // remplissage du localstorage - infos client
     let reservation = JSON.parse(localStorage.getItem('reservation'))||{};
+
     const lastname = document.querySelector('#reservation_form_lastname').value;
     const firstname = document.querySelector('#reservation_form_firstname').value;
     const email = document.querySelector('#reservation_form_email').value;
     const telephone = document.querySelector('#reservation_form_telephone').value;
-    reservation.lastname = lastname;
-    reservation.firstname = firstname;
-    reservation.email = email;
-    reservation.telephone = telephone;
+
+
+    // lastname
+        if (/^[a-zA-Z- ]+$/.test(lastname) && lastname.length!=0){
+            reservation.lastname = lastname;
+            errorLastName.style.display='none';
+        }
+        else{
+            errorLastName.style.display='block';
+        }
+
+    // firstname
+        if (/^[a-zA-Z- ]+$/.test(firstname) && firstname.length!=0){
+            reservation.firstname = firstname;
+            errorFirstName.style.display='none';
+        }
+        else{
+            errorFirstName.style.display='block';
+        }
+
+    // email
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) && email.length!=0){
+            reservation.email = email;
+            errorEmail.style.display='none';
+        }
+        else{
+            errorEmail.style.display='block';
+        }
+
+    // telephone
+        if (/^\d+$/.test(telephone)&& telephone.length!=0){
+            reservation.telephone = telephone;
+            errorPhone.style.display='none';
+        }
+        else{
+            errorPhone.style.display='block';
+        }
     localStorage.setItem('reservation', JSON.stringify(reservation));
 })
 })
 
-book.addEventListener('click',()=>{
 
-    fetch("/reservation", {
-        method: "POST",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: localStorage.getItem('reservation')
-    })
-    .then(response => response.json())
-    .then(id => {
-        window.location.href = `/payement/${id}`;
-    })
-    .catch(error => console.log("Erreur : " + error));
+book.addEventListener('click',()=>{
     
+    const lastname = document.querySelector('#reservation_form_lastname').value;
+    const firstname = document.querySelector('#reservation_form_firstname').value;
+    const email = document.querySelector('#reservation_form_email').value;
+    const telephone = document.querySelector('#reservation_form_telephone').value;
+
+    if(lastname.length != 0 && firstname.length != 0 && email.length != 0 && telephone.length != 0 &&
+        window.getComputedStyle(errorLastName).display=='none' && window.getComputedStyle(errorFirstName).display=='none'&& 
+        window.getComputedStyle(errorEmail).display=='none'&& window.getComputedStyle(errorPhone).display=='none'){
         
+        errorGlobal.style.display = 'none';
+
+        fetch("/reservation", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: localStorage.getItem('reservation')
+        })
+        .then(response => response.json())
+        .then(id => {
+            window.location.href = `/checkout/${id}`;
+        })
+        .catch(error => console.log("Erreur : " + error));
+    }
+    else{
+        errorGlobal.style.display = 'block';
+    }
 })
