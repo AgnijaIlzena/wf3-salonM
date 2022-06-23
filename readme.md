@@ -10,6 +10,7 @@
 ## symfony console doctrine:fixtures:load 
 ## composer require fzaninotto/faker
 
+## composer require symfony/serializer
 
 ## npm install
 ## (delete build folder)
