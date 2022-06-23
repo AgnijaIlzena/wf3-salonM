@@ -60,8 +60,6 @@ buttons.forEach(el=>{
         // clic sur une carte massagist -> calendrier
         if(e.target.classList == 'card-text' || e.target.classList == 'massagist-photo-profile' 
         || e.target.classList == 'card-title' || e.target.classList == 'card-body'){
-            calendarSection.style.display = 'block';
-            window.scrollTo(0,calendarSection.getBoundingClientRect().top + document.documentElement.scrollTop -30);
 
             // remplissage du localstorage - massagist 
             let massagistId = el.dataset.massagistId;
