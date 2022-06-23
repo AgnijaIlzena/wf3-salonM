@@ -15,7 +15,7 @@ class UserFixtures extends Fixture
         $user->setFirstName('Admin');
         $user->setLastName('Admin');
         $user->setEmail('admin@admin.com');
-        $user->setPassword('password');
+        $user->setPassword(password_hash('password', PASSWORD_ARGON2I));
         $user->setRoles(array('ROLE_ADMIN'));
         $user->setIsVerified(true);
 
