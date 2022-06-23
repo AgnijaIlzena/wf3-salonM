@@ -6,9 +6,15 @@ use App\Repository\MassagistRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Stringable;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File as FileFile;
+use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 #[ORM\Entity(repositoryClass: MassagistRepository::class)]
-class Massagist
+#[Vich\Uploadable]
+class Massagist implements Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -22,10 +28,14 @@ class Massagist
     private $description;
 
     #[ORM\OneToMany(mappedBy: 'massagist', targetEntity: Reservation::class, orphanRemoval: true)]
+    #[Ignore]
     private $reservations;
 
     #[ORM\Column(type: 'string', length: 50)]
     private $cover;
+
+    #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'cover')]
+    private ?FileFile $file = null;
 
     public function __construct()
     {
@@ -99,6 +109,31 @@ class Massagist
     public function setCover(string $cover): self
     {
         $this->cover = $cover;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
+        /**
+     * Get the value of file
+     */ 
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Set the value of file
+     *
+     * @return  self
+     */ 
+    public function setFile($file)
+    {
+        $this->file = $file;
 
         return $this;
     }
