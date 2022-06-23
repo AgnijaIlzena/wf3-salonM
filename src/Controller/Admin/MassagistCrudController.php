@@ -20,10 +20,7 @@ class MassagistCrudController extends AbstractCrudController
         return Massagist::class;
     }
 
-    public function __construct(private string $uploadDir)
-    {
-        
-    }
+
 
     
     public function configureFields(string $pageName): iterable
@@ -33,13 +30,13 @@ class MassagistCrudController extends AbstractCrudController
         yield TextareaField::new(propertyName:'description', label:'Description');
 
 
-        yield TextField::new(propertyName: 'file', label: 'Image')
+        yield TextField::new(propertyName: 'profileFile', label: 'Image')
             ->setFormType(formTypeFqcn:VichImageType::class)
             ->onlyOnForms();
         
         yield ImageField::new(propertyName:'cover', label:'Image')
-            ->setBasePath(path:$this->uploadDir)
-            ->setUploadDir('public/uploads')
+            ->setBasePath('images/')
+            ->setUploadDir('public/images')
             ->hideOnForm();
 
             
