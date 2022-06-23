@@ -13,58 +13,58 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Email;
+
 class GiftFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('sender', TextType::class, [
-                'label' => "Sender Name and Lastname",
+                'label' => "Nom et prenom de l'expéditeur",
                 'required' => false
             ])
             ->add('receiver', TextType::class, [
-                'label' => "Receiver Name and Lastname",
+                'label' => "Nom et prenom du destinataire",
                 'required' => false
             ])
             ->add('sender_email', EmailType::class, [
-                'label' => "Sender email",
+                'label' => "E-mail de l'expéditeur",
                 'constraints' => [
                     new Email([
-                        'message' => 'this Email is invalid'
+                        'message' => 'Cette adresse email est invalide'
                     ]),
                     new NotBlank([
-                        'message' => 'this field is obligatory'
+                        'message' => 'ce champ est obligatoire
+                        '
                     ])
                 ]
             ])
-
-        
             ->add('receiver_email', EmailType::class, [
-                'label' => "Receiver email",
+                'label' => "E-mail du destinataire",
                 'constraints' => [
                     new Email([
-                        'message' => 'this Email is invalid'
+                        'message' => 'Cette adresse email est invalide'
                     ]),
                     new NotBlank([
-                        'message' => 'this field is obligatory'
+                        'message' => 'ce champ est obligatoire'
                     ])
                 ]
             ])
-            ->add('message', TextareaType::class)
-            
+            ->add('message', TextareaType::class)            
             ->add('save', SubmitType::class, [
-                'label' => 'Commander',
+                'label' => 'suivant',
                 'attr' => [
-                    'class' => 'btn-design',
-                    'submit' => 'app_pdf'
+                    'class' => 'btn btn-outline-primary'
                 ]
             ]);
     }
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Gift::class,
+            "allow_extra_fields" => true
         ]);
     }
 }

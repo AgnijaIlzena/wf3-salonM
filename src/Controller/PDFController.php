@@ -100,7 +100,6 @@ public function __construct(ParameterBagInterface $parameterBag)
         // Render the HTML as PDF
         $dompdf->render();
 
-
         // Store PDF Binary Data
         $output = $dompdf->output();
 
