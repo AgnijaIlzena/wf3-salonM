@@ -32,18 +32,20 @@
                             <div class="col-12 mt-3">
                             {% for massagist in massagists %}
                                 <div class="card">
-                                    <button class="btn-card ajax" data-massagist-id="{{massagist.id}} "
-                                    data-massagist-name="{{massagist.name}}">
-                                        <div class="card-horizontal">
-                                            <div class="img-square-wrapper">
-                                                <img class="massagist-photo-profile" src="{{asset('images/'~massagist.cover)}}">
+                                    <a class='massagistLink' href='?massagist={{massagist.id}}'>
+                                        <button class="btn-card ajax" data-massagist-id="{{massagist.id}}"
+                                        data-massagist-name="{{massagist.name}}">
+                                            <div class="card-horizontal">
+                                                <div class="img-square-wrapper">
+                                                    <img class="massagist-photo-profile" src="{{asset('images/'~massagist.cover)}}">
+                                                </div>
+                                                <div class="card-body">
+                                                    <h4 class="card-title">{{massagist.name}}</h4>
+                                                    <p class="card-text">{{massagist.description}}</p>
+                                                </div>
                                             </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">{{massagist.name}}</h4>
-                                                <p class="card-text">{{massagist.description}}</p>
-                                            </div>
-                                        </div>
-                                    </button>
+                                        </button>
+                                    </a>
                                 </div>
                             {% endfor %}
                             </div>
@@ -73,40 +75,24 @@
                     {{ form_start(form) }}
                         <p>{{form_label(form.lastname)}}</p>
                         <p class="ajax">{{form_widget(form.lastname)}}</p>
-                        <div class="alert alert-danger" role="alert">Nom de famille obligatoire</div>
+                        <div class="alert alert-danger errorLastName" role="alert">Nom de famille manquant ou invalide</div>
 
                         <p>{{form_label(form.firstname)}}</p>
                         <p class="ajax" >{{form_widget(form.firstname)}}</p>
-                        <div class="alert alert-danger" role="alert">Prénom obligatoire</div>
+                        <div class="alert alert-danger errorFirstName" role="alert">Prénom manquant ou invalide</div>
                         
                         <p>{{form_label(form.email)}}</p>
                         <p class="ajax" >{{form_widget(form.email)}}</p>
-                        <div class="alert alert-danger" role="alert">Email obligatoire</div>
+                        <div class="alert alert-danger errorEmail" role="alert">Email manquant ou invalide</div>
 
                         <p>{{form_label(form.telephone)}}</p>
                         <p class="ajax">{{form_widget(form.telephone)}}</p>
-                        <div class="alert alert-danger" role="alert">Numéro de téléphone obligatoire</div>
+                        <div class="alert alert-danger errorPhone"role="alert">Numéro de téléphone manquant ou invalide</div>
                         
-                        <button class="btn btn-primary mt-3 next ajax " type="button">Suivant</button>
-
-                        {# Récapitulatif #}
-                        <section class="summary">
-                            <h3 class="mb-3">Résumé</h3>
-                            <p class="summary-massage">Massage: </p>
-                            <p class="summary-massagist">Masseur: </p>
-                            <p class="summary-date">Date et horaire: </p>
-                            <p class="summary-price">Prix: </p>
-                            <button type="button" class="btn btn-primary mt-3 book">Réserver</a></button>
-
-                        </section>
                        
                     {{ form_end(form)}} 
-
-                    <div>
-                        <a class="btn-design mb-5" href="{{ path('app_checkout', { id: massage.id }) }}">
-                            payer
-                        </a> 
-                    </div>                                 
+                    <div class="alert alert-danger errorGlobal" role="alert">Tous les champs sont obligatoires</div>
+                    <div><a class="btn-design mx-5 book">Réserver</a></div>                                 
                 </section>           
             </div>
         </div>
