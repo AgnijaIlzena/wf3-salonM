@@ -1,11 +1,9 @@
 <?php
 namespace App\Service;
-// use mysqli;
-
 
 class CalendarService{
 
-    function build_calendar($month, $year, $reservationRepository){
+    function build_calendar($month, $year, $reservationRepository, $massagist){
 
         $daysOfWeek = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
         $daysOfMonth = [1=>'Janvier','Février','Mars','Avril','Mai','Juin',
@@ -75,7 +73,7 @@ class CalendarService{
     
             $currentDayRel = str_pad($currentDay, 2, '0', STR_PAD_LEFT);
             $date = "$year-$month-$currentDayRel";
-            $totalBookings = count($reservationRepository->findByDate($date));
+            $totalBookings = count($reservationRepository->findReservationByMassagist($date, $massagist));
     
             // attribuer la classe 'today' au jour actuel pour lui mettre un background en css
             $dateToday = date('Y-m-d');
@@ -88,7 +86,7 @@ class CalendarService{
 
             if($dayName !='sunday' && $date>=date('Y-m-d') && $totalBookings<9){
                 $calendar .= "<td class='$classToday' id='dateTd'><button class='ajax date' data-date=$date>
-                <h4 class='date'><a href='?date=$date'>$currentDay</h4></button></td>";
+                <h4 class='date'><a class='dateLink' href='?date=$date&massagist=$massagist'>$currentDay</h4></button></td>";
             }
             else{
                 $calendar .= "<td class='$classToday'><h4>$currentDay</h4></td>";
@@ -110,7 +108,4 @@ class CalendarService{
     return $calendar;
     }
     
-    
-    
-
 }
