@@ -7,12 +7,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\CalendarService;
 use App\Service\TimeSlotsService;
+use App\Entity\Massage;
 
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ReservationRepository;
 use App\Form\ReservationFormType;
 use App\Entity\Reservation;
-use App\Entity\Massage;
 use App\Repository\MassagistRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -88,6 +88,9 @@ class ReservationController extends AbstractController
     }
 
 
+
+
+
     #[Route('/reservation', name: 'app_reservation_datas', methods: ['POST'])]
     public function setData(
         ReservationRepository $reservationRepository,
@@ -123,8 +126,10 @@ class ReservationController extends AbstractController
 
         return $this->json($reservation->getId());
     }
+
     #[Route('/payement/{id}', name: 'payement', requirements:['id'=>'\d+'])]
-    public function test(Reservation $reservation){   
+    public function test(Reservation $reservation)
+    {   
         return $this->render('reservation/test.html.twig',[
             'reservation'=>$reservation]
     );

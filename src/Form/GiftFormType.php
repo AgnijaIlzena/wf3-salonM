@@ -53,9 +53,9 @@ class GiftFormType extends AbstractType
             ->add('message', TextareaType::class)
             
             ->add('save', SubmitType::class, [
-                'label' => 'Next',
+                'label' => 'Commander',
                 'attr' => [
-                    'class' => 'btn btn-outline-primary',
+                    'class' => 'btn-design',
                     'submit' => 'app_pdf'
                 ]
             ]);

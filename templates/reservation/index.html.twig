@@ -99,15 +99,17 @@
                             <button type="button" class="btn btn-primary mt-3 book">Réserver</a></button>
 
                         </section>
-                    {{ form_end(form)}}
-                </section>
+                       
+                    {{ form_end(form)}} 
+
+                    <div>
+                        <a class="btn-design mb-5" href="{{ path('app_checkout', { id: massage.id }) }}">
+                            payer
+                        </a> 
+                    </div>                                 
+                </section>           
             </div>
         </div>
-
-
-
-
-
     </div>
 
     {{ include('component/_footer.html.twig') }}
