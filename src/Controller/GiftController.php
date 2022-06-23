@@ -33,9 +33,9 @@ class GiftController extends AbstractController
             $gift->setMassage($massage);
             $giftRepository->add($gift, true);
 
-            $this->addFlash('succesful', 'Your gift has been added well , time to pay !');
+            $this->addFlash('succesful', 'Your gift has been added, time to pay !');
 
-            return $this->redirectToRoute('app_checkout_gift', ['id' => $gift->getId(), 'gift' => 'gift']);
+            return $this->redirectToRoute('app_checkout_gift', ['id' => $gift->getId(), 'cadeau' => 'cadeau']);
         }
 
         return $this->render('gift/gift.html.twig', [

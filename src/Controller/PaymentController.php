@@ -3,11 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Gift;
-use App\Entity\Massage;
 use App\Entity\Reservation;
-use App\Repository\MassageRepository;
+use App\Entity\Massage;
 use App\Repository\ReservationRepository;
 use App\Repository\GiftRepository;
+use App\Repository\MassageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -50,7 +50,7 @@ class PaymentController extends AbstractController
         'mode' => 'payment',
         'success_url' => $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
         'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
-        'metadata'                    => [
+        'metadata' => [
           'reservation_id' => $reservation->getId(),
       ]
       ]);
@@ -78,7 +78,7 @@ class PaymentController extends AbstractController
 
 // add gift variable in route and further
 // connect with gift controller as it was with reservations (redirect to route)
-    #[Route('/checkout/{id}/{gift}', name: 'app_checkout_gift', requirements: ['id' => '\d+'])]
+    #[Route('/checkout/{id}/{cadeau}', name: 'app_checkout_gift', requirements: ['id' => '\d+'])]
     public function checkoutGift(Gift $gift, $stripeSK ): Response
     {
 
@@ -100,15 +100,15 @@ class PaymentController extends AbstractController
         'mode' => 'payment',
         'success_url' => $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
         'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
-        'metadata'                    => [
-          'reservation_id' => $gift->getId(),
+        'metadata' => [
+          'gift_id' => $gift->getId(),
       ]
       ]);
 
       return $this->redirect($session->url, 303, [
         
-        'reservation' => $reservation,
         'gift' => $gift,
+        'cadeau' => 'cadeau',
       ]);
     }
 
