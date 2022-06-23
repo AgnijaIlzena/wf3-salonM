@@ -1,4 +1,4 @@
-const elementsForAjax = document.querySelectorAll('.ajax');
+const buttons = document.querySelectorAll('.ajax');
 const calendarSection = document.querySelector('.calendar');
 const timeslotsSection = document.querySelector('.timeslots');
 const formSection = document.querySelector('.form');
@@ -14,20 +14,24 @@ const massageText = document.querySelector('.massage');
 const book = document.querySelector('.book');
 const next = document.querySelector('.next');
 
-const calendarBtn = document.querySelector('.calendarBtn');
+const calendarTop = calendarSection.getBoundingClientRect();
 
-calendarBtn.forEach(el=>{
-    el.addEventListener('click',()=>{
-        const params = new Proxy(new URLSearchParams(window.location.search), {
-            get: (searchParams, prop) => searchParams.get(prop),
-          });
-          // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-          let value = params.some_key; // "some_value"
+
+// scroll jusqu'au calendrier si clic sur un des btn mois suivant, 
+// mois ou mois précédent ou mois en cours
+const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  });
+
+  let value = params.calendar;
+  if(value == 1){
+    calendarSection.style.display = 'block';
+    window.scrollTo(0,calendarTop.top);
+  }
           
-    })
-})
 
-elementsForAjax.forEach(el=>{
+
+buttons.forEach(el=>{
     el.addEventListener('click', (e) => {
         let reservation = JSON.parse(localStorage.getItem('reservation'))||{};
 
@@ -36,6 +40,7 @@ elementsForAjax.forEach(el=>{
         if(e.target.classList == 'card-text' || e.target.classList == 'massagist-photo-profile' 
         || e.target.classList == 'card-title' || e.target.classList == 'card-body'){
             calendarSection.style.display = 'block';
+            window.scrollTo(0,1584);
 
             // remplissage du localstorage - massagist 
             let massagistId = el.dataset.massagistId;
@@ -47,7 +52,7 @@ elementsForAjax.forEach(el=>{
         // clic sur  calendrier -> timeSlot
         if(e.target.classList == 'date' || e.target.classList[1] == 'date'){
             timeslotsSection.style.display = 'block';
-
+            window.scrollTo(0,1850);
             // remplissage du localstorage - date
             let date = el.dataset.date;
             reservation.date = date;
@@ -56,6 +61,7 @@ elementsForAjax.forEach(el=>{
         // clic sur  timeSlot -> form infos client
         if(e.target.classList[4]=='timeSlot'){
             formSection.style.display = 'block';
+            window.scrollTo(0,2200);
 
             // remplissage du localstorage - timeSlot
             let timeslot = el.dataset.timeslot;
@@ -73,6 +79,7 @@ elementsForAjax.forEach(el=>{
         // clic sur  btn 'suivant' -> summary 
         if(e.target.classList[3]=='next'){
             summary.style.display = 'block';
+            window.scrollTo(0,2600);
             next.style.display = 'none';
 
             // résumé
@@ -89,7 +96,7 @@ elementsForAjax.forEach(el=>{
 })
 
 // inputs
-elementsForAjax.forEach(el=>{
+buttons.forEach(el=>{
     el.addEventListener('change', (e) => {
 
     // remplissage du localstorage - infos client
