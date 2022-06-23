@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\MassageRepository;
+use App\Entity\Massage;
 use App\Repository\GiftRepository;
 use App\Entity\user;
 use App\Entity\Gift;
