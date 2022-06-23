@@ -30,3 +30,6 @@ composer.lock
 ###> liip/imagine-bundle ###
 /public/media/cache/
 ###< liip/imagine-bundle ###
+
+/public/giftPdf.pdf
+/public/giftPdf.pdf

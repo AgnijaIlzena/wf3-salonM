@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\MassageRepository;
+use App\Entity\Massage;
 use App\Repository\GiftRepository;
 use App\Entity\user;
 use App\Entity\Gift;
@@ -99,7 +100,6 @@ public function __construct(ParameterBagInterface $parameterBag)
 
         // Render the HTML as PDF
         $dompdf->render();
-
 
         // Store PDF Binary Data
         $output = $dompdf->output();

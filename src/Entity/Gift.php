@@ -32,6 +32,12 @@ class Gift
     #[ORM\JoinColumn(nullable: false)]
     private $massage;
 
+    #[ORM\OneToOne(targetEntity: Payement::class, cascade: ['persist', 'remove'])]
+    private $payment;
+
+    // #[ORM\Column(type: 'date')]
+    // private $date;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -108,4 +114,28 @@ class Gift
 
         return $this;
     }
+
+    public function getPayment(): ?Payement
+    {
+        return $this->payment;
+    }
+
+    public function setPayment(?Payement $payment): self
+    {
+        $this->payment = $payment;
+
+        return $this;
+    }
+
+    // public function getDate(): ?\DateTimeInterface
+    // {
+    //     return $this->date;
+    // }
+
+    // public function setDate(\DateTimeInterface $date): self
+    // {
+    //     $this->date = $date;
+
+    //     return $this;
+    // }
 }
