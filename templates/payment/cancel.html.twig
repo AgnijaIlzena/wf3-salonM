@@ -2,21 +2,19 @@
 
 {% block title %}Payment Fail!{% endblock %}
 
-{% block stylesheets %}
-    {{parent()}}
-    <link rel="stylesheet" href="/css/style.css">
-{% endblock %}
-
 {% block body %}
     {{parent()}}
 
-<h1>Thanks for your attempted order!</h1>
-    <p>
-      We would appreciate your business!
-     Your payment failed !
-      <a href="mailto:orders@example.com">failures@example.com</a>.
-    </p>
+<div class="text-center cancel">
+    <h1>Merci pour votre tentative de commande !</h1>
+    <h3>  Votre paiement a échoué !  </h3>
+        <p>     
+        En cas de questions, veuillez nous contacter par e-mail:
+        <a href="mailto:orders@example.com">failures@example.com</a>.
+        </p>
 
-    <a class="btn-design" href="{{ path('app_home') }}">retour à accueil</a>
-
+        <a class="btn-design" href="{{ path('app_home') }}">retour à accueil</a>
+</div>
 {% endblock %}
+
+
