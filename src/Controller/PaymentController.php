@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PaymentController extends AbstractController
@@ -29,7 +30,6 @@ class PaymentController extends AbstractController
     public function checkout(Reservation $reservation, $stripeSK ): Response
     {
 
-      // dd($reservation->getMassagist()->getName());
        Stripe::setApiKey($stripeSK);
        
        $serviceDetails = $reservation->getMassage()->getName() .' le '. $reservation->getDate() .' à '. $reservation->getTimeSlot();
@@ -48,11 +48,12 @@ class PaymentController extends AbstractController
           'quantity' => 1,
         ]],
         'mode' => 'payment',
-        'success_url' => $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
+        'success_url' => $this->generateUrl('success_url', ['id' => $reservation->getId()], UrlGeneratorInterface::ABSOLUTE_URL),
         'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
         'metadata' => [
           'reservation_id' => $reservation->getId(),
       ]
+      
       ]);
 
       return $this->redirect($session->url, 303, [
@@ -61,19 +62,7 @@ class PaymentController extends AbstractController
       ]);
     }
 
-    #[Route('/success-url', name: 'success_url')]
-    public function successUrl(): Response
-    {
-        return $this->render('payment/success.html.twig', [     
-        ]);
-    }
 
-    #[Route('/cancel-url', name: 'cancel_url')]
-    public function cancelUrl(): Response
-    {
-        return $this->render('payment/cancel.html.twig', [     
-        ]);
-    }
 
 
 // add gift variable in route and further
@@ -98,7 +87,7 @@ class PaymentController extends AbstractController
           'quantity' => 1,
         ]],
         'mode' => 'payment',
-        'success_url' => $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
+        'success_url' => $this->generateUrl('success_url', ['id' => $gift->getId()], UrlGeneratorInterface::ABSOLUTE_URL),
         'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
         'metadata' => [
           'gift_id' => $gift->getId(),
@@ -109,7 +98,29 @@ class PaymentController extends AbstractController
         
         'gift' => $gift,
         'cadeau' => 'cadeau',
+    
       ]);
+    }
+
+
+    #[Route('/success-url', name: 'success_url')]
+    public function successUrl(Request $request): Response
+    {
+        $idGift = $request->query->get('id');
+        $idReserve = $request->query->get('id');
+
+
+        return $this->render('payment/success.html.twig', [ 
+          'idGift' => $idGift,   
+          'idReserve' => $idReserve,  
+        ]);
+    }
+
+    #[Route('/cancel-url', name: 'cancel_url')]
+    public function cancelUrl(): Response
+    {
+        return $this->render('payment/cancel.html.twig', [     
+        ]);
     }
 
 
