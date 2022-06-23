@@ -35,8 +35,11 @@ class Gift
     #[ORM\OneToOne(targetEntity: Payement::class, cascade: ['persist', 'remove'])]
     private $payment;
 
-    // #[ORM\Column(type: 'date')]
-    // private $date;
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    private $date;
+
+   
+
 
     public function getId(): ?int
     {
@@ -127,15 +130,19 @@ class Gift
         return $this;
     }
 
-    // public function getDate(): ?\DateTimeInterface
-    // {
-    //     return $this->date;
-    // }
+    public function getDate(): ?\DateTimeImmutable
+    {
+        return $this->date;
+    }
 
-    // public function setDate(\DateTimeInterface $date): self
-    // {
-    //     $this->date = $date;
+    public function setDate(?\DateTimeImmutable $date): self
+    {
+        $this->date = $date;
 
-    //     return $this;
-    // }
+        return $this;
+    }
+
+   
+
+  
 }

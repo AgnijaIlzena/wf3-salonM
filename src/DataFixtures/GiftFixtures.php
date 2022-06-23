@@ -6,6 +6,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Gift;
 use App\Entity\Massage;
+use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 class GiftFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -13,13 +14,16 @@ class GiftFixtures extends Fixture implements DependentFixtureInterface
     {
         for($i = 0; $i < 6; $i++) {
 
-        
+            $number = rand(1, 500);
+            $date = new DateTimeImmutable();
+            $randDate = $date->modify("+$number day");
+           
             $gift = new Gift();
             $gift->setSender("sender_$i");
             $gift->setReceiver("receiver_$i");
             $gift->setSenderEmail("sender_email_$i");
             $gift->setReceiverEmail("recevier_email_$i");
-           
+            $gift->setDate($randDate);
             $gift->setMessage("message_$i");
 
             $gift->setMassage($this->getReference("massage_".rand(0, 6)));
