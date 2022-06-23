@@ -29,7 +29,7 @@ class GiftController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $gift->setDate(new DateTimeImmutable());
+            $gift->setDate(new DateTimeImmutable);
             $gift->setMassage($massage);
             $giftRepository->add($gift, true);
 
