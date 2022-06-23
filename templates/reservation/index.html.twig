@@ -3,10 +3,6 @@
 {# Nom du massage à ajouter #}
 {% block title %}Réservation{% endblock %}
 
-{% block stylesheets %}
-    {{parent()}}
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
-{% endblock %}
 
 {% block javascripts %}
     {{parent()}}
@@ -65,9 +61,6 @@
                 <section class="timeslots mb-5">
                     <h3>Choisir un créneau horaire</h3>
 
-                    {# <h1 class="text-center">Book for Date: <?= date('Y/m/d', strtotime($date)) ?></h1> #}
-                    {# <?= isset($msg) ? $msg : "" ?> #}
-
                     <!-- affichage des times slots -->
                     {% for timeSlot in timeSlots|raw %}
                         <button class="btn btn-primary mb-4 ajax timeSlot" data-timeslot="{{timeSlot}}">{{timeSlot}}</button>
@@ -80,19 +73,19 @@
                     {{ form_start(form) }}
                         <p>{{form_label(form.lastname)}}</p>
                         <p class="ajax">{{form_widget(form.lastname)}}</p>
-                        <p>{{form_errors(form.lastname)}}</p>
+                        <div class="alert alert-danger" role="alert">Nom de famille obligatoire</div>
 
                         <p>{{form_label(form.firstname)}}</p>
                         <p class="ajax" >{{form_widget(form.firstname)}}</p>
-                        <p>{{form_errors(form.firstname)}}</p>
+                        <div class="alert alert-danger" role="alert">Prénom obligatoire</div>
                         
                         <p>{{form_label(form.email)}}</p>
                         <p class="ajax" >{{form_widget(form.email)}}</p>
-                        <p>{{form_errors(form.email)}}</p>
+                        <div class="alert alert-danger" role="alert">Email obligatoire</div>
 
                         <p>{{form_label(form.telephone)}}</p>
                         <p class="ajax">{{form_widget(form.telephone)}}</p>
-                        <p>{{form_errors(form.telephone)}}</p>
+                        <div class="alert alert-danger" role="alert">Numéro de téléphone obligatoire</div>
                         
                         <button class="btn btn-primary mt-3 next ajax " type="button">Suivant</button>
 
@@ -103,17 +96,20 @@
                             <p class="summary-massagist">Masseur: </p>
                             <p class="summary-date">Date et horaire: </p>
                             <p class="summary-price">Prix: </p>
-                            <button type="button" class="btn btn-primary mt-3 book">Réserver</button>
+                            <button type="button" class="btn btn-primary mt-3 book">Réserver</a></button>
+
                         </section>
-                    {{ form_end(form)}}
-                </section>
+                       
+                    {{ form_end(form)}} 
+
+                    <div>
+                        <a class="btn-design mb-5" href="{{ path('app_checkout', { id: massage.id }) }}">
+                            payer
+                        </a> 
+                    </div>                                 
+                </section>           
             </div>
         </div>
-
-
-
-
-
     </div>
 
     {{ include('component/_footer.html.twig') }}

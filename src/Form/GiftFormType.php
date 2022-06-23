@@ -14,8 +14,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Email;
 
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-
 class GiftFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -41,11 +39,8 @@ class GiftFormType extends AbstractType
                     ])
                 ]
             ])
-
-        
             ->add('receiver_email', EmailType::class, [
-                'label' => "E-mail du destinataire
-                ",
+                'label' => "E-mail du destinataire",
                 'constraints' => [
                     new Email([
                         'message' => 'Cette adresse email est invalide'
@@ -55,9 +50,7 @@ class GiftFormType extends AbstractType
                     ])
                 ]
             ])
-            ->add('message', TextareaType::class)
-            // ->add('massage_id', HiddenType::class)
-            
+            ->add('message', TextareaType::class)            
             ->add('save', SubmitType::class, [
                 'label' => 'suivant',
                 'attr' => [
@@ -71,6 +64,7 @@ class GiftFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Gift::class,
+            "allow_extra_fields" => true
         ]);
     }
 }

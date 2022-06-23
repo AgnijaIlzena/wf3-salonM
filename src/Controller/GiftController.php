@@ -20,28 +20,26 @@ use DateTimeImmutable;
 class GiftController extends AbstractController
 {
    
-        #[Route('/gift/{id}', name: 'app_gift' , requirements:["id"=>"\d+"]) ]
-        #[Entity('gift', expr: 'repository.find(massage_id)')]
-        public function new(GiftRepository $giftRepository, MassageRepository $massageRepository, Massage $massage,  Request $request): Response
-        {
+    #[Route('/gift/{id}', name: 'app_gift' , requirements:["id"=>"\d+"]) ]
+    public function new(Massage $massage, GiftRepository $giftRepository, Request $request): Response
+    {
         $gift = new Gift();
 
-
         $form = $this->createForm(GiftFormType::class, $gift);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $gift->setDate(new DateTimeImmutable());
+            // $gift->setDate(new DateTimeImmutable());
+            $gift->setMassage($massage);
             $giftRepository->add($gift, true);
 
             $this->addFlash('succesful', 'Your gift has been added well , time to pay !');
 
-            return $this->redirectToRoute('app_gift');
+            return $this->redirectToRoute('app_checkout_gift', ['id' => $gift->getId(), 'gift' => 'gift']);
         }
 
         return $this->render('gift/gift.html.twig', [
-            'form' => $form-> createView(),
+            'form' => $form->createView(),
             'massage'=>$massage,
         ]);
     }

@@ -4,26 +4,9 @@ namespace App\Service;
 
 
 class CalendarService{
-    // function checkSlots($mysqli, $date){
-    //     $stmt = $mysqli->prepare('SELECT * FROM bookings WHERE date=?');
-    //     $stmt->bind_param('s',$date);
-    //     $totalBookings = 0;
-    //     if($stmt->execute()){
-    //         $result = $stmt->get_result();
-    //         if($result->num_rows>0){
-    //             while($row = $result->fetch_assoc()){
-    //                 $totalBookings++;
-    //             }
-    //             $stmt->close();
-    //         }
-    //     }
-    //     return $totalBookings;
-    // }
+
     function build_calendar($month, $year, $reservationRepository){
 
-        // $mysqli = new mysqli('localhost','root','','salon');
-        
-    
         $daysOfWeek = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
         $daysOfMonth = [1=>'Janvier','Février','Mars','Avril','Mai','Juin',
         'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
@@ -61,9 +44,9 @@ class CalendarService{
         $calendar = "<table class = 'table table-bordered'>";
         $calendar.="<div class ='text-center'><h2>$monthName $year</h2></div>";
         $calendar.= "<div class='buttons d-flex justify-content-between w-50 mx-auto my-3'>
-                    <a class='btn btn-primary btn-xs' href='?month=$prev_month&year=$prev_year' >Mois précédent</a>";
-        $calendar.= "<a class='btn btn-primary btn-xs' href='?month=".date('m')."&year=".date('Y')."' >Mois en cours</a></center>";
-        $calendar.= "<a class='btn btn-primary btn-xs' href='?month=$next_month&year=$next_year' >Mois suivant</a>
+                    <a class='btn btn-primary btn-xs' href='?month=$prev_month&year=$prev_year&calendar=1'>Mois précédent</a>";
+        $calendar.= "<a class='btn btn-primary btn-xs' href='?month=".date('m')."&year=".date('Y')."&calendar=1'>Mois en cours</a></center>";
+        $calendar.= "<a class='btn btn-primary btn-xs' href='?month=$next_month&year=$next_year&calendar=1'>Mois suivant</a>
                     </div>";
         $calendar.= "<thead><tr>";
     
@@ -104,15 +87,13 @@ class CalendarService{
             $totalBookings = nombre de réservation total possible par jour*/
 
             if($dayName !='sunday' && $date>=date('Y-m-d') && $totalBookings<9){
-                $calendar .= "<td class='$classToday'><button class='ajax date' data-date=$date>
-                <h4 class='date'>$currentDay</h4></button></td>";
+                $calendar .= "<td class='$classToday' id='dateTd'><button class='ajax date' data-date=$date>
+                <h4 class='date'><a href='?date=$date'>$currentDay</h4></button></td>";
             }
             else{
                 $calendar .= "<td class='$classToday'><h4>$currentDay</h4></td>";
             }
             
-            
-    
             // on incrémente les compteurs
             $currentDay++;
             $dayOfWeek++;
@@ -128,6 +109,7 @@ class CalendarService{
     $calendar.= "</tr></body></table>";
     return $calendar;
     }
+    
     
     
 

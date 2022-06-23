@@ -7,11 +7,13 @@
     --grey-btn: rgb(231, 232, 236,0.4);
     --grey-border:rgb(215, 213, 213);
     --summary:rgba(24, 134, 197, 0.6);
-    --today: yellow;
+    --today: rgb(243, 178, 11);
+    --black: black;
 
     --sky-blue-crayola: #6fd2e5ff;
     --white: #fcf7f8ff;
     --text-color: #0e273cff;
+    --blue-secondary: #112E47;
     --ruby-red: #a31621ff;
     --grey: #7f7b82ff;
     --raisin-black: #191923ff;
@@ -98,7 +100,7 @@ p {
     position: absolute;
     top: 30%;
     left: 15rem;
-    width: 10%;
+    width: 20%;
     font-size: 4rem;
     line-height: 1.2;
     z-index: 1;
@@ -123,7 +125,7 @@ p {
     transition: 0.5s;    
 }
 
-.intro-text button {
+.intro-text a {
     position: absolute;
     top: 75%;
     left: 15rem;
@@ -165,7 +167,7 @@ p {
 }
 
 .btn-massage {
-    padding: 0.5rem 0; 
+    padding: 0.5rem 2rem; 
     width: 40%;    
 }
 
@@ -187,14 +189,39 @@ p {
 }
 
 /* Reservation */
-/* on n'affiche pas les différentes parties de la réservation,
-elles s'afficheront au clic sur la section précédente
- */
 
- .calendar, .timeslots, .form, .summary{
+.calendar, .timeslots, .form, .summary, .alert-danger{
     display: none;
  }
 
+.date{
+    background: none;
+    width: 100%;
+    height: 100%;
+	color: inherit;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+ }
+ .today{
+    background-color: var(--today)!important;
+}
+ #dateTd{
+    background-color: var(--sky-blue-crayola);
+ }
+ #dateTd:hover, .today:hover{
+    color:var(--white);
+    background-color: var(--text-color)!important;
+ }
+.btn-primary{
+    background-color: var(--sky-blue-crayola)!important;
+    color: var(--black);
+    border:none;
+}
+.btn-primary:hover{
+    background-color: var(--text-color)!important;
+}
 .summary{
     width: 400px;
     padding: 15px;
@@ -228,9 +255,57 @@ elles s'afficheront au clic sur la section précédente
     background: var(--grey-btn); 
     transition: 0.5s;
 }
-.today{
-    background-color: var(--today);
+
+/* Gift Card */
+
+.gift-title {
+    font-family: var(--title-font);
+    font-size: 3rem;
 }
+
+.gift-subtitle {
+    font-family: var(--title-font);
+    line-height: 1.4;
+    font-size: 1.3rem;
+    
+}
+
+/* contact us */
+
+.contact-triger {
+    font-size: 2rem;
+    font-family: var(--title-font);
+    text-decoration: none;
+    color: var(--white);
+    padding: 20px 0;
+    margin: 0;
+    transition: 0.5s;      
+}
+
+.contact-triger:hover {
+    color: var(--grey);
+    transition: 0.5s;
+}
+
+.contact-collapse {
+    color: var(--blue-secondary);
+}
+
+#contact {
+    background-color: var(--blue-secondary);
+}
+
+.contact-top {
+    height: 5vh;
+    text-align: center;
+}
+
+.contact.card {
+    background-color: var(--blue-secondary);
+    border-color: var(--blue-secondary);
+    height: 400px;
+}
+
 
 /* footer */
 
@@ -246,12 +321,127 @@ footer .contact-us, .hours{
 .adress, .social {
     font-size: 1.2rem;
     color: var(--white) ;
+    transition: 0.5s;
+}
+
+.social:hover {
+    color: var(--ruby-red);
+    transition: 0.5s;
 }
 
 .hours-time {
     color: var(--white);
     font-size: 1.1rem;
 }
+
+/* modal */
+
+/* Modal Background */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: var(--text-color);
+    opacity: 0.95;
+    margin: 10% auto; /* 15% from the top and centered */
+    padding: 20px;
+    width: 60%; /* Could be more or less, depending on screen size */
+  }
+
+  .modal-img {
+    /* background-size: cover;  */
+    width: 100%;
+  }
+
+  .modal-price {
+    color: var(--white);
+    font-family: var(--text-font);
+  }
+
+  .modal-descr {
+    color: var(--white);
+    font-family: var(--text-font);
+    text-justify: auto;
+  }
+
+  .modal-title {
+    color: var(--white);
+    font-family: var(--title-font);
+    font-size: 2.5rem;
+  }
+
+  .btn-modal {
+    padding: 0.5rem 4rem; 
+  }
+
+  .btn-modal:hover {
+    border: 0.1rem solid var(--white);
+  }
+
+  .btnDetails {
+    background-color: transparent;
+    border: none;
+    color: var(--text-color);
+    font-weight: 700;
+    letter-spacing: 5px;
+  }
+
+  .btnDetails:hover {
+    color: var(--ruby-red);
+    transition: 0.5s;
+  }
+ 
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .success, .cancel {
+    margin-top: 5rem;
+
+  }
+  .success h1, .cancel h1 {
+    font-size: 2rem;
+    font-family: var(--title-font);
+  }
+
+  .cancel h3 {
+    font-size: 1.2rem;
+    font-family: var(--title-font);
+    color:var(--ruby-red);
+  }
+
+  .success p,  .cancel p {
+    font-size: 1rem;
+    font-family: var(--text-font);
+    margin-bottom: 4rem;
+  }
+
+  .success a, .cancel a {
+    padding: 0.5rem 2rem;
+   
+  }
 
 
 

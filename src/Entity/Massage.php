@@ -6,10 +6,16 @@ use App\Repository\MassageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File as FileFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Stringable;
+
+
 use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: MassageRepository::class)]
-class Massage
+#[Vich\Uploadable] 
+class Massage implements Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -36,6 +42,10 @@ class Massage
     }
     #[ORM\Column(type: 'integer')]
     private $price;
+
+
+    // #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    // private $cover = '';
 
     public function getPrice(): ?int
     {
@@ -65,6 +75,9 @@ class Massage
     }
     
 
+    #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'cover')]
+    private ?FileFile $file = null;
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -140,5 +153,30 @@ class Massage
         }
 
         return $this;
+    }
+
+    /**
+     * Get the value of file
+     */ 
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Set the value of file
+     *
+     * @return  self
+     */ 
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;       
     }
 }
