@@ -63,4 +63,15 @@ class ReservationRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+   public function findTimeSlotByDate($value): ?array
+   {
+       return $this->createQueryBuilder('r')
+            ->select('r.timeslot')
+           ->andWhere('r.date = :val')
+           ->setParameter('val', $value)
+           ->getQuery()
+           ->getArrayResult()
+       ;
+   }
 }

@@ -17,7 +17,7 @@ use App\Repository\MassagistRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\MassageRepository;
-use App\Controller\PDO;
+
 
 class ReservationController extends AbstractController
 {   
@@ -28,7 +28,8 @@ class ReservationController extends AbstractController
         CalendarService $calendarService, 
         TimeSlotsService $timeSlotsService, 
         ReservationRepository $reservationRepository,
-        MassagistRepository $massagistRepository
+        MassagistRepository $massagistRepository,
+        Request $request
         
         ): Response
     {   
@@ -41,6 +42,7 @@ class ReservationController extends AbstractController
         if(isset($_GET['month']) && isset($_GET['year'])){
            $month = +$_GET['month'];
            $year = $_GET['year'];
+           dump($year);
         }
         else{
            $month = $dateComponents['mon'];
@@ -56,7 +58,19 @@ class ReservationController extends AbstractController
         $start = "09:00";
         $end = "18:00";
 
-        $timeSlots = $timeSlotsService->timeslots($duration, $cleanUp, $start, $end);
+        // date récupérée dans l'url au clic
+        $date = $request->query->get('date');
+        // créneaux réservés en bdd
+        $timeSlotsBooked = $reservationRepository->findTimeSlotByDate($date);
+        foreach ($timeSlotsBooked as $ts) {
+            $timeSlotsBookedClean[]=$ts['timeslot'];
+        }
+   
+        // tous les créneaux disponibles 
+        $timeSlotsArray = $timeSlotsService->timeslots($duration, $cleanUp, $start, $end);
+        
+        // Filtrer les résultats pour garder seulement les créneaux horaires disponibles
+        $timeSlotsFiltered = array_diff($timeSlotsArray, $timeSlotsBookedClean);
 
 
         //  on déclare un objet vide, que l'on remplira par la suite
@@ -66,7 +80,7 @@ class ReservationController extends AbstractController
         
         return $this->render('reservation/index.html.twig',[
             'calendar'=>$calendar,
-            'timeSlots'=>$timeSlots,
+            'timeSlots'=>$timeSlotsFiltered,
             'massagists'=>$massagists,
             'massage'=>$massage,
             'form'=>$form->createView()

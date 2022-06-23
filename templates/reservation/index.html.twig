@@ -61,9 +61,6 @@
                 <section class="timeslots mb-5">
                     <h3>Choisir un créneau horaire</h3>
 
-                    {# <h1 class="text-center">Book for Date: <?= date('Y/m/d', strtotime($date)) ?></h1> #}
-                    {# <?= isset($msg) ? $msg : "" ?> #}
-
                     <!-- affichage des times slots -->
                     {% for timeSlot in timeSlots|raw %}
                         <button class="btn btn-primary mb-4 ajax timeSlot" data-timeslot="{{timeSlot}}">{{timeSlot}}</button>
