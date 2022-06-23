@@ -111,7 +111,7 @@ class ReservationController extends AbstractController
     }
     #[Route('/payement', name: 'payement')]
     public function test(ReservationRepository $reservationRepository){   
-        $lastInsertId = 
+        
         return $this->render('reservation/test.html.twig');
     }
 }

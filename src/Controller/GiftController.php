@@ -13,22 +13,36 @@ use App\Repository\GiftRepository;
 use App\Repository\UserRepository;
 use App\Repository\MassageRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use DateTimeImmutable;
 
 
 class GiftController extends AbstractController
 {
    
-        #[Route('/gift', name: 'app_gift')]
-        public function new(GiftRepository $giftRepository, MassageRepository $massageRepository,  Request $request): Response
+        #[Route('/gift/{id}', name: 'app_gift' , requirements:["id"=>"\d+"]) ]
+        #[Entity('gift', expr: 'repository.find(massage_id)')]
+        public function new(GiftRepository $giftRepository, MassageRepository $massageRepository, Massage $massage,  Request $request): Response
         {
         $gift = new Gift();
 
 
         $form = $this->createForm(GiftFormType::class, $gift);
 
-        return $this->renderForm('gift/gift.html.twig', [
-            'form' => $form,
-            'massages' => $massageRepository->findAll()
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $gift->setDate(new DateTimeImmutable());
+            $giftRepository->add($gift, true);
+
+            $this->addFlash('succesful', 'Your gift has been added well , time to pay !');
+
+            return $this->redirectToRoute('app_gift');
+        }
+
+        return $this->render('gift/gift.html.twig', [
+            'form' => $form-> createView(),
+            'massage'=>$massage,
         ]);
     }
 }
