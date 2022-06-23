@@ -30,7 +30,7 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
             $reservation->setFirstname($faker->firstName);
             $reservation->setEmail($faker->email);
             $reservation->setTelephone($faker->phoneNumber);
-            $reservation->setMassagist($this->getReference("massagist_".rand(0,4)));
+            $reservation->setMassagist($this->getReference("massagist_".rand(0,2)));
             $reservation->setMassage($this->getReference("massage_".rand(0,6)));
 
             $manager->persist($reservation);
