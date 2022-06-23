@@ -4,40 +4,34 @@
 {% endblock %}
 
 {% block body %}
-  {{ include('component/_navbar.html.twig') }}
+	{{ include('component/_navbar.html.twig') }}
 	<div>
 		<div class="row  w-50 m-auto py-5">
-			
 			<div class="col">
-
-	           
-
-				<div class="py-3">			
-
-						{{ massage.name }}
-						</div>
-						<div class="py-3">
-							{{ massage.description }}
-						</div>
-						<div class="py-3">
-							{{ massage.price}} &euro;
-						</div>
-						<div class="py-3">
-						<img src="{{asset('images/'~ massage.cover)|imagine_filter('vignette')}}" alt="picture">
-						</div>
-					
+				<div class="py-3 pt-5 m-auto fs-2 fw-bold text-center">
+					{{ massage.name }}
+				</div>
+				<div class="py-3 m-auto fs-5 fw-bold text-center">
+					{{ massage.description }}
+				</div>
+				<div class="py-3 m-auto text-center fs-3 fw-bold"><span class="text-dark">
+					{{ massage.price}}
+					&euro;
+				</div></span>
+				<div class="py-3 d-flex align-items-center justify-content-center m-auto">
+					<img src="{{asset('images/'~ massage.cover)|imagine_filter('vignette')}}" alt="picture">
 				</div>
 
-				<div>
+			</div>
+
+			<div>
+			
 				<h3 class="gift-title py-5 text-center">Créez votre bon cadeau</h3>
-				<h5 class="gift-subtitle pb-5">You want to offer a relaxing massage for a moment of well-being on the occasion of an anniversary or a special occasion like Valentine's day, Christmas Offer a gift voucher for a Relaxing Massage. 🎁</h5>
+				<h5 class="gift-subtitle pb-5 text-center fw-bold ">Vous souhaitez offrir un massage relaxant pour un moment de bien-être à l'occasion d'un anniversaire ou d'une occasion particulière comme la Saint Valentin, Noël Offrez un bon cadeau pour un rassage relaxant. 🎁</h5>
 				{{ form(form)}}
-				{# the attribute not to use now , just to copy the path after the payment button works #}
-				    <a href="{{ path('app_pdf') }}">pdf</a>
-					{#  #}
 				</div>
 
 			</div>
 		</div>
-	{{ include('component/_footer.html.twig') }}
-{% endblock %}
+		{{ include('component/_footer.html.twig') }}
+	{% endblock %}
