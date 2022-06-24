@@ -2,12 +2,8 @@
 
 {% block title %}Payment Success!{% endblock %}
 
-
-
 {% block body %}
-    {{parent()}}
-
-
+ 
 <div class="text-center success">
     <h1>Merci pour votre commande!</h1>
       <p>
@@ -17,10 +13,5 @@
 
     <a class="btn-design" href="{{ path('app_home') }}">retour à accueil</a>
   </div>
-
-
-<pre>
-    {{ dump(idGift) }}
-</pre>
 
 {% endblock %}
