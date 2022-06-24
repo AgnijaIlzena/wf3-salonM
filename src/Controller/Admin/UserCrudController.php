@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use Symfony\Component\Form\AbstractType;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -22,14 +23,13 @@ class UserCrudController extends AbstractCrudController
     
     public function configureFields(string $pageName): iterable
     {
-            yield IdField::new(propertyName:'ID')->hideOnForm();
-            yield EmailField::new(propertyName: 'email', label: 'Email');
-            yield TextField::new(propertyName: 'password', label: 'Mot de passe');
-            //yield TextField::new('password')->setFormType(PasswordType::class);
-            yield TextField::new(propertyName: 'lastName', label: 'Nom');
-            yield TextField::new(propertyName: 'firstName', label: 'Prénom');
-            yield ArrayField::new(propertyName: 'roles', label: 'Rôle')->onlyOnForms();
-            yield ArrayField::new(propertyName: 'roles[0]', label: 'Rôle')->hideOnForm();
+        yield IdField::new(propertyName:'id')->hideOnForm();
+        yield EmailField::new(propertyName: 'email', label: 'Email');
+        yield TextField::new(propertyName: 'password', label: 'Mot de passe');
+        yield TextField::new(propertyName: 'lastName', label: 'Nom');
+        yield TextField::new(propertyName: 'firstName', label: 'Prénom');
+        yield ArrayField::new(propertyName: 'roles', label: 'Rôle');
+        // yield ArrayField::new(propertyName: 'roles[0]', label: 'Rôle')->hideOnForm();
     }
 
     public function configureCrud(Crud $crud): Crud

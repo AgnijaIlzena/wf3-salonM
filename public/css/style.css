@@ -4,7 +4,7 @@
     --title-font: 'Libre Baskerville', serif;
     --text-font: 'Source Sans Pro', sans-serif; 
   
-    --grey-btn: rgb(231, 232, 236,0.4);
+    --grey-btn: rgb(231, 232, 236,0.6);
     --grey-border:rgb(215, 213, 213);
     --summary:rgba(24, 134, 197, 0.6);
     --today: rgb(243, 178, 11);
@@ -215,10 +215,11 @@ p {
  #dateTd{
     background-color: var(--sky-blue-crayola);
  }
- .dateLink{
+ .dateLink, .massagistLink{
     text-decoration: none;
     color:var(--black);
 }
+
 
 #dateTd:hover, #dateTd:hover .dateLink, .today:hover{
     color:var(--white)!important;
@@ -261,8 +262,10 @@ p {
     transition: 0.5s;
 }
 
-.btn-card:hover{
+
+.btn-card:hover, .btn-card:hover .massagistLink{
     background: var(--grey-btn); 
+    color: var(--black);
     transition: 0.5s;
 }
 

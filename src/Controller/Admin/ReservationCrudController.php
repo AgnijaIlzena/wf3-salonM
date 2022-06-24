@@ -27,8 +27,8 @@ class ReservationCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
 
-            yield IdField::new(propertyName:'ID')->hideOnForm();
-            yield DateField::new(propertyName: 'date', label: 'Date');
+            yield IdField::new(propertyName:'id')->hideOnForm();
+            yield TextField::new(propertyName: 'date', label: 'Date');
             yield EmailField::new(propertyName: 'email', label: 'Email');
             yield TextField::new(propertyName: 'lastname', label: 'Nom');
             yield TextField::new(propertyName: 'firstname', label: 'Prénom');

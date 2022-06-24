@@ -15,13 +15,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class MassageController extends AbstractController
 {
-    // #[Route('/massage', name: 'app_massage')]
-    // public function index(): Response
-    // {
-    //     return $this->render('massage/index.html.twig', [
-    //         'controller_name' => 'MassageController',
-    //     ]);
-    // }
+
+    #[Route('/massage', name: 'app_massage')]
+
 
     #[Route('/massage/delete/{id}', name:'delmassage', requirements: ['id' => '\d+'])]
     public function deleteMassage(Massage $massage, Request $request, MassageRepository $massageRepository): RedirectResponse

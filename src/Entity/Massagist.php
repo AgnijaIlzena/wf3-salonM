@@ -8,9 +8,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Stringable;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\HttpFoundation\File\File as FileFile;
 use Symfony\Component\Serializer\Annotation\Ignore;
-use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+
 
 #[ORM\Entity(repositoryClass: MassagistRepository::class)]
 #[Vich\Uploadable]
@@ -35,7 +36,9 @@ class Massagist implements Stringable
     private $cover;
 
     #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'cover')]
-    private ?FileFile $file = null;
+    #[Assert\Image(mimeTypesMessage: 'Ce fichier n\'est pas une image')]
+    #[Assert\File(maxSize: '1M', maxSizeMessage: 'Le fichier ne doit pas dépasser les {{ limit }} {{ suffix }}')]
+    private  $profileFile;
 
     public function __construct()
     {
@@ -118,23 +121,20 @@ class Massagist implements Stringable
         return $this->name;
     }
 
-        /**
-     * Get the value of file
-     */ 
-    public function getFile()
-    {
-        return $this->file;
-    }
 
     /**
-     * Set the value of file
-     *
-     * @return  self
+     * Get the value of profilefile
      */ 
-    public function setFile($file)
+    public function getProfileFile(): ?File
     {
-        $this->file = $file;
+        return $this->profileFile;
+    }
+
+    public function setProfileFile(?File $profileFile = null): self
+    {
+        $this->profileFile = $profileFile;
 
         return $this;
     }
+    
 }
