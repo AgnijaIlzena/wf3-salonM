@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ReservationRepository;
 use App\Form\ReservationFormType;
 use App\Entity\Reservation;
+use App\Entity\Massage;
 use App\Repository\MassagistRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpFoundation\JsonResponse;
