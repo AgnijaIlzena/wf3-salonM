@@ -11,6 +11,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
+use DateTimeImmutable;
 
 
 #[ORM\Entity(repositoryClass: MassagistRepository::class)]
@@ -39,6 +40,10 @@ class Massagist implements Stringable
     #[Assert\Image(mimeTypesMessage: 'Ce fichier n\'est pas une image')]
     #[Assert\File(maxSize: '1M', maxSizeMessage: 'Le fichier ne doit pas dépasser les {{ limit }} {{ suffix }}')]
     private  $profileFile;
+
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    private $updated_at;
+
 
     public function __construct()
     {
@@ -109,7 +114,7 @@ class Massagist implements Stringable
         return $this->cover;
     }
 
-    public function setCover(string $cover): self
+    public function setCover(?string $cover): self
     {
         $this->cover = $cover;
 
@@ -133,6 +138,22 @@ class Massagist implements Stringable
     public function setProfileFile(?File $profileFile = null): self
     {
         $this->profileFile = $profileFile;
+
+        if ($profileFile !== null) {
+            $this->updated_at = new DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
+    {
+        $this->updated_at = $updated_at;
 
         return $this;
     }
