@@ -1,3 +1,5 @@
+# Short guide through page: https://www.youtube.com/watch?v=TwGFmP5pPmA 
+
 ## composer install
 
 ## symfony console doctrine:database:create
